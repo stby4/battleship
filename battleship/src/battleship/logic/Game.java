@@ -22,7 +22,7 @@ public class Game {
 	
 	
 	public void init() {
-		
+		// TODO coding...		
 	}
 	
 	private void autoPlaceShips() {
