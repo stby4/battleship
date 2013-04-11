@@ -16,3 +16,5 @@ public interface Player {
 	User getUser(int uid);
 	ArrayList<User> getAll();
 }
+
+// TODO a lot...
