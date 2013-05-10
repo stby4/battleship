@@ -1,5 +1,11 @@
 package battleship.logic;
 
+/**
+ * 
+ * @author Hinrich
+ * 
+ */
+
 public class Start {
 
 	/**
