@@ -27,6 +27,7 @@ import javax.swing.JTextField;
  * 
  */
 public class Register extends JFrame implements ActionListener {
+    // Hinrich changed somtehing
 
 	private static final long serialVersionUID = 1L;
 	
@@ -37,7 +38,7 @@ public class Register extends JFrame implements ActionListener {
 	JPasswordField pField = new JPasswordField();
 	JPasswordField pField2 = new JPasswordField();
 	JButton weiter = new JButton("Weiter");
-	JButton zurueck = new JButton("Zurück");
+	JButton zurueck = new JButton("Zurï¿½ck");
 	JButton beenden = new JButton("Beenden");
 	JPanel registerPanel = new JPanel();
 	
@@ -133,11 +134,11 @@ public class Register extends JFrame implements ActionListener {
 			} catch (IOException e2) {
 				e2.printStackTrace();
 			}
-			//Überprüfung ob Passwortfelder übereinstimmen
+			//ï¿½berprï¿½fung ob Passwortfelder ï¿½bereinstimmen
 			if (!password.equals(password2)) {
-				JOptionPane.showMessageDialog(null, "Passwort stimmt nicht überein");
+				JOptionPane.showMessageDialog(null, "Passwort stimmt nicht ï¿½berein");
 			}
-			//Überprüfung ob Benutzername und Passwort eingegeben
+			//ï¿½berprï¿½fung ob Benutzername und Passwort eingegeben
 			if (usernameIsEmpty || passwordIsEmpty || passwordIsEmpty2) {
 				JOptionPane.showMessageDialog(null, "Bitte geben Sie einen Benutzername und ein Passwort ein");
 			}
