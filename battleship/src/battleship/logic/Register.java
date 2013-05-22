@@ -27,7 +27,7 @@ import javax.swing.JTextField;
  * 
  */
 public class Register extends JFrame implements ActionListener {
-    // Hinrich changed somtehing
+    // Tom changed somtehing
 
 	private static final long serialVersionUID = 1L;
 	
