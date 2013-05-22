@@ -9,13 +9,13 @@ import java.util.ArrayList;
  * @author H. Kaestner, T. Ohme
  */
 public class Field {
-    public enum Fieldelements {
-        WATER,
-        SHIP,
-        HIT,
-        SHOT,
-        SUNK,
-        ERROR
+    static public enum Fieldelements {
+        WATER, // virgin field
+        SHIP,  // ship in perfect condition
+        HIT,   // ship with a hit
+        SHOT,  // a shot in the water
+        SUNK,  // sunk ship
+        ERROR  // everything else
     }
 
     private int sizeX = 10;
@@ -159,8 +159,8 @@ public class Field {
         return false;
     }
 
-    public boolean shoot(int x, int y) {
+    public Fieldelements shoot(int x, int y) {
         // TODO shoot
-        return true; // false if field is not available or has already been shot on
+        return Fieldelements.ERROR;
     }
 }
