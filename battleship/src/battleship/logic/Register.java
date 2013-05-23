@@ -169,7 +169,7 @@ public class Register extends JFrame implements ActionListener {
 	public boolean checkExistUsername() {
 		BufferedReader br = null;
 		try {
-			br = new BufferedReader(new FileReader(new File("C:\\file.txt")));
+			br = new BufferedReader(new FileReader(new File("C:\\downloads\\battleshipUser.txt")));
 			String line = null;
 			while ((line = br.readLine()) != null) {
 				String[] parts = line.split(";");
@@ -197,7 +197,7 @@ public class Register extends JFrame implements ActionListener {
 	//Logindaten in Textdatei schreiben
 	public void registPlayer(String username, String password) {
 		try {
-			FileWriter fw = new FileWriter("C:\\file.txt", true);
+			FileWriter fw = new FileWriter("C:\\downloads\\battleshipUser.txt", true);
 			BufferedWriter ausgabe = new BufferedWriter(fw);
 			ausgabe.write(username);
 			ausgabe.write(";");

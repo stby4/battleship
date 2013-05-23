@@ -1,5 +1,8 @@
 package battleship.logic;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Application {
 
 	private Login login;
@@ -10,6 +13,7 @@ public class Application {
 	 */
 	public static void main(String[] args) {
 		Application app = new Application();
+		app.createFile();
 		app.init();
 		app.start();
 	}
@@ -39,6 +43,15 @@ public class Application {
 	
 	public void registerDone() {
 		login();
+	}
+	
+	public void createFile() {
+		try {
+			FileWriter fw = new FileWriter("C:\\downloads\\battleshipUser.txt", true);
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
