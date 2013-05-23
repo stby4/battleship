@@ -88,41 +88,46 @@ public class Login extends JFrame implements ActionListener {
 			String username = bField.getText();
 			char[] charpassword = pField.getPassword();
 			String password = new String(charpassword);
-			BufferedReader br = null;
-			try {
-				br = new BufferedReader(new FileReader(new File("C:\\downloads\\battleshipUser.txt")));
-				String line = null;
-				while ((line = br.readLine()) != null) {
-					String[] parts = line.split(";");
-					if (username.equals(parts[0]) && password.equals(parts[1])) {
-						JOptionPane.showMessageDialog(null, "Sie wurden erfolgreich angemeldet bei Battleship angemeldet");
-					}
-				}
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} finally {
-				if (br != null) {
-					try {
-						br.close();
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				}
+			boolean isValide = checkUsernamePassword(username, password);			
+			if (isValide == true) {
+				JOptionPane.showMessageDialog(null, "Sie wurden erfolgreich angemeldet bei Battleship angemeldet");
+				app.loginDone();
+				dispose();
+			} else {
+				JOptionPane.showMessageDialog(null, "Benutzername oder Passwort falsch");
 			}
-			
-			app.loginDone();
-			dispose();
-
-			//schauen ob username und password übereinstimmen sonst Fehlermeldung
 		} else if (e.getSource() == registrieren) {
 			app.register();
-			
-
 		} else if (e.getSource() == beenden) {
 			System.exit(0);
 		}
+	}
+	
+	public boolean checkUsernamePassword(String username, String password) {
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(new File("C:\\downloads\\battleshipUser.txt")));
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				String[] parts = line.split(";");
+				if (username.equals(parts[0]) && password.equals(parts[1])) {
+					return true;
+				} 
+			}
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
+		return false;
 	}
 	
 }
