@@ -27,9 +27,9 @@ import javax.swing.JTextField;
  * 
  */
 public class Register extends JFrame implements ActionListener {
-    // Tom changed somtehing
 
 	private static final long serialVersionUID = 1L;
+	private Application app;
 	
 	JLabel bLabel = new JLabel("Username: ");
 	JLabel pLabel = new JLabel("Password: ");
@@ -38,11 +38,13 @@ public class Register extends JFrame implements ActionListener {
 	JPasswordField pField = new JPasswordField();
 	JPasswordField pField2 = new JPasswordField();
 	JButton weiter = new JButton("Weiter");
-	JButton zurueck = new JButton("Zurï¿½ck");
+	JButton zurueck = new JButton("Zurück");
 	JButton beenden = new JButton("Beenden");
 	JPanel registerPanel = new JPanel();
 	
-	Register() {
+	Register(Application app) {
+		this.app = app;
+		
 		setTitle("Registrierung Battleship");
 		//Zentrierung des Fenster
 	    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -78,7 +80,7 @@ public class Register extends JFrame implements ActionListener {
 		
 		getContentPane().add(registerPanel);
 		
-		setVisible(true);
+		//setVisible(true);
 		
 		actionregister();
 	}
@@ -92,69 +94,117 @@ public class Register extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == weiter) {
-			boolean usernameIsEmpty = bField.getText().isEmpty();
-			boolean passwordIsEmpty = pField.getPassword().isEmpty();
-			boolean passwordIsEmpty2 = pField2.getPassword().isEmpty();
 			String username = bField.getText();
-			char[] password = pField.getPassword();
-			char[] password2 = pField.getPassword();
-			//Schauen ob Bentzername vorhanden
-			BufferedReader br = null;
-			try {
-				br = new BufferedReader(new FileReader(new File("c:/Test/Test.txt")));
-				String line = null;
-				while ((line = br.readLine()) != null) {
-					String[] parts = line.split(";");
-					if (bLabel.getText() == parts[0]) {
-						JOptionPane.showMessageDialog(null, "Benutzername schon vorhanden");
-					}
-				}
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			} finally {
-				if (br != null) {
-					try {
-						br.close();
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				}
+			char[] charpassword = pField.getPassword();
+			char[] charpassword2 = pField2.getPassword();
+			String password = new String(charpassword);
+			String password2 = new String(charpassword2);
+			boolean isValide = checkUsernamePassword(username, password, password2);
+			if (!isValide) {
+				return;
 			}
-			//Logindaten in Textdatei schreiben
-			try {
-				FileWriter fw = new FileWriter("c:/Test/Test.txt", true);
-				BufferedWriter ausgabe = new BufferedWriter(fw);
-				ausgabe.write(username);
-				ausgabe.write(";");
-				ausgabe.write(password);
-				ausgabe.newLine();
-				ausgabe.close();
-			} catch (IOException e2) {
-				e2.printStackTrace();
+			isValide = checkPassword(username, password, password2);
+			if (!isValide) {
+				return;
 			}
-			//ï¿½berprï¿½fung ob Passwortfelder ï¿½bereinstimmen
-			if (!password.equals(password2)) {
-				JOptionPane.showMessageDialog(null, "Passwort stimmt nicht ï¿½berein");
+			isValide = comparePassword(password, password2);
+			if (!isValide) {
+				return;
 			}
-			//ï¿½berprï¿½fung ob Benutzername und Passwort eingegeben
-			if (usernameIsEmpty || passwordIsEmpty || passwordIsEmpty2) {
-				JOptionPane.showMessageDialog(null, "Bitte geben Sie einen Benutzername und ein Passwort ein");
+			boolean vorhanden = checkExistUsername();
+			if (vorhanden == false) {
+				registPlayer(username, password);
+				app.registerDone();
 			}
-			dispose();
 		} else if (e.getSource() == zurueck) {
-			Login login = new Login();
-			dispose();
+			app.login();
 		} else if (e.getSource() == beenden) {
 			System.exit(0);
-		}
+		}		
 	}
 	
-	public void checkUsername() {
+	//Überprüfung ob Username und Passwort eingegeben
+	public boolean checkUsernamePassword(String username, String password, String password2) {
+		if(username.equals("") && password.equals("") && password2.equals("")) {
+			JOptionPane.showMessageDialog(null, "Bitte geben Sie einen Benutzername und ein Passwort ein");
+			return false;
+		} else if (username.equals("") && !password.equals("") && !password2.equals("")) {
+			JOptionPane.showMessageDialog(null, "Bitte geben Sie einen Bentzername ein");
+			return false;
+		} else if (!username.equals("") && password.equals("") && password2.equals("")) {
+			JOptionPane.showMessageDialog(null, "Bitte geben Sie ein Passwort ein");
+			return false;
+		}
+		return true; 
+	}
+	
+	//Überprüfung ob Passwort 2x eingegeben
+	public boolean checkPassword(String username, String password, String password2) {
+		if (!username.equals("") && !password.equals("") && password2.equals("")) {
+			JOptionPane.showMessageDialog(null, "Bitte geben Sie das Passwort nochmals ein");
+			return false;
+		} else if (!username.equals("") && password.equals("") && !password2.equals("")) {
+			JOptionPane.showMessageDialog(null, "Bitte geben Sie das Passwort nochmals ein");
+			return false;
+		} 
+		return true;
+	}
+	
+	//Überprüfung ob Passwortfelder übereinstimmen
+	public boolean comparePassword(String password, String password2) {
+		if (!password.equals("") && !password.equals("") && !password2.equals("") && !password.equals(password2)) {
+			JOptionPane.showMessageDialog(null, "Passwort stimmt nicht überein"); 
+			return false;
+		}	
+		return true;
+	}
+	
+	//Schauen ob Bentzername vorhanden
+	public boolean checkExistUsername() {
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(new File("C:\\Temp\\file.txt")));
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				String[] parts = line.split(";");
+				if (bField.getText().equals(parts[0])) {
+					JOptionPane.showMessageDialog(null, "Benutzername schon vorhanden");
+					return true;
+				}
+			}
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
+		return false;
+	}
+	
+	//Logindaten in Textdatei schreiben
+	public void registPlayer(String username, String password) {
+		try {
+			FileWriter fw = new FileWriter("C:\\Temp\\file.txt", true);
+			BufferedWriter ausgabe = new BufferedWriter(fw);
+			ausgabe.write(username);
+			ausgabe.write(";");
+			ausgabe.write(password);
+			ausgabe.newLine();
+			ausgabe.flush();
+			ausgabe.close();
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		}
 		
 	}
 	
+	//noch kontrollieren wenn nur ein Passwort Feld eingegeben
 	
-
 }

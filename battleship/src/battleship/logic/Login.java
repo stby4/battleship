@@ -22,10 +22,7 @@ import javax.swing.JTextField;
 public class Login extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-
-	public static void main(String[] args) {
-		Login login = new Login();
-	}
+	private Application app;
 
 	JLabel bLabel = new JLabel("Username: ");
 	JLabel pLabel = new JLabel("Password: ");
@@ -36,7 +33,9 @@ public class Login extends JFrame implements ActionListener {
 	JButton beenden = new JButton("Beenden");
 	JPanel loginPanel = new JPanel();
 	
-	Login() {
+	Login(Application app) {
+		this.app = app;
+		
 		setTitle("Login Autentification Battleship");
 		//Zentrierung des Fenster
 	    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -68,8 +67,6 @@ public class Login extends JFrame implements ActionListener {
 		
 		getContentPane().add(loginPanel);
 		
-		setVisible(true);
-		
 		actionlogin();
 	}
 	
@@ -82,20 +79,16 @@ public class Login extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == anmelden) {
-			String username = bField.getText();
-			String password = pField.getText();
-			//Logindaten in Textdatei schreiben
-			
-			
-			
-			
+			app.loginDone();
+			//String username = bField.getText();
+			//String password = pField.getText();
 			//schauen ob username und password übereinstimmen sonst Fehlermeldung
 			//wenn richtig Game Objekt erstellen Game battleship = new Game();
 			//dispose();
 		} else if (e.getSource() == registrieren) {
-			Register register = new Register();
+			app.register();
 			
-			dispose();
+
 		} else if (e.getSource() == beenden) {
 			System.exit(0);
 		}
