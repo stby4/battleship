@@ -114,9 +114,12 @@ public class Register extends JFrame implements ActionListener {
 			boolean vorhanden = checkExistUsername();
 			if (vorhanden == false) {
 				registPlayer(username, password);
+				emptyFields();
+				JOptionPane.showMessageDialog(null, "Danke für die Registrierung bei Battleship");
 				app.registerDone();
 			}
 		} else if (e.getSource() == zurueck) {
+			emptyFields();
 			app.login();
 		} else if (e.getSource() == beenden) {
 			System.exit(0);
@@ -208,7 +211,13 @@ public class Register extends JFrame implements ActionListener {
 		} catch (IOException e2) {
 			e2.printStackTrace();
 		}
-		
+	}
+	
+	//Textfeld entleeren
+	public void emptyFields() {
+		bField.setText("");
+		pField.setText("");
+		pField2.setText("");
 	}
 	
 }

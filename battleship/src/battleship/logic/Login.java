@@ -5,10 +5,16 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -79,12 +85,37 @@ public class Login extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == anmelden) {
+			String username = bField.getText();
+			char[] charpassword = pField.getPassword();
+			String password = new String(charpassword);
+			BufferedReader br = null;
+			try {
+				br = new BufferedReader(new FileReader(new File("C:\\downloads\\battleshipUser.txt")));
+				String line = null;
+				while ((line = br.readLine()) != null) {
+					String[] parts = line.split(";");
+					if (username.equals(parts[0]) && password.equals(parts[1])) {
+						JOptionPane.showMessageDialog(null, "Sie wurden erfolgreich angemeldet bei Battleship angemeldet");
+					}
+				}
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			} finally {
+				if (br != null) {
+					try {
+						br.close();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+			
 			app.loginDone();
-			//String username = bField.getText();
-			//String password = pField.getText();
+			dispose();
+
 			//schauen ob username und password übereinstimmen sonst Fehlermeldung
-			//wenn richtig Game Objekt erstellen Game battleship = new Game();
-			//dispose();
 		} else if (e.getSource() == registrieren) {
 			app.register();
 			
