@@ -131,6 +131,12 @@ public class Register extends JFrame implements ActionListener {
 		} else if (username.equals("") && !password.equals("") && !password2.equals("")) {
 			JOptionPane.showMessageDialog(null, "Bitte geben Sie einen Bentzername ein");
 			return false;
+		} else if (username.equals("") && !password.equals("") && password2.equals("")) {
+			JOptionPane.showMessageDialog(null, "Bitte geben Sie einen Benutzername ein und das Passwort nochmals");
+			return false;
+		} else if (username.equals("") && password.equals("") && !password2.equals("")) {
+			JOptionPane.showMessageDialog(null, "Bitte geben Sie einen Benutzername ein und das Passwort nochmals");
+			return false;
 		} else if (!username.equals("") && password.equals("") && password2.equals("")) {
 			JOptionPane.showMessageDialog(null, "Bitte geben Sie ein Passwort ein");
 			return false;
@@ -163,7 +169,7 @@ public class Register extends JFrame implements ActionListener {
 	public boolean checkExistUsername() {
 		BufferedReader br = null;
 		try {
-			br = new BufferedReader(new FileReader(new File("C:\\Temp\\file.txt")));
+			br = new BufferedReader(new FileReader(new File("C:\\file.txt")));
 			String line = null;
 			while ((line = br.readLine()) != null) {
 				String[] parts = line.split(";");
@@ -191,7 +197,7 @@ public class Register extends JFrame implements ActionListener {
 	//Logindaten in Textdatei schreiben
 	public void registPlayer(String username, String password) {
 		try {
-			FileWriter fw = new FileWriter("C:\\Temp\\file.txt", true);
+			FileWriter fw = new FileWriter("C:\\file.txt", true);
 			BufferedWriter ausgabe = new BufferedWriter(fw);
 			ausgabe.write(username);
 			ausgabe.write(";");
@@ -204,7 +210,5 @@ public class Register extends JFrame implements ActionListener {
 		}
 		
 	}
-	
-	//noch kontrollieren wenn nur ein Passwort Feld eingegeben
 	
 }
