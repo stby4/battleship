@@ -90,7 +90,7 @@ public class Login extends JFrame implements ActionListener {
 			String password = new String(charpassword);
 			boolean isValide = checkUsernamePassword(username, password);			
 			if (isValide == true) {
-				JOptionPane.showMessageDialog(null, "Sie wurden erfolgreich angemeldet bei Battleship angemeldet");
+				JOptionPane.showMessageDialog(null, "Sie wurden erfolgreich bei Battleship angemeldet");
 				app.loginDone();
 				dispose();
 			} else {

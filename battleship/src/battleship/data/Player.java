@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import battleship.objects.User;
 
 /**
- * @author Hinrich Kaestner
+ * @author Tom Ohme
  *
  */
 public interface Player {

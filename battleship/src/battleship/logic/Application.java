@@ -47,7 +47,7 @@ public class Application {
 	
 	public void createFile() {
 		try {
-			FileWriter fw = new FileWriter("C:\\downloads\\battleshipUser.txt", true);
+			FileWriter fw = new FileWriter("C:\\downloads\\battleshipUser.txt", true); // TODO this belongs in data abstraction!
 			fw.close();
 		} catch (IOException e) {
 			e.printStackTrace();

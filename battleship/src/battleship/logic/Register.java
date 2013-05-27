@@ -27,6 +27,7 @@ import javax.swing.JTextField;
  * 
  */
 public class Register extends JFrame implements ActionListener {
+    // Tom changed somtehing
 
 	private static final long serialVersionUID = 1L;
 	private Application app;
@@ -38,7 +39,7 @@ public class Register extends JFrame implements ActionListener {
 	JPasswordField pField = new JPasswordField();
 	JPasswordField pField2 = new JPasswordField();
 	JButton weiter = new JButton("Weiter");
-	JButton zurueck = new JButton("Zurück");
+	JButton zurueck = new JButton("ZurÃ¼ck");
 	JButton beenden = new JButton("Beenden");
 	JPanel registerPanel = new JPanel();
 	
@@ -80,7 +81,7 @@ public class Register extends JFrame implements ActionListener {
 		
 		getContentPane().add(registerPanel);
 		
-		//setVisible(true);
+		setVisible(true);
 		
 		actionregister();
 	}
@@ -115,7 +116,7 @@ public class Register extends JFrame implements ActionListener {
 			if (vorhanden == false) {
 				registPlayer(username, password);
 				emptyFields();
-				JOptionPane.showMessageDialog(null, "Danke für die Registrierung bei Battleship");
+				JOptionPane.showMessageDialog(null, "Danke fï¿½r die Registrierung bei Battleship");
 				app.registerDone();
 			}
 		} else if (e.getSource() == zurueck) {
@@ -126,7 +127,7 @@ public class Register extends JFrame implements ActionListener {
 		}		
 	}
 	
-	//Überprüfung ob Username und Passwort eingegeben
+	//ï¿½berprï¿½fung ob Username und Passwort eingegeben
 	public boolean checkUsernamePassword(String username, String password, String password2) {
 		if(username.equals("") && password.equals("") && password2.equals("")) {
 			JOptionPane.showMessageDialog(null, "Bitte geben Sie einen Benutzername und ein Passwort ein");
@@ -147,7 +148,7 @@ public class Register extends JFrame implements ActionListener {
 		return true; 
 	}
 	
-	//Überprüfung ob Passwort 2x eingegeben
+	//ï¿½berprï¿½fung ob Passwort 2x eingegeben
 	public boolean checkPassword(String username, String password, String password2) {
 		if (!username.equals("") && !password.equals("") && password2.equals("")) {
 			JOptionPane.showMessageDialog(null, "Bitte geben Sie das Passwort nochmals ein");
@@ -159,10 +160,10 @@ public class Register extends JFrame implements ActionListener {
 		return true;
 	}
 	
-	//Überprüfung ob Passwortfelder übereinstimmen
+	//ï¿½berprï¿½fung ob Passwortfelder ï¿½bereinstimmen
 	public boolean comparePassword(String password, String password2) {
 		if (!password.equals("") && !password.equals("") && !password2.equals("") && !password.equals(password2)) {
-			JOptionPane.showMessageDialog(null, "Passwort stimmt nicht überein"); 
+			JOptionPane.showMessageDialog(null, "Passwort stimmt nicht ï¿½berein"); 
 			return false;
 		}	
 		return true;

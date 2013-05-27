@@ -20,12 +20,9 @@ public class Field {
 
     private int sizeX = 10;
     private int sizeY = 10;
-    /*
-     * possible integer values for shots:
-     *  0: no shot
-     *  1: shot
-     */
     private ArrayList<ArrayList<Fieldelements>> field = new ArrayList<ArrayList<Fieldelements>>();
+
+    private ArrayList<Ship> ships;
 
     public Field(int sizeX, int sizeY) {
         this.sizeX = sizeX;
@@ -47,6 +44,23 @@ public class Field {
         return sizeY;
     }
 
+    public ArrayList<Ship> getShips() {
+        return this.ships;
+    }
+
+    /**
+     *
+     * @return boolean true if all ships are sunk, false if not
+     */
+    public boolean getAllShipsSunk() {
+        for(Ship ship : this.ships) {
+            if(!ship.getSunk()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public Fieldelements getFieldStatus(int posX, int posY) {
         return this.field.get(posX).get(posY);
     }
@@ -58,34 +72,31 @@ public class Field {
         Fieldelements place = this.getFieldStatus(posX, posY);
 
         // set to ship
-        if (Fieldelements.SHIP == status) {
-            if (Fieldelements.WATER == place) {
-                field.get(posX).set(posY, status);
-            } else {
-                return Fieldelements.ERROR;
-            }
+        switch (status) {
+            case SHIP:
+                if (Fieldelements.WATER == place) {
+                    field.get(posX).set(posY, status);
+                } else {
+                    return Fieldelements.ERROR;
+                }
+                break;
+            case SHOT:
+                if (Fieldelements.WATER == place) {
+                    field.get(posX).set(posY, Fieldelements.SHOT);
+                } else if (Fieldelements.SHIP == place) {
+                    field.get(posX).set(posY, Fieldelements.HIT);
+                } else {
+                    return Fieldelements.ERROR;
+                }
+                break;
+            case SUNK:
+                if (Fieldelements.HIT == place) {
+                    field.get(posX).set(posY, status);
+                } else {
+                    return Fieldelements.ERROR;
+                }
+                break;
         }
-
-        // a shot
-        if (Fieldelements.SHOT == status) {
-            if (Fieldelements.WATER == place) {
-                field.get(posX).set(posY, Fieldelements.SHOT);
-            } else if (Fieldelements.SHIP == place) {
-                field.get(posX).set(posY, Fieldelements.HIT);
-            } else {
-                return Fieldelements.ERROR;
-            }
-        }
-
-        // sink it!
-        if (Fieldelements.SUNK == status) {
-            if (Fieldelements.HIT == place) {
-                field.get(posX).set(posY, status);
-            } else {
-                return Fieldelements.ERROR;
-            }
-        }
-
         return this.getFieldStatus(posX, posY);
     }
 
@@ -123,9 +134,9 @@ public class Field {
             // set fields to SHIP
             for (int i = 0; i < shipLength; i++) {
                 setFieldStatus(shipPosX + i, shipPosY, Fieldelements.SHIP);
-                //this.ships.add(ship);
-                return true;
             }
+            this.ships.add(ship);
+            return true;
         }
 
         // vertical ship
@@ -151,16 +162,41 @@ public class Field {
             // set fields to SHIP
             for (int i = 0; i < shipLength; i++) {
                 setFieldStatus(shipPosX, shipPosY + i, Fieldelements.SHIP);
-                //this.ships.add(ship);
-                return true;
             }
+            this.ships.add(ship);
+            return true;
         }
         // just in case
         return false;
     }
 
-    public Fieldelements shoot(int x, int y) {
+    public Fieldelements shoot(int posX, int posY) {
         // TODO shoot
-        return Fieldelements.ERROR;
+        Fieldelements result = setFieldStatus(posX, posY, Fieldelements.SHOT);
+        switch (result) {
+            case HIT:
+                Fieldelements shipStatus;
+                for(Ship ship : this.ships) {
+                    shipStatus = ship.shoot(posX, posY);
+                    if(Fieldelements.SUNK == shipStatus) {
+                        int posXHelper = posX;
+                        int posYHelper = posY;
+                        for(int i=0; i<ship.getLength(); i++) {
+                            setFieldStatus(posXHelper, posYHelper, Fieldelements.SUNK);
+                            if(0 == ship.getDirection()) {
+                                posXHelper++;
+                            } else {
+                                posYHelper++;
+                            }
+                        }
+                        break;
+                    }
+                    if(Fieldelements.ERROR != shipStatus) {
+                        break;
+                    }
+                }
+            default:
+                return result;
+        }
     }
 }

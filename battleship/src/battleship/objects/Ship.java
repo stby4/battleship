@@ -9,8 +9,8 @@ import java.util.ArrayList;
  */
 public class Ship {
     private int length = 2;
-    private int posX = 0;
-    private int posY = 0;
+    private int posX = 0; // start longitude
+    private int posY = 0; // start latitude
     /*
      * possible integer values for direction:
      *  0: horizontal
@@ -18,18 +18,14 @@ public class Ship {
      */
     private int direction = 0;
     private boolean sunk = false;
-    /*
-     * possible integer values for shots:
-     *  0: no shot
-     *  1: shot
-     */
-    private ArrayList<Integer> shots = new ArrayList<Integer>();
+    private ArrayList<Field.Fieldelements> shots = new ArrayList<Field.Fieldelements>();
 
     public Ship(int length) {
         this.length = length;
 
+        // init ship fields with "SHIP" status (makes sense, doesn't it?)
         for (int i = 0; i < this.length; i++) {
-            shots.add(0);
+            shots.add(Field.Fieldelements.SHIP);
         }
     }
 
@@ -37,6 +33,10 @@ public class Ship {
         this.posX = posX;
         this.posY = posY;
         this.direction = direction;
+    }
+
+    public boolean getSunk() {
+        return sunk;
     }
 
     public int getPosX() {
@@ -55,8 +55,43 @@ public class Ship {
         return length;
     }
 
-    public boolean shoot(int position) {
-        // TODO shoot on ship
-        return false; // true of ship was sunk
+    public Field.Fieldelements shoot(int posX, int posY) {
+        int posXHelper = this.posX;
+        int posYHelper = this.posY;
+        for (int i = 0; i < this.length; i++) {
+            Field.Fieldelements statusHelper = this.shots.get(i);
+            if (posXHelper == posX && posYHelper == posY) { // check that coordinates are actually part of the ship
+                if (Field.Fieldelements.SUNK == statusHelper || Field.Fieldelements.HIT == statusHelper) { // "occupied"
+                    return Field.Fieldelements.ERROR;
+                }
+                if (Field.Fieldelements.SHIP == statusHelper) {
+                    this.shots.set(i, Field.Fieldelements.HIT);
+                    // check if all other fields are also HIT and it's time to sink to the ground of the deep, dark and freezing cold ocean
+                    boolean sunkHelper = true;
+                    for (int j = 0; j < this.length; j++) {
+                        if (Field.Fieldelements.HIT != this.shots.get(j)) {
+                            sunkHelper = false;
+                            break;
+                        }
+                    }
+                    this.sunk = sunkHelper;
+                    if (sunkHelper) {
+                        // sink the ship
+                        for (int j = 0; j < this.length; j++) {
+                            this.shots.set(j, Field.Fieldelements.SUNK);
+                        }
+                        return Field.Fieldelements.SUNK;
+                    } else {
+                        return Field.Fieldelements.HIT;
+                    }
+                }
+            }
+            if (0 == this.direction) {
+                posXHelper++;
+            } else {
+                posYHelper++;
+            }
+        }
+        return Field.Fieldelements.ERROR; // just in case
     }
 }

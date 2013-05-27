@@ -14,13 +14,12 @@ import java.util.Random;
 public class Game {
     private Field fieldUser;
     private Field fieldComputer;
-    private ArrayList<Ship> ships;
+    private ArrayList<Ship> shipTypes;
 
 	/*
      * TODO
 	 * - start new game
 	 * - let user place ships (maybe in Field)
-	 * - automatically place the computers ships
 	 * - let user and computer shoot at each other (maybe in Field)
 	 * - log scores
 	 * - determine the winner
@@ -30,16 +29,30 @@ public class Game {
     public Game(int sizeX, int sizeY, ArrayList<Ship> ships) {
         this.fieldUser = new Field(sizeX, sizeY);
         this.fieldComputer = new Field(sizeX, sizeY);
+        this.shipTypes = ships;
 
-        this.ships = ships;
+        this.placeShipsComputer();
     }
 
-    private void autoPlaceShips() {
+    /**
+     * adds a ship to the user field
+     * @param ship Ship
+     * @return boolean
+     */
+    public boolean placeShipUser(Ship ship) {
+        return fieldUser.addShip(ship);
+    }
+
+    public Field.Fieldelements placeShotUser() {
+        return Field.Fieldelements.ERROR;
+    }
+
+    private void placeShipsComputer() {
         Random random = new Random();
         int sizeX = this.fieldComputer.getSizeX();
         int sizeY = this.fieldComputer.getSizeY();
 
-        for (Ship ship : this.ships) {
+        for (Ship ship : this.shipTypes) {
             do {
                 int posX = random.nextInt(sizeX + 1);
                 int posY = random.nextInt(sizeY + 1);
@@ -49,7 +62,26 @@ public class Game {
         }
     }
 
-    private Field.Fieldelements autoPlaceShot() {
+    /**
+     * @return int 0 for none, 1 for computer, 2 for user
+     */
+    public int getWinner() {
+        if (this.fieldComputer.getAllShipsSunk()) {
+            return 1;
+        }
+        if (this.fieldUser.getAllShipsSunk()) {
+            return 2;
+        }
+        return 0;
+    }
+
+    /**
+     * automatically places a shot on the gamers field
+     * algorithm based on an idea by someone at the TU Munich who didn't write his name in the comments of his/her C code
+     *
+     * @return Field.Fieldelements
+     */
+    private Field.Fieldelements placeShotComputer() {
         int sizeX = this.fieldUser.getSizeX();
         int sizeY = this.fieldUser.getSizeY();
 
@@ -74,7 +106,7 @@ public class Game {
                 if ((Field.Fieldelements.SUNK == fieldUser.getFieldStatus(posX, posY - 1) || Field.Fieldelements.WATER == fieldUser.getFieldStatus(posX, posY - 1)) &&
                         (Field.Fieldelements.SUNK == fieldUser.getFieldStatus(posX, posY + 1) || Field.Fieldelements.WATER == fieldUser.getFieldStatus(posX, posY + 1)) &&
                         (Field.Fieldelements.SUNK == fieldUser.getFieldStatus(posX - 1, posY) || Field.Fieldelements.WATER == fieldUser.getFieldStatus(posX - 1, posY)) &&
-                        (Field.Fieldelements.SUNK == fieldUser.getFieldStatus(posX + 1, posY) || Field.Fieldelements.WATER == fieldUser.getFieldStatus(posX + 1, posY)) &&
+                        (Field.Fieldelements.SUNK == fieldUser.getFieldStatus(posX + 1, posY) || Field.Fieldelements.WATER == fieldUser.getFieldStatus(posX + 1, posY))
                         ) {
                     probability[posX][posY] = 0;
                 }
@@ -119,20 +151,19 @@ public class Game {
 
         // random element
         Random random = new Random();
-        sumProbability = random.nextInt((int)sumProbability--);
+        sumProbability = random.nextInt((int) sumProbability--);
         sumProbability++; // must at least be 1
         int posY = -1;
         int posX = -1;
-        while(posY<sizeY-1 && sumProbability >= 0) {
+        while (posY < sizeY - 1 && sumProbability >= 0) {
             posY++;
             posX = -1;
-            while(posX<sizeX && sumProbability >= 0) {
+            while (posX < sizeX && sumProbability >= 0) {
                 posX++;
                 sumProbability -= probability[posX][posY];
             }
         }
-        Field.Fieldelements result = fieldUser.shoot(posX, posY);
-        return result;
+        return fieldUser.shoot(posX, posY);
     }
 
 }
