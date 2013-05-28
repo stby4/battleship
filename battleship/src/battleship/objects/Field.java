@@ -18,6 +18,11 @@ public class Field {
         ERROR  // everything else
     }
 
+    static public enum Directionelements {
+        HORIZONTAL,
+        VERTICAL
+    }
+
     private int sizeX = 10;
     private int sizeY = 10;
     private ArrayList<ArrayList<Fieldelements>> field = new ArrayList<ArrayList<Fieldelements>>();
@@ -106,13 +111,13 @@ public class Field {
         int shipLength = ship.getLength();
 
         // check if ship is within field borders
-        if ((0 == ship.getDirection() && shipPosX + shipLength > this.sizeX) || (1 == ship.getDirection() && shipPosY + shipLength > this.sizeY)) {
+        if ((Directionelements.HORIZONTAL == ship.getDirection() && shipPosX + shipLength > this.sizeX) || (Directionelements.VERTICAL == ship.getDirection() && shipPosY + shipLength > this.sizeY)) {
             return false;
         }
 
         // collision detection
         // horizontal ship
-        if (0 == ship.getDirection()) {
+        if (Directionelements.HORIZONTAL == ship.getDirection()) {
             // check for a neighbouring ship above
             for (int i = -1; i <= shipLength; i++) {
                 if (Fieldelements.SHIP == getFieldStatus(shipPosX + i, shipPosY - 1)) {
@@ -140,7 +145,7 @@ public class Field {
         }
 
         // vertical ship
-        if (1 == ship.getDirection()) {
+        if (Directionelements.VERTICAL == ship.getDirection()) {
             // check for neighbouring ship on the left
             for (int i = -1; i <= shipLength; i++) {
                 if (Fieldelements.SHIP == getFieldStatus(shipPosX - 1, shipPosY + i)) {
@@ -171,9 +176,7 @@ public class Field {
     }
 
     public Fieldelements shoot(int posX, int posY) {
-        // TODO shoot
-        Fieldelements result = setFieldStatus(posX, posY, Fieldelements.SHOT);
-        switch (result) {
+        switch (setFieldStatus(posX, posY, Fieldelements.SHOT)) {
             case HIT:
                 Fieldelements shipStatus;
                 for(Ship ship : this.ships) {
@@ -183,7 +186,7 @@ public class Field {
                         int posYHelper = posY;
                         for(int i=0; i<ship.getLength(); i++) {
                             setFieldStatus(posXHelper, posYHelper, Fieldelements.SUNK);
-                            if(0 == ship.getDirection()) {
+                            if(Directionelements.HORIZONTAL == ship.getDirection()) {
                                 posXHelper++;
                             } else {
                                 posYHelper++;
@@ -196,7 +199,7 @@ public class Field {
                     }
                 }
             default:
-                return result;
+                return getFieldStatus(posX, posY);
         }
     }
 }

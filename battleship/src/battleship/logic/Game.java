@@ -12,6 +12,11 @@ import java.util.Random;
  * @author H. Kaestner, T. Ohme
  */
 public class Game {
+    static public enum Playerelements {
+        USER,
+        COMPUTER,
+        ERROR
+    }
     private Field fieldUser;
     private Field fieldComputer;
     private ArrayList<Ship> shipTypes;
@@ -34,6 +39,22 @@ public class Game {
         this.placeShipsComputer();
     }
 
+    public Game() {
+        this.fieldUser = new Field(10, 10);
+        this.fieldComputer = new Field(10, 10);
+
+        Ship ac_carrier = new Ship(5);
+        shipTypes.add(ac_carrier);
+        Ship battleship = new Ship(4);
+        shipTypes.add(battleship);
+        Ship submarine = new Ship(3);
+        shipTypes.add(submarine);
+        Ship cruiser = new Ship(3);
+        shipTypes.add(cruiser);
+        Ship destroyer = new Ship(2);
+        shipTypes.add(destroyer);
+    }
+
     /**
      * adds a ship to the user field
      * @param ship Ship
@@ -43,8 +64,8 @@ public class Game {
         return fieldUser.addShip(ship);
     }
 
-    public Field.Fieldelements placeShotUser() {
-        return Field.Fieldelements.ERROR;
+    public Field.Fieldelements placeShotUser(int posX, int posY) {
+        return fieldComputer.shoot(posX, posY);
     }
 
     private void placeShipsComputer() {
@@ -56,23 +77,23 @@ public class Game {
             do {
                 int posX = random.nextInt(sizeX + 1);
                 int posY = random.nextInt(sizeY + 1);
-                int direction = random.nextInt(2);
-                ship.setPosition(posX, posY, direction);
+                int pick = random.nextInt(Field.Directionelements.values().length);
+                ship.setPosition(posX, posY, Field.Directionelements.values()[pick]);
             } while (fieldComputer.addShip(ship));
         }
     }
 
     /**
-     * @return int 0 for none, 1 for computer, 2 for user
+     * @return Playerelements
      */
-    public int getWinner() {
+    public Playerelements getWinner() {
         if (this.fieldComputer.getAllShipsSunk()) {
-            return 1;
+            return Playerelements.COMPUTER;
         }
         if (this.fieldUser.getAllShipsSunk()) {
-            return 2;
+            return Playerelements.USER;
         }
-        return 0;
+        return Playerelements.ERROR;
     }
 
     /**
@@ -81,7 +102,7 @@ public class Game {
      *
      * @return Field.Fieldelements
      */
-    private Field.Fieldelements placeShotComputer() {
+    public Field.Fieldelements placeShotComputer() {
         int sizeX = this.fieldUser.getSizeX();
         int sizeY = this.fieldUser.getSizeY();
 
@@ -160,7 +181,7 @@ public class Game {
             posX = -1;
             while (posX < sizeX && sumProbability >= 0) {
                 posX++;
-                sumProbability -= probability[posX][posY];
+                sumProbability = sumProbability - probability[posX][posY];
             }
         }
         return fieldUser.shoot(posX, posY);

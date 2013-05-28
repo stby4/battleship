@@ -30,13 +30,29 @@ public class User {
 		 */
 		return true;
 	}
-	
-	/*
-	 * writes user data in file
-	 * @return boolean successful registration
-	 */
+
+    public int getDefeats() {
+        return defeats;
+    }
+
+    public void setDefeats(int defeats) {
+        this.defeats = defeats;
+    }
+
+    public int getVictories() {
+        return victories;
+    }
+
+    public void setVictories(int victories) {
+        this.victories = victories;
+    }
+
+    /*
+         * writes user data in file
+         * @return boolean successful registration
+         */
 	public boolean registrate() {
-		// TODO check if user is not existant, write name and pw in file
+		// TODO check if user is not existent, write name and pw in file
 		return true;
 	}
 	
@@ -45,7 +61,7 @@ public class User {
 	 * @return boolean successful login
 	 */
 	public boolean login() {
-		// TODO check if user is existant and if password is correct
+		// TODO check if user is existent and if password is correct
 		// TODO get highscore and possibly the users latest game
 		return true;
 	}

@@ -16,7 +16,7 @@ public class Ship {
      *  0: horizontal
      *  1: vertical
      */
-    private int direction = 0;
+    private Field.Directionelements direction = Field.Directionelements.HORIZONTAL;
     private boolean sunk = false;
     private ArrayList<Field.Fieldelements> shots = new ArrayList<Field.Fieldelements>();
 
@@ -29,7 +29,7 @@ public class Ship {
         }
     }
 
-    public void setPosition(int posX, int posY, int direction) {
+    public void setPosition(int posX, int posY, Field.Directionelements direction) {
         this.posX = posX;
         this.posY = posY;
         this.direction = direction;
@@ -47,7 +47,7 @@ public class Ship {
         return posY;
     }
 
-    public int getDirection() {
+    public Field.Directionelements getDirection() {
         return direction;
     }
 
@@ -86,7 +86,7 @@ public class Ship {
                     }
                 }
             }
-            if (0 == this.direction) {
+            if (Field.Directionelements.HORIZONTAL == this.direction) {
                 posXHelper++;
             } else {
                 posYHelper++;
