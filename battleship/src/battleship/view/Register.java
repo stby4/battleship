@@ -27,7 +27,6 @@ import javax.swing.JTextField;
  * 
  */
 public class Register extends JFrame implements ActionListener {
-    // Tom changed somtehing
 
 	private static final long serialVersionUID = 1L;
 	private Application app;
@@ -39,7 +38,7 @@ public class Register extends JFrame implements ActionListener {
 	JPasswordField pField = new JPasswordField();
 	JPasswordField pField2 = new JPasswordField();
 	JButton weiter = new JButton("Weiter");
-	JButton zurueck = new JButton("ZurÃ¼ck");
+	JButton zurueck = new JButton("Zurück");
 	JButton beenden = new JButton("Beenden");
 	JPanel registerPanel = new JPanel();
 	
@@ -47,7 +46,7 @@ public class Register extends JFrame implements ActionListener {
 		this.app = app;
 		
 		setTitle("Registrierung Battleship");
-		//Zentrierung des Fenster
+		//Centering of the window
 	    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	    int top = (screenSize.height - 200) / 2;
 	    int left = (screenSize.width - 400) / 2;
@@ -114,7 +113,8 @@ public class Register extends JFrame implements ActionListener {
 			if (vorhanden == false) {
 				registPlayer(username, password);
 				emptyFields();
-				JOptionPane.showMessageDialog(null, "Danke fÃ¼r die Registrierung bei Battleship");
+				JOptionPane.showMessageDialog(null, "Danke für die Registrierung bei Battleship");
+				emptyFields();
 				app.registerDone();
 			}
 		} else if (e.getSource() == zurueck) {
@@ -125,7 +125,7 @@ public class Register extends JFrame implements ActionListener {
 		}		
 	}
 	
-	//ï¿½berprï¿½fung ob Username und Passwort eingegeben
+	//Check if username and password entered
 	public boolean checkUsernamePassword(String username, String password, String password2) {
 		if(username.equals("") && password.equals("") && password2.equals("")) {
 			JOptionPane.showMessageDialog(null, "Bitte geben Sie einen Benutzername und ein Passwort ein");
@@ -146,7 +146,7 @@ public class Register extends JFrame implements ActionListener {
 		return true; 
 	}
 	
-	//ï¿½berprï¿½fung ob Passwort 2x eingegeben
+	//Check if password entered 2 times
 	public boolean checkPassword(String username, String password, String password2) {
 		if (!username.equals("") && !password.equals("") && password2.equals("")) {
 			JOptionPane.showMessageDialog(null, "Bitte geben Sie das Passwort nochmals ein");
@@ -158,20 +158,20 @@ public class Register extends JFrame implements ActionListener {
 		return true;
 	}
 	
-	//Ueberprï¿½fung ob Passwortfelder ï¿½bereinstimmen
+	//Check if password fields match
 	public boolean comparePassword(String password, String password2) {
 		if (!password.equals("") && !password.equals("") && !password2.equals("") && !password.equals(password2)) {
-			JOptionPane.showMessageDialog(null, "Passwort stimmt nicht Ã¼berein");
+			JOptionPane.showMessageDialog(null, "Passwort stimmt nicht überein");
 			return false;
 		}	
 		return true;
 	}
 	
-	//Schauen ob Bentzername vorhanden
+	//Check if username exist
 	public boolean checkExistUsername() {
 		BufferedReader br = null;
 		try {
-			br = new BufferedReader(new FileReader(new File("C:\\downloads\\battleshipUser.txt")));
+			br = new BufferedReader(new FileReader(new File("battleshipUser.txt")));
 			String line = null;
 			while ((line = br.readLine()) != null) {
 				String[] parts = line.split(";");
@@ -196,7 +196,7 @@ public class Register extends JFrame implements ActionListener {
 		return false;
 	}
 	
-	//Logindaten in Textdatei schreiben
+	//Write log data to txt file
 	public void registPlayer(String username, String password) {
 		try {
 			FileWriter fw = new FileWriter("battleshipUser.txt", true);

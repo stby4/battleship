@@ -1,5 +1,8 @@
 package battleship.objects;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class User {
 	private String name = ""; // name must be unique, hence it can be used as primary key
 	private String password = "";
@@ -46,11 +49,21 @@ public class User {
     public void addVictory() {
         this.victories++;
     }
-
+    
+    
+	public void createFile() {
+		try {
+			FileWriter fw = new FileWriter("battleshipUser.txt", true);
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+    
     /*
-         * writes user data in file
-         * @return boolean successful registration
-         */
+     * writes user data in file
+     * @return boolean successful registration
+     */
 	public boolean registrate() {
 		// TODO check if user is not existent, write name and pw in file
 		return true;

@@ -24,7 +24,6 @@ import javax.swing.JTextField;
  * @author Hinrich Kaestner, Tom Ohme
  * 
  */
-
 public class Login extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -43,7 +42,7 @@ public class Login extends JFrame implements ActionListener {
 		this.app = app;
 		
 		setTitle("Login Autentification Battleship");
-		//Zentrierung des Fenster
+		//Centering of the window
 	    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	    int top = (screenSize.height - 200) / 2;
 	    int left = (screenSize.width - 400) / 2;
@@ -92,7 +91,6 @@ public class Login extends JFrame implements ActionListener {
 			if (isValide == true) {
 				JOptionPane.showMessageDialog(null, "Sie wurden erfolgreich bei Battleship angemeldet");
 				app.loginDone();
-				dispose();
 			} else {
 				JOptionPane.showMessageDialog(null, "Benutzername oder Passwort falsch");
 			}
@@ -103,10 +101,11 @@ public class Login extends JFrame implements ActionListener {
 		}
 	}
 	
+	//check if username and password right
 	public boolean checkUsernamePassword(String username, String password) {
 		BufferedReader br = null;
 		try {
-			br = new BufferedReader(new FileReader(new File("C:\\downloads\\battleshipUser.txt")));
+			br = new BufferedReader(new FileReader(new File("battleshipUser.txt")));
 			String line = null;
 			while ((line = br.readLine()) != null) {
 				String[] parts = line.split(";");

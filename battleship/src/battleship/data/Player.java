@@ -1,6 +1,3 @@
-/**
- * 
- */
 package battleship.data;
 
 import java.util.ArrayList;

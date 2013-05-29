@@ -1,19 +1,22 @@
 package battleship.view;
 
-import java.io.FileWriter;
-import java.io.IOException;
-
+/**
+ * Application Battleship
+ * @author Hinrich Kaestner, Tom Ohme
+ * 
+ */
 public class Application {
 
 	private Login login;
 	private Register register;
+	private Menu menu;
 	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		Application app = new Application();
-		app.createFile();
+		//createFile Methode aufrufen (vielleicht in Gameplay)
 		app.init();
 		app.start();
 	}
@@ -21,6 +24,7 @@ public class Application {
 	private void init() {
 		login = new Login(this);
 		register = new Register(this);
+		menu = new Menu(this);
 	}
 	
 	private void start() {
@@ -33,7 +37,8 @@ public class Application {
 	}
 	
 	public void loginDone() {
-		System.out.println("Jetzt kommt das Game");
+		//System.out.println("Jetzt kommt das Game");
+		menu();
 	}
 	
 	public void register() {
@@ -45,13 +50,9 @@ public class Application {
 		login();
 	}
 	
-	public void createFile() {
-		try {
-			FileWriter fw = new FileWriter("battleshipUser.txt", true);
-			fw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void menu() {
+		login.setVisible(false);
+		menu.setVisible(true);
 	}
-
+	
 }

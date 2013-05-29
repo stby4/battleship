@@ -4,8 +4,7 @@ import battleship.objects.Field;
 import battleship.objects.User;
 
 /**
- * Gameplay
- *
+ * Gameplay Battleship
  * @author H. Kaestner, T. Ohme
  */
 public class Gameplay {
