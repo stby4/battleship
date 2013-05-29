@@ -30,6 +30,11 @@ public class Gameplay {
         do {
             shootout();
         } while(Game.Playerelements.ERROR == winner);
+        if(Game.Playerelements.USER == winner) {
+            user.addVictory();
+        } else {
+            user.addDefeat();
+        }
         return winner;
     }
 
@@ -44,7 +49,7 @@ public class Gameplay {
             case USER:
                 do {
                     // nothing, so far
-                    // TODO let user shoot
+                    // TODO let user shoot: GUI connection
                 } while(Field.Fieldelements.SHOT != game.placeShotUser(1, 1));
                 currentPlayer = Game.Playerelements.COMPUTER;
                 break;

@@ -53,6 +53,8 @@ public class Game {
         shipTypes.add(cruiser);
         Ship destroyer = new Ship(2);
         shipTypes.add(destroyer);
+
+        this.placeShipsComputer();
     }
 
     /**
@@ -81,19 +83,6 @@ public class Game {
                 ship.setPosition(posX, posY, Field.Directionelements.values()[pick]);
             } while (fieldComputer.addShip(ship));
         }
-    }
-
-    /**
-     * @return Playerelements
-     */
-    public Playerelements getWinner() {
-        if (this.fieldComputer.getAllShipsSunk()) {
-            return Playerelements.COMPUTER;
-        }
-        if (this.fieldUser.getAllShipsSunk()) {
-            return Playerelements.USER;
-        }
-        return Playerelements.ERROR;
     }
 
     /**
@@ -185,6 +174,19 @@ public class Game {
             }
         }
         return fieldUser.shoot(posX, posY);
+    }
+
+    /**
+     * @return Playerelements
+     */
+    public Playerelements getWinner() {
+        if (this.fieldComputer.getAllShipsSunk()) {
+            return Playerelements.COMPUTER;
+        }
+        if (this.fieldUser.getAllShipsSunk()) {
+            return Playerelements.USER;
+        }
+        return Playerelements.ERROR;
     }
 
 }

@@ -35,16 +35,16 @@ public class User {
         return defeats;
     }
 
-    public void setDefeats(int defeats) {
-        this.defeats = defeats;
+    public void addDefeat() {
+        this.defeats++;
     }
 
     public int getVictories() {
         return victories;
     }
 
-    public void setVictories(int victories) {
-        this.victories = victories;
+    public void addVictory() {
+        this.victories++;
     }
 
     /*
