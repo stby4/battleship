@@ -1,5 +1,7 @@
 package battleship.view;
 
+import battleship.logic.FileDAO;
+
 /**
  * Application Battleship
  * @author Hinrich Kaestner, Tom Ohme
@@ -10,13 +12,14 @@ public class Application {
 	private Login login;
 	private Register register;
 	private Menu menu;
+	private FileDAO file;
+	
 	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		Application app = new Application();
-		//createFile Methode aufrufen (vielleicht in Gameplay)
 		app.init();
 		app.start();
 	}
@@ -25,6 +28,8 @@ public class Application {
 		login = new Login(this);
 		register = new Register(this);
 		menu = new Menu(this);
+		file = new FileDAO();
+		file.createFile();
 	}
 	
 	private void start() {
@@ -55,4 +60,8 @@ public class Application {
 		menu.setVisible(true);
 	}
 	
+	public FileDAO getFile() {
+		return file;
+	}
+
 }

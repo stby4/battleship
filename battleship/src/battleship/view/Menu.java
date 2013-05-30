@@ -1,21 +1,18 @@
 package battleship.view;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
- * Registrierung Battleship
+ * Menu Battleship
  * @author Hinrich Kaestner, Tom Ohme
  * 
  */
@@ -23,9 +20,7 @@ public class Menu extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private Application app;
-	
-	static Image menuBattleship;
-	
+		
 	JButton game = new JButton("Game");
 	JButton loadGame = new JButton("Load Game");
 	JButton highscore = new JButton("Highscore");
@@ -46,15 +41,14 @@ public class Menu extends JFrame implements ActionListener {
 		setBackground(Color.lightGray);
 		setResizable(false);
 		
-		
-		
-		
 //		game.setBounds(50, 15, 100, 20);
 //		loadGame.setBounds(50, 15, 100, 20);
 //		highscore.setBounds(50, 15, 100, 20);
 //		beenden.setBounds(50, 15, 100, 20);
 		
-		menuBattleship(null);
+		Image menuBattleship = null;
+		
+		//g.drawImage(Menu.menuBattleship, 0, 0, this);
 		
 		menuPanel.add(game);
 		menuPanel.add(loadGame);
@@ -75,15 +69,15 @@ public class Menu extends JFrame implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		
+		if (e.getSource() == game) {
+			//app.game Game start
+		} else if (e.getSource() == loadGame) {
+			//app.loadgame if game exist (read from text file)
+		} else if (e.getSource() == highscore) {
+			//app.highscore show highscore all users + Difference between vicoties and defeats (read from other text file)
+		} else if (e.getSource() == beenden) {
+			System.exit(0);
+		}
 	}
 	
-	public void menuBattleship(Graphics g) {
-		menuBattleship = (new ImageIcon("graphics/menuBattleship.jpg")).getImage();
-		g.drawImage(Menu.menuBattleship, 0, 0, this);
-		
-	}
-	
-
 }

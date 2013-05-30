@@ -5,13 +5,6 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,6 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import battleship.data.User;
 
 /**
  * Registrierung Battleship
@@ -30,6 +25,7 @@ public class Register extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private Application app;
+	private User user;
 	
 	JLabel bLabel = new JLabel("Username: ");
 	JLabel pLabel = new JLabel("Password: ");
@@ -97,25 +93,26 @@ public class Register extends JFrame implements ActionListener {
 			char[] charpassword2 = pField2.getPassword();
 			String password = new String(charpassword);
 			String password2 = new String(charpassword2);
-			boolean isValide = checkUsernamePassword(username, password, password2);
+			boolean isValide = user.checkUsernamePassword(username, password, password2); //geht noch nicht
 			if (!isValide) {
 				return;
 			}
-			isValide = checkPassword(username, password, password2);
+			isValide = user.checkPassword(username, password, password2); //geht noch nicht
 			if (!isValide) {
 				return;
 			}
-			isValide = comparePassword(password, password2);
+			isValide = user.comparePassword(password, password2); //geht noch nicht
 			if (!isValide) {
 				return;
 			}
-			boolean vorhanden = checkExistUsername();
-			if (vorhanden == false) {
-				registPlayer(username, password);
-				emptyFields();
+			boolean exist = app.getFile().checkExistUsername(username); 
+			if (!exist) {
+				app.getFile().registPlayer(username, password);
 				JOptionPane.showMessageDialog(null, "Danke für die Registrierung bei Battleship");
 				emptyFields();
 				app.registerDone();
+			} else {
+				JOptionPane.showMessageDialog(null, "Benutzername schon vorhanden");
 			}
 		} else if (e.getSource() == zurueck) {
 			emptyFields();
@@ -124,95 +121,9 @@ public class Register extends JFrame implements ActionListener {
 			System.exit(0);
 		}		
 	}
-	
-	//Check if username and password entered
-	public boolean checkUsernamePassword(String username, String password, String password2) {
-		if(username.equals("") && password.equals("") && password2.equals("")) {
-			JOptionPane.showMessageDialog(null, "Bitte geben Sie einen Benutzername und ein Passwort ein");
-			return false;
-		} else if (username.equals("") && !password.equals("") && !password2.equals("")) {
-			JOptionPane.showMessageDialog(null, "Bitte geben Sie einen Bentzername ein");
-			return false;
-		} else if (username.equals("") && !password.equals("") && password2.equals("")) {
-			JOptionPane.showMessageDialog(null, "Bitte geben Sie einen Benutzername ein und das Passwort nochmals");
-			return false;
-		} else if (username.equals("") && password.equals("") && !password2.equals("")) {
-			JOptionPane.showMessageDialog(null, "Bitte geben Sie einen Benutzername ein und das Passwort nochmals");
-			return false;
-		} else if (!username.equals("") && password.equals("") && password2.equals("")) {
-			JOptionPane.showMessageDialog(null, "Bitte geben Sie ein Passwort ein");
-			return false;
-		}
-		return true; 
-	}
-	
-	//Check if password entered 2 times
-	public boolean checkPassword(String username, String password, String password2) {
-		if (!username.equals("") && !password.equals("") && password2.equals("")) {
-			JOptionPane.showMessageDialog(null, "Bitte geben Sie das Passwort nochmals ein");
-			return false;
-		} else if (!username.equals("") && password.equals("") && !password2.equals("")) {
-			JOptionPane.showMessageDialog(null, "Bitte geben Sie das Passwort nochmals ein");
-			return false;
-		} 
-		return true;
-	}
-	
-	//Check if password fields match
-	public boolean comparePassword(String password, String password2) {
-		if (!password.equals("") && !password.equals("") && !password2.equals("") && !password.equals(password2)) {
-			JOptionPane.showMessageDialog(null, "Passwort stimmt nicht überein");
-			return false;
-		}	
-		return true;
-	}
-	
-	//Check if username exist
-	public boolean checkExistUsername() {
-		BufferedReader br = null;
-		try {
-			br = new BufferedReader(new FileReader(new File("battleshipUser.txt")));
-			String line = null;
-			while ((line = br.readLine()) != null) {
-				String[] parts = line.split(";");
-				if (bField.getText().equals(parts[0])) {
-					JOptionPane.showMessageDialog(null, "Benutzername schon vorhanden");
-					return true;
-				}
-			}
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-		}
-		return false;
-	}
-	
-	//Write log data to txt file
-	public void registPlayer(String username, String password) {
-		try {
-			FileWriter fw = new FileWriter("battleshipUser.txt", true);
-			BufferedWriter ausgabe = new BufferedWriter(fw);
-			ausgabe.write(username);
-			ausgabe.write(";");
-			ausgabe.write(password);
-			ausgabe.newLine();
-			ausgabe.flush();
-			ausgabe.close();
-		} catch (IOException e2) {
-			e2.printStackTrace();
-		}
-	}
-	
-	//Textfeld entleeren
+
+
+	//text fields empty
 	public void emptyFields() {
 		bField.setText("");
 		pField.setText("");

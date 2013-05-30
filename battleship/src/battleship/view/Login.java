@@ -5,11 +5,6 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,6 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import battleship.data.User;
 
 /**
  * Login Battleship
@@ -28,6 +25,7 @@ public class Login extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private Application app;
+	private User user;
 
 	JLabel bLabel = new JLabel("Username: ");
 	JLabel pLabel = new JLabel("Password: ");
@@ -87,8 +85,9 @@ public class Login extends JFrame implements ActionListener {
 			String username = bField.getText();
 			char[] charpassword = pField.getPassword();
 			String password = new String(charpassword);
-			boolean isValide = checkUsernamePassword(username, password);			
-			if (isValide == true) {
+			user = app.getFile().readUser(username);
+			boolean isValide = (user != null && user.checkPassword(password));
+			if (isValide) {
 				JOptionPane.showMessageDialog(null, "Sie wurden erfolgreich bei Battleship angemeldet");
 				app.loginDone();
 			} else {
@@ -99,34 +98,6 @@ public class Login extends JFrame implements ActionListener {
 		} else if (e.getSource() == beenden) {
 			System.exit(0);
 		}
-	}
-	
-	//check if username and password right
-	public boolean checkUsernamePassword(String username, String password) {
-		BufferedReader br = null;
-		try {
-			br = new BufferedReader(new FileReader(new File("battleshipUser.txt")));
-			String line = null;
-			while ((line = br.readLine()) != null) {
-				String[] parts = line.split(";");
-				if (username.equals(parts[0]) && password.equals(parts[1])) {
-					return true;
-				} 
-			}
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-		}
-		return false;
 	}
 	
 }
