@@ -2,7 +2,6 @@ package battleship.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,9 +32,9 @@ public class Menu extends JFrame implements ActionListener {
 		setTitle("Menu Battleship");
 		//Centering of the window
 	    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	    int top = (screenSize.height - 200) / 2;
-	    int left = (screenSize.width - 400) / 2;
-	    setSize(400, 200);
+	    int top = (screenSize.height - 400) / 2;
+	    int left = (screenSize.width - 800) / 2;
+	    setSize(800, 400);
 	    setLocation(left, top);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBackground(Color.lightGray);
@@ -46,9 +45,7 @@ public class Menu extends JFrame implements ActionListener {
 //		highscore.setBounds(50, 15, 100, 20);
 //		beenden.setBounds(50, 15, 100, 20);
 		
-		Image menuBattleship = null;
-		
-		//g.drawImage(Menu.menuBattleship, 0, 0, this);
+		//Aufruf für Bild in PicturePanel
 		
 		menuPanel.add(game);
 		menuPanel.add(loadGame);

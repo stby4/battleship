@@ -25,7 +25,6 @@ public class Register extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private Application app;
-	private User user;
 	
 	JLabel bLabel = new JLabel("Username: ");
 	JLabel pLabel = new JLabel("Password: ");
@@ -93,6 +92,7 @@ public class Register extends JFrame implements ActionListener {
 			char[] charpassword2 = pField2.getPassword();
 			String password = new String(charpassword);
 			String password2 = new String(charpassword2);
+			User user = new User();
 			boolean isValide = user.checkUsernamePassword(username, password, password2); //geht noch nicht
 			if (!isValide) {
 				return;

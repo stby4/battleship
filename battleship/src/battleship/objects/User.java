@@ -1,8 +1,5 @@
 package battleship.objects;
 
-import java.io.FileWriter;
-import java.io.IOException;
-
 public class User {
 	private String name = ""; // name must be unique, hence it can be used as primary key
 	private String password = "";
@@ -51,14 +48,6 @@ public class User {
     }
     
     
-	public void createFile() {
-		try {
-			FileWriter fw = new FileWriter("battleshipUser.txt", true);
-			fw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
     
     /*
      * writes user data in file
