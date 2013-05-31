@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -19,11 +20,12 @@ public class Menu extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private Application app;
-		
-	JButton game = new JButton("Game");
+	
+	JLabel label = new JLabel();
+	JButton game = new JButton("New Game");
 	JButton loadGame = new JButton("Load Game");
 	JButton highscore = new JButton("Highscore");
-	JButton beenden	= new JButton("Beenden");
+	JButton logout	= new JButton("Logout");
 	JPanel menuPanel = new JPanel();
 		
 	public Menu(Application app) {
@@ -33,25 +35,42 @@ public class Menu extends JFrame implements ActionListener {
 		//Centering of the window
 	    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	    int top = (screenSize.height - 400) / 2;
-	    int left = (screenSize.width - 800) / 2;
-	    setSize(800, 400);
+	    int left = (screenSize.width - 600) / 2;
+	    setSize(600, 400);
 	    setLocation(left, top);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBackground(Color.lightGray);
+//	    setBackground(Color.BLACK);
 		setResizable(false);
 		
-//		game.setBounds(50, 15, 100, 20);
-//		loadGame.setBounds(50, 15, 100, 20);
-//		highscore.setBounds(50, 15, 100, 20);
-//		beenden.setBounds(50, 15, 100, 20);
+		menuPanel.setLayout(null); 
 		
-		//Aufruf für Bild in PicturePanel
+		label.setText("Angemeldet als: " + app.getUser().getUsername());
+		label.setForeground(Color.WHITE);
 		
+		label.setBounds(50, 10, 300, 25);
+		game.setBounds(50, 325, 110, 25);
+		loadGame.setBounds(180, 325, 110, 25);
+		highscore.setBounds(310, 325, 110, 25);
+		logout.setBounds(440, 325, 110, 25);
+			
+		JPanel picture = new PicturePanel();
+		picture.setBounds(0, 20, 600, 337);
+		menuPanel.add(picture);
+		menuPanel.add(label);
 		menuPanel.add(game);
 		menuPanel.add(loadGame);
 		menuPanel.add(highscore);
-		menuPanel.add(beenden);
+		menuPanel.add(logout);
 		
+		menuPanel.setComponentZOrder(picture, 1);
+		menuPanel.setComponentZOrder(label, 0);
+		menuPanel.setComponentZOrder(game, 0);
+		menuPanel.setComponentZOrder(loadGame, 0);
+		menuPanel.setComponentZOrder(highscore, 0);
+		menuPanel.setComponentZOrder(logout, 0);
+	
+		menuPanel.setBackground(Color.BLACK);
+	
 		getContentPane().add(menuPanel);
 		
 		actionmenu();
@@ -61,19 +80,19 @@ public class Menu extends JFrame implements ActionListener {
 		game.addActionListener(this);
 		loadGame.addActionListener(this);
 		highscore.addActionListener(this);
-		beenden.addActionListener(this);
+		logout.addActionListener(this);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == game) {
-			//app.game Game start
+			app.game();
 		} else if (e.getSource() == loadGame) {
-			//app.loadgame if game exist (read from text file)
+			//app.loadgame if game exist (read from text file) überspringen des Schiffe setzen
 		} else if (e.getSource() == highscore) {
-			//app.highscore show highscore all users + Difference between vicoties and defeats (read from other text file)
-		} else if (e.getSource() == beenden) {
-			System.exit(0);
+//			app.highscore(); //show highscore all users + Difference between vicoties and defeats (read from other text file)
+		} else if (e.getSource() == logout) {
+			app.login();
 		}
 	}
 	

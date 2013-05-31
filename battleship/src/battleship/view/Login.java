@@ -89,15 +89,24 @@ public class Login extends JFrame implements ActionListener {
 			boolean isValide = (user != null && user.checkPassword(password));
 			if (isValide) {
 				JOptionPane.showMessageDialog(null, "Sie wurden erfolgreich bei Battleship angemeldet");
-				app.loginDone();
+				app.loginDone(user);
+				emptyFields();
+				
 			} else {
 				JOptionPane.showMessageDialog(null, "Benutzername oder Passwort falsch");
 			}
 		} else if (e.getSource() == registrieren) {
 			app.register();
+			emptyFields();
 		} else if (e.getSource() == beenden) {
 			System.exit(0);
 		}
+	}
+	
+	//text fields empty
+	public void emptyFields() {
+		bField.setText("");
+		pField.setText("");
 	}
 	
 }

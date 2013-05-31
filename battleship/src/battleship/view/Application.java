@@ -1,5 +1,6 @@
 package battleship.view;
 
+import battleship.data.User;
 import battleship.logic.FileDAO;
 
 /**
@@ -9,9 +10,12 @@ import battleship.logic.FileDAO;
  */
 public class Application {
 
+	private User user;
 	private Login login;
 	private Register register;
 	private Menu menu;
+	private Game game;
+//	private Highscore highscore;
 	private FileDAO file;
 	
 	
@@ -27,7 +31,6 @@ public class Application {
 	private void init() {
 		login = new Login(this);
 		register = new Register(this);
-		menu = new Menu(this);
 		file = new FileDAO();
 		file.createFile();
 	}
@@ -37,12 +40,21 @@ public class Application {
 	}
 	
 	public void login() {
+		if (game != null) {
+			game.setVisible(false);
+		}
+		if (menu != null) {
+			menu.setVisible(false);
+		}
 		register.setVisible(false);
 		login.setVisible(true);
 	}
 	
-	public void loginDone() {
+	public void loginDone(User user) {
 		//System.out.println("Jetzt kommt das Game");
+		this.user = user;
+		menu = new Menu(this);
+		game = new Game(this);
 		menu();
 	}
 	
@@ -60,8 +72,26 @@ public class Application {
 		menu.setVisible(true);
 	}
 	
+	public void game() {
+		menu.setVisible(false);
+		game.setVisible(true);
+	}
+	
+	public void loadGame() {
+		//kommt noch überspringen des Schiffe setzen
+	}
+	
+//	public void highscore() {
+//		menu.setVisible(false);
+//		highscore.setVisible(true);
+//	}
+	
 	public FileDAO getFile() {
 		return file;
+	}
+	
+	public User getUser() {
+		return user;
 	}
 
 }

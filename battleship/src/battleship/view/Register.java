@@ -93,15 +93,15 @@ public class Register extends JFrame implements ActionListener {
 			String password = new String(charpassword);
 			String password2 = new String(charpassword2);
 			User user = new User();
-			boolean isValide = user.checkUsernamePassword(username, password, password2); //geht noch nicht
+			boolean isValide = user.checkUsernamePassword(username, password, password2); 
 			if (!isValide) {
 				return;
 			}
-			isValide = user.checkPassword(username, password, password2); //geht noch nicht
+			isValide = user.checkPassword(username, password, password2);
 			if (!isValide) {
 				return;
 			}
-			isValide = user.comparePassword(password, password2); //geht noch nicht
+			isValide = user.comparePassword(password, password2); 
 			if (!isValide) {
 				return;
 			}
@@ -121,8 +121,7 @@ public class Register extends JFrame implements ActionListener {
 			System.exit(0);
 		}		
 	}
-
-
+	
 	//text fields empty
 	public void emptyFields() {
 		bField.setText("");
