@@ -74,7 +74,6 @@ public class User {
 		return true;
 	}
 
-
 	public String getUsername() {
 		return username;
 	}

@@ -41,10 +41,10 @@ public class FileDAO {
 			String line = null;
 			while ((line = br.readLine()) != null) {
 				String[] parts = line.split(";");
-				if (username.equals(parts[0])) {
+				if (username.equals(parts[1])) {
 					User user = new User();
-					user.setUsername(parts[0]);
-					user.setPassword(parts[1]);
+					user.setUsername(parts[1]);
+					user.setPassword(parts[2]);
 					return user;
 				} 
 			}
@@ -71,6 +71,8 @@ public class FileDAO {
 		try {
 			FileWriter fw = new FileWriter("battleshipUser.txt", true);
 			BufferedWriter ausgabe = new BufferedWriter(fw);
+			ausgabe.write(countUser());
+			ausgabe.write(";");
 			ausgabe.write(username);
 			ausgabe.write(";");
 			ausgabe.write(password);
@@ -92,7 +94,7 @@ public class FileDAO {
 			String line = null;
 			while ((line = br.readLine()) != null) {
 				String[] parts = line.split(";");
-				if (username.equals(parts[0])) {
+				if (username.equals(parts[1])) {
 					return true;
 				}
 			}
@@ -110,6 +112,35 @@ public class FileDAO {
 			}
 		}
 		return false;
+	}
+	
+	/*
+	 * count user in text file for id
+	 */
+	public int countUser() {
+		BufferedReader br = null;
+		int users = 0;
+		try {
+			br = new BufferedReader(new FileReader(new File("battleshipUser.txt")));
+			int rows = 0;
+			while ((br.readLine()) != null) {
+				rows++;
+			}
+			users = rows + 1;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}  finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
+		return users;
 	}
 	
 }

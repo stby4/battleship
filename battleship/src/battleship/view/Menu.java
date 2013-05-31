@@ -39,7 +39,7 @@ public class Menu extends JFrame implements ActionListener {
 	    setSize(600, 400);
 	    setLocation(left, top);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//	    setBackground(Color.BLACK);
+	    //setBackground(Color.BLACK);
 		setResizable(false);
 		
 		menuPanel.setLayout(null); 
