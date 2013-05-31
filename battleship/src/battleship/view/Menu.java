@@ -52,7 +52,20 @@ public class Menu extends JFrame implements ActionListener {
 		loadGame.setBounds(180, 325, 110, 25);
 		highscore.setBounds(310, 325, 110, 25);
 		logout.setBounds(440, 325, 110, 25);
-			
+		
+		game.setBackground(Color.BLACK);
+		game.setForeground(Color.WHITE);
+		game.setFocusable(false);
+		loadGame.setBackground(Color.BLACK);
+		loadGame.setForeground(Color.WHITE);
+		loadGame.setFocusable(false);
+		highscore.setBackground(Color.BLACK);
+		highscore.setForeground(Color.WHITE);
+		highscore.setFocusable(false);
+		logout.setBackground(Color.BLACK);
+		logout.setForeground(Color.WHITE);
+		logout.setFocusable(false);
+		
 		JPanel picture = new PicturePanel();
 		picture.setBounds(0, 20, 600, 337);
 		menuPanel.add(picture);
