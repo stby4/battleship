@@ -22,7 +22,7 @@ public class PicturePanel extends JPanel {
 	public PicturePanel() {
 		this.setPreferredSize(new Dimension(600, 337));
 		try {
-			image = ImageIO.read(new File("battleship/graphics/wallpaper.jpg"));
+			image = ImageIO.read(new File("graphics/wallpaper.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
