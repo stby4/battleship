@@ -45,14 +45,14 @@ public class Game {
 
         Ship ac_carrier = new Ship(5);
         shipTypes.add(ac_carrier);
-        Ship battleship = new Ship(4);
-        shipTypes.add(battleship);
+        Ship cruiser = new Ship(4);
+        shipTypes.add(cruiser);
+        Ship destroyer = new Ship(3);
+        shipTypes.add(destroyer);
         Ship submarine = new Ship(3);
         shipTypes.add(submarine);
-        Ship cruiser = new Ship(3);
-        shipTypes.add(cruiser);
-        Ship destroyer = new Ship(2);
-        shipTypes.add(destroyer);
+        Ship frigate = new Ship(2);
+        shipTypes.add(frigate);
 
         this.placeShipsComputer();
     }
