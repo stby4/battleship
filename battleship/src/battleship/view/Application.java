@@ -1,7 +1,7 @@
 package battleship.view;
 
 import battleship.data.User;
-import battleship.logic.FileDAO;
+import battleship.data.FileDAO;
 
 /**
  * Application Battleship
@@ -78,7 +78,7 @@ public class Application {
 	}
 	
 	public void loadGame() {
-		//kommt noch überspringen des Schiffe setzen
+		//kommt noch ï¿½berspringen des Schiffe setzen
 	}
 	
 //	public void highscore() {
