@@ -11,20 +11,21 @@ import javax.swing.JPanel;
 /**
  * PicturePanel Battleship
  * @author Hinrich Kaestner, Tom Ohme
+ * wird wieder gelöscht, wenn ich weiss wie mit einem PicturePanel die Auswahl geht!!!!
  * 
  */
-public class PicturePanel extends JPanel {
+public class PicturePanel2 extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	private Image image;
+	private Image ac_carrier;
 	
 	/*
 	 * Picture for GUI
 	 */
-	public PicturePanel() {
+	public PicturePanel2() {
 		//this.setPreferredSize(new Dimension(600, 337));
 		try {
-			image = ImageIO.read(new File("graphics/wallpaper.jpg")); //Menupicture
+			ac_carrier = ImageIO.read(new File("graphics/ac_carrier.png")); //Gamepicture ac_carrier
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -32,8 +33,8 @@ public class PicturePanel extends JPanel {
 	
 	protected void paintComponent(Graphics g) {
 		super.paintComponents(g);
-		if (image != null) {
-			g.drawImage(image, 0, 0, 600, 337, null);
+		if (ac_carrier != null) {
+			g.drawImage(ac_carrier, 0, 0, 200, 120, null);
 		}
 	}
 }

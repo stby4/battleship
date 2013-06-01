@@ -19,6 +19,7 @@ public class Game extends JFrame implements ActionListener {
 	
 	private static final long serialVersionUID = 1L;
 	private Application app;
+	private Field myOcean;
 	
 	JButton next = new JButton("Next");
 	JButton logout = new JButton("Logout");
@@ -34,16 +35,40 @@ public class Game extends JFrame implements ActionListener {
 		setSize(600, 400);
 		setLocation(left, top);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBackground(Color.lightGray);
+		//setBackground(Color.lightGray);
 		setResizable(false);
 		
 		gamePanel.setLayout(null); 	
 		
-		next.setBounds(50, 15, 100, 20);
-		logout.setBounds(50, 15, 100, 20);
+		next.setBounds(440, 325, 110, 25);
+		logout.setBounds(50, 325, 110, 25);
+		
+		next.setBackground(Color.BLACK);
+		next.setForeground(Color.WHITE);
+		next.setFocusable(false);
+		logout.setBackground(Color.BLACK);
+		logout.setForeground(Color.WHITE);
+		logout.setFocusable(false);
+		
+		//create Field
+		myOcean = new Field();
+		myOcean.setBounds(50, 48, 250, 250);
+		gamePanel.add(myOcean);
+		
+		//create ac_carrier
+		JPanel picture = new PicturePanel2();
+		picture.setBounds(350, 180, 200, 120);
+		gamePanel.add(picture);
 		
 		gamePanel.add(next);
 		gamePanel.add(logout);
+				
+		gamePanel.setComponentZOrder(picture, 1);
+		gamePanel.setComponentZOrder(next, 0);
+		gamePanel.setComponentZOrder(logout, 0);
+		gamePanel.setComponentZOrder(myOcean, 0);
+		
+		gamePanel.setBackground(Color.BLACK);
 		
 		getContentPane().add(gamePanel);
 		
