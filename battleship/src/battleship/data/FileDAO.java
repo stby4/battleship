@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 import battleship.data.User;
 
@@ -141,6 +142,38 @@ public class FileDAO {
 			}
 		}
 		return users;
+	}
+	
+	/*
+	 * sort User after the difference between victories and defeats
+	 */
+	public void sortUser() {
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(new File("battleshipUser.txt")));
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				String[] parts = line.split(";");
+				for (int i=0; i<parts[0].length(); i++) {
+					int difference[] = parts[3] - parts[4];
+				}
+				Arrays.sort(difference);
+				//JList in Highscore übergeben //aufpassen über Logik gehen nur zum Test
+				
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
 	}
 	
 }

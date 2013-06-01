@@ -103,7 +103,7 @@ public class Menu extends JFrame implements ActionListener {
 		} else if (e.getSource() == loadGame) {
 			//app.loadgame if game exist (read from text file) überspringen des Schiffe setzen
 		} else if (e.getSource() == highscore) {
-//			app.highscore(); //show highscore all users + Difference between vicoties and defeats (read from other text file)
+			app.highscore(); //show highscore all users + Difference between vicoties and defeats (read from other text file)
 		} else if (e.getSource() == logout) {
 			app.login();
 		}

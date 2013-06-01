@@ -15,7 +15,7 @@ public class Application {
 	private Register register;
 	private Menu menu;
 	private Game game;
-//	private Highscore highscore;
+	private Highscore highscore;
 	private FileDAO file;
 	
 	
@@ -55,6 +55,7 @@ public class Application {
 		this.user = user;
 		menu = new Menu(this);
 		game = new Game(this);
+		highscore = new Highscore(this);
 		menu();
 	}
 	
@@ -68,6 +69,9 @@ public class Application {
 	}
 	
 	public void menu() {
+		if (highscore != null) {
+			highscore.setVisible(false);
+		}
 		login.setVisible(false);
 		menu.setVisible(true);
 	}
@@ -78,13 +82,13 @@ public class Application {
 	}
 	
 	public void loadGame() {
-		//kommt noch ï¿½berspringen des Schiffe setzen
+		//kommt noch überspringen des Schiffe setzen
 	}
 	
-//	public void highscore() {
-//		menu.setVisible(false);
-//		highscore.setVisible(true);
-//	}
+	public void highscore() {
+		menu.setVisible(false);
+		highscore.setVisible(true);
+	}
 	
 	public FileDAO getFile() {
 		return file;
