@@ -2,12 +2,14 @@ package battleship.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -21,6 +23,9 @@ public class Game extends JFrame implements ActionListener {
 	private Application app;
 	private Field myOcean;
 	
+	JLabel label = new JLabel("Setzen:");
+	JLabel label2 = new JLabel("Flugzeugträger");
+	JLabel label3 = new JLabel("(5 Felder)");
 	JButton next = new JButton("Next");
 	JButton logout = new JButton("Logout");
 	JPanel gamePanel = new JPanel();
@@ -38,8 +43,17 @@ public class Game extends JFrame implements ActionListener {
 		//setBackground(Color.lightGray);
 		setResizable(false);
 		
+		label.setFont(new Font("Arial", Font.BOLD, 18));
+		
 		gamePanel.setLayout(null); 	
 		
+		label.setForeground(Color.WHITE);
+		label2.setForeground(Color.WHITE);
+		label3.setForeground(Color.WHITE);
+		
+		label.setBounds(350, 48, 110, 25);
+		label2.setBounds(400, 73, 110, 25);
+		label3.setBounds(400, 93, 110, 25);
 		next.setBounds(440, 325, 110, 25);
 		logout.setBounds(50, 325, 110, 25);
 		
@@ -60,10 +74,16 @@ public class Game extends JFrame implements ActionListener {
 		picture.setBounds(350, 180, 200, 120);
 		gamePanel.add(picture);
 		
+		gamePanel.add(label);
+		gamePanel.add(label2);
+		gamePanel.add(label3);
 		gamePanel.add(next);
 		gamePanel.add(logout);
 				
 		gamePanel.setComponentZOrder(picture, 1);
+		gamePanel.setComponentZOrder(label, 0);
+		gamePanel.setComponentZOrder(label2, 0);
+		gamePanel.setComponentZOrder(label3, 0);
 		gamePanel.setComponentZOrder(next, 0);
 		gamePanel.setComponentZOrder(logout, 0);
 		gamePanel.setComponentZOrder(myOcean, 0);

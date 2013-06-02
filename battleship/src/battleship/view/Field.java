@@ -20,8 +20,11 @@ import javax.swing.JPanel;
 public class Field extends JPanel implements MouseListener {
 	
 	private static final long serialVersionUID = 1L;
+	//wo sich curser befindet
 	protected Point cursorLocation;
 	private Rectangle gridRects[][] = new Rectangle[10][10];
+//	//Popup
+//	JMenuItem vertical, horizontal;
 	private Image selection;
 	
 	public Field() {
@@ -31,7 +34,15 @@ public class Field extends JPanel implements MouseListener {
 				gridRects[x][y] = new Rectangle(x*25,y*25,25,25);
 			}
 		}
+		//wo sich curser befindet
 		addMouseMotionListener(new MouseMovingHandler());
+//		//Popup
+//		vertical = new JMenuItem("vertical");
+//        add(vertical);
+//        vertical.addActionListener((ActionListener) this);
+//        horizontal = new JMenuItem("horizontal");
+//        add(horizontal);
+//        horizontal.addActionListener((ActionListener) this);
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -57,13 +68,13 @@ public class Field extends JPanel implements MouseListener {
 	    }   
 	         
 	    int sqStat=0;                                     
-	    for (int r=0; r<10; r++) {	                  //marks the holes on user's guessboard   
+	    for (int r=0; r<10; r++) {	                  
 	    	for (int c=0; c<10;c++){     
 	    		if (sqStat==2)  {   
-	    			g.setColor(Color.RED);                    //a location that was hit (shot)  
+	    			g.setColor(Color.RED);                    //shot
 	    			g.fillOval(c*28+30, r*28+30, 10,10);   
 	    		} else if (sqStat==3)  {   
-	    			g.setColor(Color.WHITE);                  //a location guessed, but not hit (water)   
+	    			g.setColor(Color.WHITE);                  //water
 	    			g.fillOval(c*28+30, r*28+30, 10,10);   
 	    		}   
 	    	}   
