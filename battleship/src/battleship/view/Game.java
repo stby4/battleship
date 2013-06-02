@@ -52,7 +52,7 @@ public class Game extends JFrame implements ActionListener {
 		
 		//create Field
 		myOcean = new Field();
-		myOcean.setBounds(50, 48, 250, 250);
+		myOcean.setBounds(50, 48, 251, 251); //myOcean.setBounds(50, 48, 250, 250);
 		gamePanel.add(myOcean);
 		
 		//create ac_carrier

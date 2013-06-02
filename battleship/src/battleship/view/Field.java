@@ -1,13 +1,12 @@
 package battleship.view;
 
 import java.awt.Color;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.ImageIcon;
@@ -18,7 +17,7 @@ import javax.swing.JPanel;
  * @author Hinrich Kaestner, Tom Ohme
  * 
  */
-public class Field extends JPanel {
+public class Field extends JPanel implements MouseListener {
 	
 	private static final long serialVersionUID = 1L;
 	protected Point cursorLocation;
@@ -26,7 +25,7 @@ public class Field extends JPanel {
 	private Image selection;
 	
 	public Field() {
-		selection = (new ImageIcon("graphics/selection.jpg")).getImage();
+		selection = (new ImageIcon("graphics/selection.png")).getImage();
 		for (int y=0; y<10; y++) {
 			for (int x=0; x<10; x++) {
 				gridRects[x][y] = new Rectangle(x*25,y*25,25,25);
@@ -36,24 +35,59 @@ public class Field extends JPanel {
 	}
 	
 	public void paintComponent(Graphics g) {
-		Graphics2D g2 = (Graphics2D)g;
-
-		GradientPaint gp = new GradientPaint(0.0f, 0.0f, new Color(0,0,255), 250.0f, 250.0f, new Color(255,255,255)); //farblicher Hintergrund von blau in weiss
-		g2.setPaint(gp);
-		g2.fillRect(0, 0, 250, 250); 
-
-		g2.setColor(new Color(0,0,0)); 
-		for (int i=1; i<10; i++) {
-			g2.drawLine(i*25,0,i*25,250);
-			g2.drawLine(0,i*25,250,i*25);
-		}
-		g2.setColor(Color.BLACK);
-		g2.draw3DRect(0,0,250,250,false);
-
-		g2.setColor(new Color(0,60,60));
+	    g.setColor(Color.BLACK);   
+	    g.fillRect(0, 0, 250, 250);         
+	    g.setColor(Color.WHITE);      
+	    //10 X 10 square    
+	    for (int i=0; i<11; i++) {
+	    	g.drawLine(i*25,0,i*25,250);   
+	    }
+	    for (int i=0; i<11; i++) {
+	    	g.drawLine(0,i*25,250,i*25);   
+	    }
+	    char ch='0';   
+	    for (int i=0; i<10; i++){                    //Spalten Koordinaten oben   
+	    	g.drawString(ch+" ",10+25*i,17);   
+	    	ch++;   
+	    }   
+	    ch='A';   
+	    for (int i=0; i<10; i++) {                   //Spalten Koordinaten links   
+	    	g.drawString(ch+" ",10,17+25*i);   
+	        ch++;   
+	    }   
+	         
+	    int sqStat=0;                                     
+	    for (int r=0; r<10; r++) {	                  //marks the holes on user's guessboard   
+	    	for (int c=0; c<10;c++){     
+	    		if (sqStat==2)  {   
+	    			g.setColor(Color.RED);                    //a location that was hit (shot)  
+	    			g.fillOval(c*28+30, r*28+30, 10,10);   
+	    		} else if (sqStat==3)  {   
+	    			g.setColor(Color.WHITE);                  //a location guessed, but not hit (water)   
+	    			g.fillOval(c*28+30, r*28+30, 10,10);   
+	    		}   
+	    	}   
+	    } 
+	       
+//		old Field		
+//		Graphics2D g2 = (Graphics2D)g;
+//
+//		GradientPaint gp = new GradientPaint(0.0f, 0.0f, new Color(0,0,255), 250.0f, 250.0f, new Color(255,255,255)); //farblicher Hintergrund von blau in weiss
+//		g2.setPaint(gp);
+//		g2.fillRect(0, 0, 250, 250); 
+//
+//		g2.setColor(new Color(0,0,0)); 
+//		for (int i=1; i<10; i++) {
+//			g2.drawLine(i*25,0,i*25,250);
+//			g2.drawLine(0,i*25,250,i*25);
+//		}
+//		g2.setColor(Color.BLACK);
+//		g2.draw3DRect(0,0,250,250,false);
+//
+//		g2.setColor(new Color(0,60,60));
 		
 		if (cursorLocation!=null) {
-			g2.drawImage(selection, 25*(int)cursorLocation.getX(), 25*(int)cursorLocation.getY(), this);
+			g.drawImage(selection, 25*(int)cursorLocation.getX(), 25*(int)cursorLocation.getY(), this);
 		}
 	}
 	
@@ -71,6 +105,36 @@ public class Field extends JPanel {
 				repaint();
 			}
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
