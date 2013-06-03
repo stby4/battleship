@@ -12,7 +12,7 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.JPanel;
 
 /**
- * PlayingField Battleship
+ * Field Battleship
  * @author Hinrich Kaestner, Tom Ohme
  * 
  */
@@ -147,8 +147,8 @@ public class Field extends JPanel implements ActionListener {
 				cursorLocation = new Point(x,y);
 				repaint();
 			}
-			System.out.println(x);
-			System.out.println(y);
+			System.out.println(x); //zum testen
+			System.out.println(y); //zum testen
 			//mouseClicked x und y in addShip Speichern und Textfile Feld anderst Färben mit Feldlänge des Schiffts
 		}
 	}
