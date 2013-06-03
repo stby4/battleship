@@ -7,10 +7,12 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 /**
  * Game Battleship
@@ -23,11 +25,13 @@ public class Game extends JFrame implements ActionListener {
 	private Application app;
 	private Field myOcean;
 	
-	JLabel label = new JLabel("Setzen:");
-	JLabel label2 = new JLabel("Flugzeugträger");
-	JLabel label3 = new JLabel("(5 Felder)");
+	JLabel label = new JLabel("Set Ship:");
+	JLabel label2 = new JLabel();
+	JLabel label3 = new JLabel();
+	JRadioButton verticalButton = new JRadioButton("vertical", false);
+	JRadioButton horizontalButton = new JRadioButton("horizontal", false);
 	JButton next = new JButton("Next");
-	JButton logout = new JButton("Logout");
+	JButton back = new JButton("Back");
 	JPanel gamePanel = new JPanel();
 	
 	public Game(Application app) {
@@ -43,51 +47,101 @@ public class Game extends JFrame implements ActionListener {
 		//setBackground(Color.lightGray);
 		setResizable(false);
 		
-		label.setFont(new Font("Arial", Font.BOLD, 18));
+		label.setFont(new Font("Arial", Font.BOLD, 16));
 		
-		gamePanel.setLayout(null); 	
+		gamePanel.setLayout(null);
 		
-		label.setForeground(Color.WHITE);
-		label2.setForeground(Color.WHITE);
-		label3.setForeground(Color.WHITE);
+		ButtonGroup bgroup = new ButtonGroup();
+		bgroup.add(verticalButton);
+		bgroup.add(horizontalButton);
 		
 		label.setBounds(350, 48, 110, 25);
 		label2.setBounds(400, 73, 110, 25);
 		label3.setBounds(400, 93, 110, 25);
-		next.setBounds(440, 325, 110, 25);
-		logout.setBounds(50, 325, 110, 25);
+		verticalButton.setBounds(400, 113, 110, 25);
+		horizontalButton.setBounds(400, 133, 110, 25);
+		back.setBounds(50, 325, 110, 25);
 		
-		next.setBackground(Color.BLACK);
-		next.setForeground(Color.WHITE);
-		next.setFocusable(false);
-		logout.setBackground(Color.BLACK);
-		logout.setForeground(Color.WHITE);
-		logout.setFocusable(false);
+		label.setForeground(Color.WHITE);
+		label2.setForeground(Color.WHITE);
+		label3.setForeground(Color.WHITE);
+		verticalButton.setForeground(Color.WHITE);
+		verticalButton.setFocusable(false);
+		horizontalButton.setForeground(Color.WHITE);
+		horizontalButton.setFocusable(false);
+		back.setBackground(Color.BLACK);
+		back.setForeground(Color.WHITE);
+		back.setFocusable(false);
 		
 		//create Field
 		myOcean = new Field();
-		myOcean.setBounds(50, 48, 251, 251); //myOcean.setBounds(50, 48, 250, 250);
+		myOcean.setBounds(30, 28, 271, 271); //myOcean.setBounds(50, 48, 250, 250);
 		gamePanel.add(myOcean);
 		
-		//create ac_carrier
-		JPanel picture = new PicturePanel2();
-		picture.setBounds(350, 180, 200, 120);
-		gamePanel.add(picture);
-		
+		//if wenn noch kein Schiff gesetzt
+			label2.setText("Flugzeugträger");
+			label3.setText("(5 Felder)");
+			//create ac_carrier
+			JPanel picture = new PicturePanel2();
+			picture.setBounds(350, 180, 200, 120);
+			gamePanel.add(picture);
+			//checkShip(); 
+//		//else if wenn Flugzeugträger gesetzt 
+//			label2.setText("Battleship");
+//			label3.setText("(4 Felder)");
+//			JPanel picture = new PicturePanel3();
+//			picture.setBounds(350, 180, 200, 120);
+//			gamePanel.add(picture);
+//			checkShip();
+//		//else if wenn Battleship gesetzt
+//			label2.setText("Destroyer");
+//			label3.setText("(3 Felder)");
+//			JPanel picture = new PicturePanel4();
+//			picture.setBounds(350, 180, 200, 120);
+//			gamePanel.add(picture);
+//			checkShip();
+//		//else if wenn Destroyer gesetzt
+//			label2.setText("Submarine");
+//			label3.setText("(3 Felder)");
+//			JPanel picture = new PicturePanel5();
+//			picture.setBounds(350, 180, 200, 120);
+//			gamePanel.add(picture);
+//			checkShip();
+//		//else if wenn Submarine gesetzt 
+//			label2.setText("Frigate");
+//			label3.setText("(2 Felder)");
+//			JPanel picture = new PicturePanel6();
+//			picture.setBounds(350, 180, 200, 120);
+//			gamePanel.add(picture);
+//			checkShip();
+//		//else if wenn alle gesetzt sind
+//			//vlt Bild
+//			//aufgefordert next du drücken
+//			next.setBounds(440, 325, 110, 25);
+//			next.setBackground(Color.BLACK);
+//			next.setForeground(Color.WHITE);
+//			next.setFocusable(false);
+//			gamePanel.add(next);
+//			gamePanel.setComponentZOrder(next, 0);
+			
 		gamePanel.add(label);
 		gamePanel.add(label2);
 		gamePanel.add(label3);
-		gamePanel.add(next);
-		gamePanel.add(logout);
+		gamePanel.add(verticalButton);
+		gamePanel.add(horizontalButton);
+		gamePanel.add(back);
 				
 		gamePanel.setComponentZOrder(picture, 1);
 		gamePanel.setComponentZOrder(label, 0);
 		gamePanel.setComponentZOrder(label2, 0);
 		gamePanel.setComponentZOrder(label3, 0);
-		gamePanel.setComponentZOrder(next, 0);
-		gamePanel.setComponentZOrder(logout, 0);
+		gamePanel.setComponentZOrder(verticalButton, 0);
+		gamePanel.setComponentZOrder(horizontalButton, 0);
+		gamePanel.setComponentZOrder(back, 0);
 		gamePanel.setComponentZOrder(myOcean, 0);
 		
+		verticalButton.setBackground(Color.BLACK);
+		horizontalButton.setBackground(Color.BLACK);
 		gamePanel.setBackground(Color.BLACK);
 		
 		getContentPane().add(gamePanel);
@@ -97,16 +151,23 @@ public class Game extends JFrame implements ActionListener {
 	
 	public void actiongame() {
 		next.addActionListener(this);
-		logout.addActionListener(this);
+		back.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == next) {
-			//nächstes Schiff setzen
-		} else if (e.getSource() == logout) {
-			app.login();
+			
+		} else if (e.getSource() == back) {
+			app.menu();
 		}
+	}
+	
+	public void checkShip() {
+		//wenn auf das Spielfeld geklickt wird und es ist noch nicht vertical oder horizontal ausgewählt
+//		if (!verticalButton.isSelected() || !horizontalButton.isSelected()) {
+//			JOptionPane.showMessageDialog(null, "Bitte vertical oder horizontal auswählen");
+//		} 
 	}
 
 }

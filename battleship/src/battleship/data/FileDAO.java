@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
 
 import battleship.data.User;
 
@@ -118,9 +117,10 @@ public class FileDAO {
 	/*
 	 * count user in text file for id
 	 */
-	public int countUser() {
+	public String countUser() {
 		BufferedReader br = null;
 		int users = 0;
+		String id = null;
 		try {
 			br = new BufferedReader(new FileReader(new File("battleshipUser.txt")));
 			int rows = 0;
@@ -128,6 +128,7 @@ public class FileDAO {
 				rows++;
 			}
 			users = rows + 1;
+			id = String.valueOf(users);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -141,25 +142,20 @@ public class FileDAO {
 				}
 			}
 		}
-		return users;
+		return id;
 	}
 	
 	/*
 	 * sort User after the difference between victories and defeats
 	 */
-	public void sortUser() {
+	public String[] sortUser() {
 		BufferedReader br = null;
+		String[] parts = null;
 		try {
 			br = new BufferedReader(new FileReader(new File("battleshipUser.txt")));
 			String line = null;
 			while ((line = br.readLine()) != null) {
-				String[] parts = line.split(";");
-				for (int i=0; i<parts[0].length(); i++) {
-					int difference[] = parts[3] - parts[4];
-				}
-				Arrays.sort(difference);
-				//JList in Highscore übergeben //aufpassen über Logik gehen nur zum Test
-				
+				parts = line.split(";");
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -174,6 +170,7 @@ public class FileDAO {
 				}
 			}
 		}
+		return parts;
 	}
 	
 }

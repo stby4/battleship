@@ -11,6 +11,8 @@ public class User {
 	
 	private String username;
 	private String password;
+	private String victories;
+	private String defeats;
 	
 	/*
 	 * call in Login
@@ -88,6 +90,22 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getVictories() {
+		return victories;
+	}
+
+	public void setVictories(String victories) {
+		this.victories = victories;
+	}
+
+	public String getDefeats() {
+		return defeats;
+	}
+
+	public void setDefeats(String defeats) {
+		this.defeats = defeats;
 	}
 
 }

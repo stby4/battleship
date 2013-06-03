@@ -40,9 +40,6 @@ public class Application {
 	}
 	
 	public void login() {
-		if (game != null) {
-			game.setVisible(false);
-		}
 		if (menu != null) {
 			menu.setVisible(false);
 		}
@@ -71,6 +68,9 @@ public class Application {
 	public void menu() {
 		if (highscore != null) {
 			highscore.setVisible(false);
+		}
+		if (game != null) {
+			game.setVisible(false);
 		}
 		login.setVisible(false);
 		menu.setVisible(true);

@@ -1,5 +1,6 @@
 package battleship.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -8,8 +9,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JList;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 
 /**
  * Highscore Battleship
@@ -21,6 +23,11 @@ public class Highscore extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private Application app;
 
+	JTable table = new JTable();
+	JLabel headline = new JLabel("Hightscore Liste");
+	String columnNames[] = {"Username", "Victories", "Defeats", "Difference"};
+	JLabel[][] data;
+	JPanel dataPanel = new JPanel();
 	JButton back = new JButton("Back");
 	JButton print = new JButton("Print"); //optional um Highscore zu drucken
 	JPanel highscorePanel = new JPanel();
@@ -37,11 +44,18 @@ public class Highscore extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		
-		highscorePanel.setLayout(null); 	
+		highscorePanel.setLayout(new BorderLayout()); 	
 
-		JList themenAuswahl = new JList();
-//		setForeground(Color.WHITE);
-		//setBounds(50, 10, 300, 25);
+//		//übergeben aus User(Data) sortUser() Array oder Objekt muss noch Logik dazwischen
+//		data = new JLabel[user.size(), 3];
+//		dataPanel.setLayout(new GridLayout(user.size(),3));
+//		
+//		fillDataPanel();
+//		
+//		add(headline, BorderLayout.NORTH);
+//		add(table, BorderLayout.CENTER);
+//		pack(); //Fenstergösse anpassen
+		
 		
 		back.setBounds(50, 325, 110, 25);
 		
@@ -68,5 +82,16 @@ public class Highscore extends JFrame implements ActionListener {
 			app.menu();
 		}
 	}
-
+	
+//	private void fillDataPanel() {
+//        int countRows = user.size();
+//        String rowData[] = new String[3];
+//        for (int i=0; i<countRows; i++) {
+//        	rowData = user.getRowData(i);
+//        } 
+//        table = new JTable(rowData, columnNames)
+//        table.setBackground(Color.BLACK);
+//        table.setForeground(Color.WHITE);
+//	}
+	
 }
