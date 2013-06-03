@@ -2,14 +2,14 @@ package battleship.view;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
+
+import battleship.objects.Ship;
 
 /**
  * Field Battleship
@@ -19,22 +19,13 @@ import javax.swing.JPanel;
 public class Field extends JPanel implements ActionListener {
 	
 	private static final long serialVersionUID = 1L;
-	protected Point cursorLocation;
-	private Rectangle gridRects[][] = new Rectangle[10][10];
-//	private Image selection;
 	
 	public Field() {
-//		selection = (new ImageIcon("graphics/selection.png")).getImage();
-		for (int y=0; y<10; y++) {
-			for (int x=0; x<10; x++) {
-				gridRects[x][y] = new Rectangle(x*25,y*25,25,25);
-			}
-		}
-		addMouseMotionListener(new MouseMovingHandler());
+		addMouseListener(new MouseEventDemo());
+		
 	}
 	
 	public void paintComponent(Graphics g) {
-		
 		g.setColor(Color.BLACK);   
 		g.fillRect(0,0,271,271);    
 		g.setColor(Color.WHITE);   
@@ -64,12 +55,13 @@ public class Field extends JPanel implements ActionListener {
 	    			g.setColor(Color.RED);                  //hit
 	    			g.fillOval(c*28+30, r*28+30, 10,10);   
 	    		} else if (sqStat==3) {   
-	    			g.setColor(Color.WHITE);                //water  
+	    			g.setColor(Color.BLUE);                 //water  
 	    			g.fillOval(c*28+30, r*28+30, 10,10);   
 	    		}   
 	    	} 
 	    }
 	    
+	} 
 //		old Field2
 //	    g.setColor(Color.BLACK);   
 //	    g.fillRect(0, 0, 250, 250);         
@@ -105,9 +97,7 @@ public class Field extends JPanel implements ActionListener {
 //	    	}   
 //	    } 
 		
-		
-	
-	       
+		       
 //		old Field3		
 //		Graphics2D g2 = (Graphics2D)g;
 //
@@ -125,32 +115,54 @@ public class Field extends JPanel implements ActionListener {
 //
 //		g2.setColor(new Color(0,60,60));
 		
-		if (cursorLocation!=null) {
-			g.drawImage(null, 25*(int)cursorLocation.getX(), 25*(int)cursorLocation.getY(), this);
-		}
-	}
+//		if (cursorLocation!=null) {
+//			g.drawImage(null, 25*(int)cursorLocation.getX(), 25*(int)cursorLocation.getY(), this);
+//		}
+	
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		
 	}
 	
-	private class MouseMovingHandler extends MouseMotionAdapter {
-		private Rectangle lastSelected = new Rectangle();
-
-		public void mouseMoved(MouseEvent e) {
+	private class MouseEventDemo implements MouseListener {
+		private Ship ship;
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
 			int x = (int)(e.getPoint().getX()/25);
 			int y = (int)(e.getPoint().getY()/25);
-
-			if(x<10 && y<10 && gridRects[x][y]!=lastSelected) {
-				lastSelected = gridRects[x][y];
-				cursorLocation = new Point(x,y);
-				repaint();
-			}
+			//ship.setPosition(x, y, direction) //?????????????????????????????????????????????????????????????????????????????
 			System.out.println(x); //zum testen
 			System.out.println(y); //zum testen
-			//mouseClicked x und y in addShip Speichern und Textfile Feld anderst Färben mit Feldlänge des Schiffts
+			//Feld weiss einfärben +Felder horizontal oder vertical für Schiff //+Felder speichern
+
 		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 	
 }

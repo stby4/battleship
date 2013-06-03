@@ -28,7 +28,7 @@ public class Game extends JFrame implements ActionListener {
 	JLabel label = new JLabel("Set Ship:");
 	JLabel label2 = new JLabel();
 	JLabel label3 = new JLabel();
-	JRadioButton verticalButton = new JRadioButton("vertical", false);
+	JRadioButton verticalButton = new JRadioButton("vertical", true);
 	JRadioButton horizontalButton = new JRadioButton("horizontal", false);
 	JButton next = new JButton("Next");
 	JButton back = new JButton("Back");
@@ -78,6 +78,7 @@ public class Game extends JFrame implements ActionListener {
 		myOcean.setBounds(30, 28, 271, 271); //myOcean.setBounds(50, 48, 250, 250);
 		gamePanel.add(myOcean);
 		
+		
 		//if wenn noch kein Schiff gesetzt
 			label2.setText("Flugzeugträger");
 			label3.setText("(5 Felder)");
@@ -85,38 +86,33 @@ public class Game extends JFrame implements ActionListener {
 			JPanel picture = new PicturePanel2();
 			picture.setBounds(350, 180, 200, 120);
 			gamePanel.add(picture);
-			//checkShip(); 
 //		//else if wenn Flugzeugträger gesetzt 
 //			label2.setText("Battleship");
 //			label3.setText("(4 Felder)");
 //			JPanel picture = new PicturePanel3();
 //			picture.setBounds(350, 180, 200, 120);
 //			gamePanel.add(picture);
-//			checkShip();
-//		//else if wenn Battleship gesetzt
+//		//else if wenn Battleship und Flugzeugträger gesetzt
 //			label2.setText("Destroyer");
 //			label3.setText("(3 Felder)");
 //			JPanel picture = new PicturePanel4();
 //			picture.setBounds(350, 180, 200, 120);
 //			gamePanel.add(picture);
-//			checkShip();
-//		//else if wenn Destroyer gesetzt
+//		//else if wenn Destroyer... gesetzt
 //			label2.setText("Submarine");
 //			label3.setText("(3 Felder)");
 //			JPanel picture = new PicturePanel5();
 //			picture.setBounds(350, 180, 200, 120);
 //			gamePanel.add(picture);
-//			checkShip();
-//		//else if wenn Submarine gesetzt 
+//		//else if wenn Submarine... gesetzt 
 //			label2.setText("Frigate");
 //			label3.setText("(2 Felder)");
 //			JPanel picture = new PicturePanel6();
 //			picture.setBounds(350, 180, 200, 120);
 //			gamePanel.add(picture);
-//			checkShip();
 //		//else if wenn alle gesetzt sind
 //			//vlt Bild
-//			//aufgefordert next du drücken
+//			//next Button
 //			next.setBounds(440, 325, 110, 25);
 //			next.setBackground(Color.BLACK);
 //			next.setForeground(Color.WHITE);
@@ -161,13 +157,6 @@ public class Game extends JFrame implements ActionListener {
 		} else if (e.getSource() == back) {
 			app.menu();
 		}
-	}
-	
-	public void checkShip() {
-		//wenn auf das Spielfeld geklickt wird und es ist noch nicht vertical oder horizontal ausgewählt
-//		if (!verticalButton.isSelected() || !horizontalButton.isSelected()) {
-//			JOptionPane.showMessageDialog(null, "Bitte vertical oder horizontal auswählen");
-//		} 
 	}
 
 }

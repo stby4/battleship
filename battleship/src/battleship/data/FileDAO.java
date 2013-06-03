@@ -146,7 +146,7 @@ public class FileDAO {
 	}
 	
 	/*
-	 * sort User after the difference between victories and defeats
+	 * sort User for highscore
 	 */
 	public String[] sortUser() {
 		BufferedReader br = null;
