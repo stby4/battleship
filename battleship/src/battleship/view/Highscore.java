@@ -15,7 +15,7 @@ import javax.swing.JTable;
 
 /**
  * Highscore Battleship
- * @author Hinrich Kaestner, Tom Ohme
+ * @author Tom Ohme
  * 
  */
 public class Highscore extends JFrame implements ActionListener {
@@ -46,7 +46,7 @@ public class Highscore extends JFrame implements ActionListener {
 		
 		highscorePanel.setLayout(new BorderLayout()); 	
 
-//		//übergeben aus User(Data) sortUser() Array oder Objekt muss noch Logik dazwischen
+//		//ï¿½bergeben aus User(Data) sortUser() Array oder Objekt muss noch Logik dazwischen
 //		data = new JLabel[user.size(), 3];
 //		dataPanel.setLayout(new GridLayout(user.size(),3));
 //		
@@ -54,7 +54,7 @@ public class Highscore extends JFrame implements ActionListener {
 //		
 //		add(headline, BorderLayout.NORTH);
 //		add(table, BorderLayout.CENTER);
-//		pack(); //Fenstergösse anpassen
+//		pack(); //Fenstergï¿½sse anpassen
 		
 		
 		back.setBounds(50, 325, 110, 25);

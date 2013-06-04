@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 /**
  * Menu Battleship
- * @author Hinrich Kaestner, Tom Ohme
+ * @author Tom Ohme
  * 
  */
 public class Menu extends JFrame implements ActionListener {
@@ -101,7 +101,7 @@ public class Menu extends JFrame implements ActionListener {
 		if (e.getSource() == game) {
 			app.game();
 		} else if (e.getSource() == loadGame) {
-			//app.loadgame if game exist (read from text file) überspringen des Schiffe setzen
+			//app.loadgame if game exist (read from text file) ï¿½berspringen des Schiffe setzen
 		} else if (e.getSource() == highscore) {
 			app.highscore(); //show highscore all users + Difference between vicoties and defeats (read from other text file)
 		} else if (e.getSource() == logout) {

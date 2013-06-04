@@ -18,7 +18,7 @@ import battleship.data.User;
 
 /**
  * Login Battleship
- * @author Hinrich Kaestner, Tom Ohme
+ * @author Tom Ohme
  * 
  */
 public class Login extends JFrame implements ActionListener {

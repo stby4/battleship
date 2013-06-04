@@ -1,23 +1,54 @@
 package battleship.objects;
 
-public class User {
+/**
+ * User class
+ *
+ * @author H. Kaestner
+ */
+public class User implements java.io.Serializable {
+    private int uid = -1;
 	private String name = ""; // name must be unique, hence it can be used as primary key
 	private String password = "";
 	private int victories = 0;
 	private int defeats = 0;
-	
-	public User(String name, String password) {
+    private int lastGame = -1;
+
+    /**
+     *
+     * @param name
+     * @param password
+     */
+	public User(int uid, String name, String password) {
+        this.setUid(uid);
 		this.setName(name);
 		this.setPassword(password);
 	}
-	
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
+    /**
+     *
+     * @param name
+     * @return
+     */
 	public boolean setName(String name) {
 		this.name = name;
-		/*
-		 * TODO check if name is valid
-		 */
 		return true;
 	}
+
+    /**
+     *
+     * @return
+     */
+    public String getName() {
+        return this.name;
+    }
 	
 	/*
 	 * @param String password
@@ -25,11 +56,24 @@ public class User {
 	 */
 	public boolean setPassword(String password) {
 		this.password = password;
-		/*
-		 * TODO check if password is valid
-		 */
 		return true;
 	}
+
+    /**
+     *
+     * @return
+     */
+    public String getPassword() {
+        return this.password;
+    }
+
+    public int getLastGame() {
+        return lastGame;
+    }
+
+    public void setLastGame(int lastGame) {
+        this.lastGame = lastGame;
+    }
 
     public int getDefeats() {
         return defeats;
@@ -46,28 +90,4 @@ public class User {
     public void addVictory() {
         this.victories++;
     }
-    
-    
-    
-    /*
-     * writes user data in file
-     * @return boolean successful registration
-     */
-	public boolean registrate() {
-		// TODO check if user is not existent, write name and pw in file
-		return true;
-	}
-	
-	/*
-	 * login user
-	 * @return boolean successful login
-	 */
-	public boolean login() {
-		// TODO check if user is existent and if password is correct
-		// TODO get highscore and possibly the users latest game
-		return true;
-	}
-	
-	
-
 }

@@ -16,7 +16,7 @@ import javax.swing.JRadioButton;
 
 /**
  * Game Battleship
- * @author Hinrich Kaestner, Tom Ohme
+ * @author Tom Ohme
  * 
  */
 public class Game extends JFrame implements ActionListener {
@@ -80,19 +80,19 @@ public class Game extends JFrame implements ActionListener {
 		
 		
 		//if wenn noch kein Schiff gesetzt
-			label2.setText("Flugzeugträger");
+			label2.setText("Flugzeugtrï¿½ger");
 			label3.setText("(5 Felder)");
 			//create ac_carrier
 			JPanel picture = new PicturePanel2();
 			picture.setBounds(350, 180, 200, 120);
 			gamePanel.add(picture);
-//		//else if wenn Flugzeugträger gesetzt 
+//		//else if wenn Flugzeugtrï¿½ger gesetzt 
 //			label2.setText("Battleship");
 //			label3.setText("(4 Felder)");
 //			JPanel picture = new PicturePanel3();
 //			picture.setBounds(350, 180, 200, 120);
 //			gamePanel.add(picture);
-//		//else if wenn Battleship und Flugzeugträger gesetzt
+//		//else if wenn Battleship und Flugzeugtrï¿½ger gesetzt
 //			label2.setText("Destroyer");
 //			label3.setText("(3 Felder)");
 //			JPanel picture = new PicturePanel4();

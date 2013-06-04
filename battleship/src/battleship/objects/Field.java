@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Field
  *
- * @author H. Kaestner, T. Ohme
+ * @author H. Kaestner
  */
 public class Field {
     static public enum Fieldelements {

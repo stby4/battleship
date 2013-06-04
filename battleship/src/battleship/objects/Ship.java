@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Ship
  *
- * @author H. Kaestner, T. Ohme
+ * @author H. Kaestner
  */
 public class Ship {
     private int length = 2;

@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 /**
  * PicturePanel Battleship
- * @author Hinrich Kaestner, Tom Ohme
+ * @author Tom Ohme
  * 
  */
 public class PicturePanel extends JPanel {
@@ -24,7 +24,7 @@ public class PicturePanel extends JPanel {
 	public PicturePanel() {
 		//this.setPreferredSize(new Dimension(600, 337));
 		try {
-			image = ImageIO.read(new File("graphics/wallpaper.jpg")); //Menupicture
+			image = ImageIO.read(new File("../graphics/wallpaper.jpg")); //Menupicture
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

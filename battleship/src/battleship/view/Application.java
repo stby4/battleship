@@ -5,7 +5,7 @@ import battleship.data.FileDAO;
 
 /**
  * Application Battleship
- * @author Hinrich Kaestner, Tom Ohme
+ * @author Tom Ohme
  * 
  */
 public class Application {
@@ -31,8 +31,8 @@ public class Application {
 	private void init() {
 		login = new Login(this);
 		register = new Register(this);
-		file = new FileDAO();
-		file.createFile();
+		//file = new FileDAO();
+		//file.createFile(); TODO use appropriate way to save data (see UML)
 	}
 	
 	private void start() {
@@ -82,7 +82,7 @@ public class Application {
 	}
 	
 	public void loadGame() {
-		//kommt noch überspringen des Schiffe setzen
+		//kommt noch ï¿½berspringen des Schiffe setzen
 	}
 	
 	public void highscore() {

@@ -4,10 +4,10 @@ import battleship.objects.Field;
 import battleship.objects.User;
 
 /**
- * Gameplay Battleship
- * @author H. Kaestner, T. Ohme
+ * Gameplay
+ * @author H. Kaestner
  */
-public class Gameplay {
+public class Gameplay implements java.io.Serializable {
     private User user;
     private Game game;
     private Game.Playerelements currentPlayer = Game.Playerelements.ERROR;

@@ -1,8 +1,8 @@
 package battleship.data;
 
 /**
- * @author Tom Ohme
+ * @author H. Kaestner
  * @see http://stackoverflow.com/questions/2836646/java-serializable-object-to-byte-array
  */
-public class Game {
+public class Game extends FileDAO {
 }

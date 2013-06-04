@@ -1,111 +1,64 @@
 package battleship.data;
 
-import javax.swing.JOptionPane;
+import java.io.*;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
- * User Battleship
- * @author Hinrich Kaestner, Tom Ohme
- * 
+ * User
+ *
+ * @author Hinrich Kaestner
+ * @link http://stackoverflow.com/questions/2836646/java-serializable-object-to-byte-array
+ * @link http://stackoverflow.com/questions/12977290/write-and-read-multiple-byte-in-file-with-java
  */
-public class User {
-	
-	private String username;
-	private String password;
-	private String victories;
-	private String defeats;
-	
-	/*
-	 * call in Login
-	 * check if password equals password in file
-	 */
-	public boolean checkPassword(String password) {
-		if (password.equals(this.password)) {
-			return true;
-		}
-		return false;
-	}
-	
-	/*
-	 * call in Register
-	 * check if username and password entered
-	 */
-	public boolean checkUsernamePassword(String username, String password, String password2) {
-		if(username.equals("") && password.equals("") && password2.equals("")) {
-			JOptionPane.showMessageDialog(null, "Bitte geben Sie einen Benutzername und ein Passwort ein");
-			return false;
-		} else if (username.equals("") && !password.equals("") && !password2.equals("")) {
-			JOptionPane.showMessageDialog(null, "Bitte geben Sie einen Bentzername ein");
-			return false;
-		} else if (username.equals("") && !password.equals("") && password2.equals("")) {
-			JOptionPane.showMessageDialog(null, "Bitte geben Sie einen Benutzername ein und das Passwort nochmals");
-			return false;
-		} else if (username.equals("") && password.equals("") && !password2.equals("")) {
-			JOptionPane.showMessageDialog(null, "Bitte geben Sie einen Benutzername ein und das Passwort nochmals");
-			return false;
-		} else if (!username.equals("") && password.equals("") && password2.equals("")) {
-			JOptionPane.showMessageDialog(null, "Bitte geben Sie ein Passwort ein");
-			return false;
-		}
-		return true; 
-	}
-	
-	/*
-	 * call in Register
-	 * check if password entered 2 times
-	 */
-	public boolean checkPassword(String username, String password, String password2) {
-		if (!username.equals("") && !password.equals("") && password2.equals("")) {
-			JOptionPane.showMessageDialog(null, "Bitte geben Sie das Passwort nochmals ein");
-			return false;
-		} else if (!username.equals("") && password.equals("") && !password2.equals("")) {
-			JOptionPane.showMessageDialog(null, "Bitte geben Sie das Passwort nochmals ein");
-			return false;
-		} 
-		return true;
-	}
-	
-	/*
-	 * call in Register
-	 * check if password fields match
-	 */
-	public boolean comparePassword(String password, String password2) {
-		if (!password.equals("") && !password.equals("") && !password2.equals("") && !password.equals(password2)) {
-			JOptionPane.showMessageDialog(null, "Passwort stimmt nicht überein");
-			return false;
-		}	
-		return true;
-	}
+public class User extends FileDAO {
 
-	public String getUsername() {
-		return username;
-	}
+    private int uid = -1;
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void store(battleship.objects.User user) throws IOException {
 
-	public String getPassword() {
-		return password;
-	}
+        List<battleship.objects.User> users = new ArrayList<battleship.objects.User>();
+        users.add(user.getUid(), user);
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+        ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+        ObjectOutput out = null;
+        try {
+            out = new ObjectOutputStream(byteOut);
+            out.writeObject(users);
+            byte[] data = byteOut.toByteArray();
 
-	public String getVictories() {
-		return victories;
-	}
+            this.write("user", data);
+        } finally {
+            out.close();
+            byteOut.close();
+        }
+    }
 
-	public void setVictories(String victories) {
-		this.victories = victories;
-	}
+    private List<battleship.objects.User> readAll() throws IOException, ClassNotFoundException {
+        ByteArrayInputStream byteIn = null;
+        List<battleship.objects.User> users = null;
+        try {
+            byteIn = new ByteArrayInputStream(this.read("user"));
+            ObjectInput in = new ObjectInputStream(byteIn);
+            users = (List<battleship.objects.User>) in.readObject();
+        } finally {
+            byteIn.close();
+        }
+        return users;
+    }
 
-	public String getDefeats() {
-		return defeats;
-	}
+    public battleship.objects.User get(String username, String password) {
+        List<battleship.objects.User> users = null;
+        try {
+            users = readAll();
+        } finally {
+            for (battleship.objects.User user : users) {
+                if (username.equals(user.getName()) && password.equals(user.getPassword())) {
+                    return user;
+                }
+            }
+        }
 
-	public void setDefeats(String defeats) {
-		this.defeats = defeats;
-	}
+    }
 
 }

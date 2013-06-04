@@ -9,7 +9,7 @@ import java.util.Random;
 /**
  * most important class!!!!!
  *
- * @author H. Kaestner, T. Ohme
+ * @author H. Kaestner
  */
 public class Game {
     static public enum Playerelements {

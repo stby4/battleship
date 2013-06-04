@@ -18,7 +18,7 @@ import battleship.data.User;
 
 /**
  * Registrierung Battleship
- * @author Hinrich Kaestner, Tom Ohme
+ * @author Tom Ohme
  * 
  */
 public class Register extends JFrame implements ActionListener {
@@ -33,7 +33,7 @@ public class Register extends JFrame implements ActionListener {
 	JPasswordField pField = new JPasswordField();
 	JPasswordField pField2 = new JPasswordField();
 	JButton weiter = new JButton("Weiter");
-	JButton zurueck = new JButton("Zurück");
+	JButton zurueck = new JButton("Zurï¿½ck");
 	JButton beenden = new JButton("Beenden");
 	JPanel registerPanel = new JPanel();
 	
@@ -108,7 +108,7 @@ public class Register extends JFrame implements ActionListener {
 			boolean exist = app.getFile().checkExistUsername(username); 
 			if (!exist) {
 				app.getFile().registPlayer(username, password);
-				JOptionPane.showMessageDialog(null, "Danke für die Registrierung bei Battleship");
+				JOptionPane.showMessageDialog(null, "Danke fï¿½r die Registrierung bei Battleship");
 				emptyFields();
 				app.registerDone();
 			} else {
