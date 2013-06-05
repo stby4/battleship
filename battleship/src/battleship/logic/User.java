@@ -27,7 +27,7 @@ public class User {
         if(password1.equals(password2)) {
             throw new NotMatchingPasswordsException("Die Passwörter stimmen nicht miteinander überein.");
         }
-        // TODO create new entry in DAO
+        // TODO create new entry in DAO...
 
         return 1;
     }
