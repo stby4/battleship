@@ -8,20 +8,20 @@ import java.util.ArrayList;
  * @author H. Kaestner
  */
 public class Ship {
+    private boolean isset = false;
     private int length = 2;
     private int posX = 0; // start longitude
     private int posY = 0; // start latitude
-    /*
-     * possible integer values for direction:
-     *  0: horizontal
-     *  1: vertical
-     */
     private Field.Directionelements direction = Field.Directionelements.HORIZONTAL;
     private boolean sunk = false;
+    private String name = "";
+    private String image = "";
     private ArrayList<Field.Fieldelements> shots = new ArrayList<Field.Fieldelements>();
 
-    public Ship(int length) {
+    public Ship(int length, String name, String image) {
         this.length = length;
+        this.name = name;
+        this.image = image;
 
         // init ship fields with "SHIP" status (makes sense, doesn't it?)
         for (int i = 0; i < this.length; i++) {
@@ -33,10 +33,23 @@ public class Ship {
         this.posX = posX;
         this.posY = posY;
         this.direction = direction;
+        this.isset = true;
+    }
+
+    public boolean isIsset() {
+        return isset;
     }
 
     public boolean getSunk() {
         return sunk;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getImage() {
+        return image;
     }
 
     public int getPosX() {

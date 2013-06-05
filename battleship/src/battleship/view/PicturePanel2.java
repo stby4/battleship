@@ -17,15 +17,15 @@ import javax.swing.JPanel;
 public class PicturePanel2 extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	private Image ac_carrier;
+	private Image shipImage;
 	
 	/*
 	 * Picture for GUI
 	 */
-	public PicturePanel2() {
+	public PicturePanel2(String file) {
 		//this.setPreferredSize(new Dimension(600, 337));
 		try {
-			ac_carrier = ImageIO.read(new File("../graphics/ac_carrier.png")); //Gamepicture ac_carrier
+			shipImage = ImageIO.read(new File("../graphics/"+file)); //Gamepicture ac_carrier
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -33,8 +33,8 @@ public class PicturePanel2 extends JPanel {
 	
 	protected void paintComponent(Graphics g) {
 		super.paintComponents(g);
-		if (ac_carrier != null) {
-			g.drawImage(ac_carrier, 0, 0, 200, 120, null);
+		if (shipImage != null) {
+			g.drawImage(shipImage, 0, 0, 200, 120, null);
 		}
 	}
 }

@@ -43,15 +43,15 @@ public class Game {
         this.fieldUser = new Field(10, 10);
         this.fieldComputer = new Field(10, 10);
 
-        Ship ac_carrier = new Ship(5);
+        Ship ac_carrier = new Ship(5, "Flugzeugträger", "ac_carrier.png");
         shipTypes.add(ac_carrier);
-        Ship cruiser = new Ship(4);
+        Ship cruiser = new Ship(4, "Kreuzer", "destroyer.jpg");
         shipTypes.add(cruiser);
-        Ship destroyer = new Ship(3);
+        Ship destroyer = new Ship(3, "Zerstörer", "destroyer3.png");
         shipTypes.add(destroyer);
-        Ship submarine = new Ship(3);
+        Ship submarine = new Ship(3, "U-Boot", "submarine2.png");
         shipTypes.add(submarine);
-        Ship frigate = new Ship(2);
+        Ship frigate = new Ship(2, "Fregatte", "frigate.png");
         shipTypes.add(frigate);
 
         this.placeShipsComputer();

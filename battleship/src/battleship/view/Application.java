@@ -1,7 +1,7 @@
 package battleship.view;
 
 import battleship.data.User;
-import battleship.data.FileDAO;
+import battleship.data.binaryFile;
 
 /**
  * Application Battleship
@@ -14,9 +14,9 @@ public class Application {
 	private Login login;
 	private Register register;
 	private Menu menu;
-	private Game game;
+	private Position position;
 	private Highscore highscore;
-	private FileDAO file;
+	private binaryFile file;
 	
 	
 	/**
@@ -31,7 +31,7 @@ public class Application {
 	private void init() {
 		login = new Login(this);
 		register = new Register(this);
-		//file = new FileDAO();
+		//file = new binaryFile();
 		//file.createFile(); TODO use appropriate way to save data (see UML)
 	}
 	
@@ -48,10 +48,10 @@ public class Application {
 	}
 	
 	public void loginDone(User user) {
-		//System.out.println("Jetzt kommt das Game");
+		//System.out.println("Jetzt kommt das Position");
 		this.user = user;
 		menu = new Menu(this);
-		game = new Game(this);
+		position = new Position(this);
 		highscore = new Highscore(this);
 		menu();
 	}
@@ -69,8 +69,8 @@ public class Application {
 		if (highscore != null) {
 			highscore.setVisible(false);
 		}
-		if (game != null) {
-			game.setVisible(false);
+		if (position != null) {
+			position.setVisible(false);
 		}
 		login.setVisible(false);
 		menu.setVisible(true);
@@ -78,7 +78,7 @@ public class Application {
 	
 	public void game() {
 		menu.setVisible(false);
-		game.setVisible(true);
+		position.setVisible(true);
 	}
 	
 	public void loadGame() {
@@ -90,7 +90,7 @@ public class Application {
 		highscore.setVisible(true);
 	}
 	
-	public FileDAO getFile() {
+	public binaryFile getFile() {
 		return file;
 	}
 	

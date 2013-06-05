@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * FileDAO
+ * binaryFile
  * @author Hinrich Kaestner
  */
-abstract public class FileDAO {
+abstract public class binaryFile {
 
     public byte[] read(String filename) throws IOException{
         File file = new File(filename+".bin");

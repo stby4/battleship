@@ -22,8 +22,8 @@ public class Menu extends JFrame implements ActionListener {
 	private Application app;
 	
 	JLabel label = new JLabel();
-	JButton game = new JButton("New Game");
-	JButton loadGame = new JButton("Load Game");
+	JButton game = new JButton("New Position");
+	JButton loadGame = new JButton("Load Position");
 	JButton highscore = new JButton("Highscore");
 	JButton logout	= new JButton("Logout");
 	JPanel menuPanel = new JPanel();

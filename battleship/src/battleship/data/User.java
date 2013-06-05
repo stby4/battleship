@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @link http://stackoverflow.com/questions/2836646/java-serializable-object-to-byte-array
  * @link http://stackoverflow.com/questions/12977290/write-and-read-multiple-byte-in-file-with-java
  */
-public class User extends FileDAO {
+public class User extends binaryFile {
 
     private int uid = -1;
 
@@ -28,7 +28,8 @@ public class User extends FileDAO {
             byte[] data = byteOut.toByteArray();
 
             this.write("user", data);
-        } finally {
+        }
+        finally {
             out.close();
             byteOut.close();
         }
@@ -47,7 +48,7 @@ public class User extends FileDAO {
         return users;
     }
 
-    public battleship.objects.User get(String username, String password) {
+    public battleship.objects.User get(String username, String password) throws IOException, ClassNotFoundException {
         List<battleship.objects.User> users = null;
         try {
             users = readAll();
@@ -58,7 +59,7 @@ public class User extends FileDAO {
                 }
             }
         }
-
+        return null; // unlikely...
     }
 
 }
