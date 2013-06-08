@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import battleship.data.User;
 import battleship.objects.IncompleteDataException;
 import battleship.objects.WrongCredentialsException;
 
@@ -27,7 +26,6 @@ public class Login extends JFrame implements ActionListener {
 
     private static final long serialVersionUID = 1L;
     private Application app;
-    private User user;
 
     JLabel bLabel = new JLabel("Username: ");
     JLabel pLabel = new JLabel("Password: ");
@@ -87,7 +85,7 @@ public class Login extends JFrame implements ActionListener {
             String username = bField.getText();
             char[] charpassword = pField.getPassword();
             String password = new String(charpassword);
-            battleship.logic.User lUser = new battleship.logic.User();
+            battleship.logic.User lUser = battleship.logic.User.getInstance();
             try {
                 lUser.login(username, password);
                 app.loginDone();

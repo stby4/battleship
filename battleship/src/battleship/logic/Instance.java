@@ -7,7 +7,17 @@ import battleship.objects.*;
  * @author H. Kaestner
  */
 public class Instance {
+    private static Instance instance = null;
     private Gameplay gameplay;
+
+    private Instance() {}
+
+    public static Instance getInstance() {
+        if(null == instance) {
+            instance = new Instance();
+        }
+        return instance;
+    }
 
     public void newGame(battleship.objects.User user) {
         this.gameplay = new Gameplay(user);
@@ -19,5 +29,9 @@ public class Instance {
 
     public void storeGame() {
         // TODO sent gameplay to DAO
+    }
+
+    public Gameplay getGameplay() {
+        return gameplay;
     }
 }

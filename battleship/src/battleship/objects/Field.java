@@ -27,7 +27,7 @@ public class Field {
     private int sizeY = 10;
     private ArrayList<ArrayList<Fieldelements>> field = new ArrayList<ArrayList<Fieldelements>>();
 
-    private ArrayList<Ship> ships;
+    private ArrayList<Ship> ships = new ArrayList<Ship>();
 
     public Field(int sizeX, int sizeY) {
         this.sizeX = sizeX;

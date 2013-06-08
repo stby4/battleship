@@ -36,7 +36,7 @@ public class Ship {
         this.isset = true;
     }
 
-    public boolean isIsset() {
+    public boolean isSet() {
         return isset;
     }
 

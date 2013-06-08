@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
  */
 public class LogicUserTest {
 
-    private battleship.logic.User lUser = new battleship.logic.User();
+    private battleship.logic.User lUser = battleship.logic.User.getInstance();
 
     @Before
     public void setUp() throws Exception {

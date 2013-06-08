@@ -40,6 +40,7 @@ public class Game {
     }
 
     public Game() {
+        this.shipTypes = new ArrayList<Ship>();
         this.fieldUser = new Field(10, 10);
         this.fieldComputer = new Field(10, 10);
 
@@ -81,7 +82,7 @@ public class Game {
                 int posY = random.nextInt(sizeY + 1);
                 int pick = random.nextInt(Field.Directionelements.values().length);
                 ship.setPosition(posX, posY, Field.Directionelements.values()[pick]);
-            } while (fieldComputer.addShip(ship));
+            } while (!fieldComputer.addShip(ship));
         }
     }
 

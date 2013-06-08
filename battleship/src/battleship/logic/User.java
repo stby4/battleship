@@ -8,13 +8,26 @@ import battleship.objects.WrongCredentialsException;
 import java.io.IOException;
 import java.util.UUID;
 
+
 /**
  * logic.User
  *
  * @author H. Kaestner
  */
 public class User {
-    private battleship.objects.User user = null; // TODO create user object
+    private static User user = null;
+    private battleship.objects.User oUser = null; // TODO create user object
+
+    private User() {
+
+    }
+
+    public static User getInstance() {
+        if(null == user) {
+            user = new User();
+        }
+        return user;
+    }
 
     /**
      *
@@ -40,8 +53,8 @@ public class User {
         }
 
         String uid = UUID.randomUUID().toString();
-        user = new battleship.objects.User(uid, username, password2);
-        dUser.store(user);
+        oUser = new battleship.objects.User(uid, username, password2);
+        dUser.store(oUser);
         return uid;
     }
 
@@ -57,17 +70,17 @@ public class User {
             throw new IncompleteDataException("Please fill out all fields.");
         }
         battleship.data.User dUser = new battleship.data.User();
-        user = dUser.get(username, password);
-        if(null == user) {
+        oUser = dUser.get(username, password);
+        if(null == oUser) {
             throw new WrongCredentialsException("A user with the given credentials does not exist. Please register if you have not already done so.");
         }
-        return user.getUid();
+        return oUser.getUid();
     }
 
     /**
      * @return
      */
     public battleship.objects.User getUser() {
-        return user;
+        return oUser;
     }
 }

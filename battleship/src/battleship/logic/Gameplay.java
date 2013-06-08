@@ -14,6 +14,7 @@ public class Gameplay implements java.io.Serializable {
 
     public Gameplay(User user) {
         this.user = user;
+        game = new Game();
 
         // determine the player who will NOT do the first move
         if(user.getDefeats() > user.getVictories()) {
@@ -24,7 +25,6 @@ public class Gameplay implements java.io.Serializable {
     }
 
     public Game.Playerelements startGame() {
-        game = new Game();
         Game.Playerelements winner = game.getWinner();
         do {
             shootout();
@@ -53,5 +53,9 @@ public class Gameplay implements java.io.Serializable {
                 currentPlayer = Game.Playerelements.COMPUTER;
                 break;
         }
+    }
+
+    public Game getGame() {
+        return game;
     }
 }
