@@ -46,7 +46,6 @@ public class Application {
     }
 
     public void loginDone() {
-        menu = new Menu(this);
         highscore = new Highscore(this);
         menu();
     }
@@ -63,7 +62,6 @@ public class Application {
 	*/
 
     public void menu() {
-
         game = new Game(this);
         if (highscore != null) {
             highscore.setVisible(false);
@@ -74,7 +72,8 @@ public class Application {
         if (game != null) {
             game.setVisible(false);
         }
-        login.setVisible(false);
+        menu = new Menu(this);
+        register.setVisible(false);
         menu.setVisible(true);
     }
 
