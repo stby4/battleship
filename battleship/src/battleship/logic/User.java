@@ -20,7 +20,7 @@ public class User {
      * @return uid
      */
     public int createNewUser(String username, String password1, String password2) throws DuplicateUsersException, NotMatchingPasswordsException, IncompleteDataException{
-        /* TODO check if username exists
+        battleship.data.User dUser = new battleship.data.User();
         if(username exists) {
             throw new DuplicateUsersException("Ein Benutzer mit diesem Namen existiert schon.");
         }
