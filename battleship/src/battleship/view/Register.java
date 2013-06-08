@@ -15,6 +15,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import battleship.data.User;
+import battleship.objects.DuplicateUsersException;
+import battleship.objects.IncompleteDataException;
+import battleship.objects.NotMatchingPasswordsException;
 
 /**
  * Registrierung Battleship
@@ -92,28 +95,19 @@ public class Register extends JFrame implements ActionListener {
 			char[] charpassword2 = pField2.getPassword();
 			String password = new String(charpassword);
 			String password2 = new String(charpassword2);
-			User user = new User();
-			boolean isValide = user.checkUsernamePassword(username, password, password2); 
-			if (!isValide) {
-				return;
-			}
-			isValide = user.checkPassword(username, password, password2);
-			if (!isValide) {
-				return;
-			}
-			isValide = user.comparePassword(password, password2); 
-			if (!isValide) {
-				return;
-			}
-			boolean exist = app.getFile().checkExistUsername(username); 
-			if (!exist) {
-				app.getFile().registPlayer(username, password);
-				JOptionPane.showMessageDialog(null, "Danke f�r die Registrierung bei Battleship");
-				emptyFields();
-				app.registerDone();
-			} else {
-				JOptionPane.showMessageDialog(null, "Benutzername schon vorhanden");
-			}
+            battleship.logic.User lUser = new battleship.logic.User();
+            try {
+                lUser.createNewUser(username, password, password2);
+                JOptionPane.showMessageDialog(null, "Danke für die Registrierung bei Battleship");
+                emptyFields();
+                app.menu();
+            } catch (DuplicateUsersException due) { // user name already taken
+                JOptionPane.showMessageDialog(null, due.getMessage());
+            } catch (NotMatchingPasswordsException nmpe) { // password fields do not match
+                JOptionPane.showMessageDialog(null, nmpe.getMessage());
+            } catch (IncompleteDataException ide) {
+                JOptionPane.showMessageDialog(null, ide.getMessage());
+            }
 		} else if (e.getSource() == zurueck) {
 			emptyFields();
 			app.login();

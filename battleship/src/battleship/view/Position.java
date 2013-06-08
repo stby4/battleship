@@ -95,12 +95,12 @@ public class Position extends JFrame implements ActionListener {
 		
 		
 		//if wenn noch kein Schiff gesetzt
-			label2.setText("Flugzeugtr�ger");
+/*			label2.setText("Flugzeugtr�ger");
 			label3.setText("(5 Felder)");
 			//create ac_carrier
 			JPanel picture = new PicturePanel2();
 			picture.setBounds(350, 180, 200, 120);
-			gamePanel.add(picture);
+			gamePanel.add(picture); */
 //		//else if wenn Flugzeugtr�ger gesetzt 
 //			label2.setText("Battleship");
 //			label3.setText("(4 Felder)");
@@ -142,7 +142,7 @@ public class Position extends JFrame implements ActionListener {
 		gamePanel.add(horizontalButton);
 		gamePanel.add(back);
 				
-		gamePanel.setComponentZOrder(picture, 1);
+		//gamePanel.setComponentZOrder(picture, 1);
 		gamePanel.setComponentZOrder(label, 0);
 		gamePanel.setComponentZOrder(label2, 0);
 		gamePanel.setComponentZOrder(label3, 0);

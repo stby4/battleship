@@ -22,10 +22,10 @@ public class Menu extends JFrame implements ActionListener {
 	private Application app;
 	
 	JLabel label = new JLabel();
-	JButton game = new JButton("New Position");
-	JButton loadGame = new JButton("Load Position");
-	JButton highscore = new JButton("Highscore");
-	JButton logout	= new JButton("Logout");
+	JButton game = new JButton("NEW GAME");
+	JButton loadGame = new JButton("LOAD GAME");
+	JButton highscore = new JButton("HIGHSCORE");
+	JButton logout	= new JButton("LOGOUT");
 	JPanel menuPanel = new JPanel();
 		
 	public Menu(Application app) {
@@ -44,7 +44,7 @@ public class Menu extends JFrame implements ActionListener {
 		
 		menuPanel.setLayout(null); 
 		
-		label.setText("Angemeldet als: " + app.getUser().getUsername());
+		//label.setText("Angemeldet als: " + app.getUser().getUsername());
 		label.setForeground(Color.WHITE);
 		
 		label.setBounds(50, 10, 300, 25);

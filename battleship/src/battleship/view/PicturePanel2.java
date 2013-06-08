@@ -25,7 +25,7 @@ public class PicturePanel2 extends JPanel {
 	public PicturePanel2(String file) {
 		//this.setPreferredSize(new Dimension(600, 337));
 		try {
-			shipImage = ImageIO.read(new File("../graphics/"+file)); //Gamepicture ac_carrier
+			shipImage = ImageIO.read(new File("graphics/" +file)); //Gamepicture ac_carrier
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -9,8 +9,6 @@ import battleship.data.binaryFile;
  * 
  */
 public class Application {
-
-	private User user;
 	private Login login;
 	private Register register;
 	private Menu menu;
@@ -46,10 +44,8 @@ public class Application {
 		register.setVisible(false);
 		login.setVisible(true);
 	}
-	
-	public void loginDone(User user) {
-		//System.out.println("Jetzt kommt das Position");
-		this.user = user;
+
+	public void loginDone() {
 		menu = new Menu(this);
 		position = new Position(this);
 		highscore = new Highscore(this);
@@ -60,11 +56,13 @@ public class Application {
 		login.setVisible(false);
 		register.setVisible(true);
 	}
-	
+
+    /*
 	public void registerDone() {
 		login();
 	}
-	
+	*/
+
 	public void menu() {
 		if (highscore != null) {
 			highscore.setVisible(false);
@@ -72,7 +70,7 @@ public class Application {
 		if (position != null) {
 			position.setVisible(false);
 		}
-		login.setVisible(false);
+		register.setVisible(false);
 		menu.setVisible(true);
 	}
 	
@@ -89,13 +87,4 @@ public class Application {
 		menu.setVisible(false);
 		highscore.setVisible(true);
 	}
-	
-	public binaryFile getFile() {
-		return file;
-	}
-	
-	public User getUser() {
-		return user;
-	}
-
 }

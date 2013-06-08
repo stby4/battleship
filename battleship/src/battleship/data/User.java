@@ -18,7 +18,7 @@ public class User extends binaryFile {
     public void store(battleship.objects.User user) throws IOException {
 
         List<battleship.objects.User> users = new ArrayList<battleship.objects.User>();
-        users.add(user.getUid(), user);
+        users.add(user);
 
         ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
         ObjectOutput out = null;

@@ -15,98 +15,99 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import battleship.data.User;
+import battleship.objects.WrongCredentialsException;
 
 /**
  * Login Battleship
+ *
  * @author Tom Ohme
- * 
  */
 public class Login extends JFrame implements ActionListener {
 
-	private static final long serialVersionUID = 1L;
-	private Application app;
-	private User user;
+    private static final long serialVersionUID = 1L;
+    private Application app;
+    private User user;
 
-	JLabel bLabel = new JLabel("Username: ");
-	JLabel pLabel = new JLabel("Password: ");
-	JTextField bField = new JTextField();
-	JPasswordField pField = new JPasswordField();
-	JButton anmelden = new JButton("Anmelden");
-	JButton registrieren = new JButton("Registrieren");
-	JButton beenden = new JButton("Beenden");
-	JPanel loginPanel = new JPanel();
-	
-	Login(Application app) {
-		this.app = app;
-		
-		setTitle("Login Autentification Battleship");
-		//Centering of the window
-	    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	    int top = (screenSize.height - 200) / 2;
-	    int left = (screenSize.width - 400) / 2;
-	    setSize(400, 200);
-	    setLocation(left, top);
-	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBackground(Color.lightGray);
-		setResizable(false);
-		
-		loginPanel.setLayout(null); 	
-		
-		bLabel.setBounds(50, 30, 100, 20);
-		bField.setBounds(150, 30, 180, 20);
-		pLabel.setBounds(50, 60, 100, 20);
-		pField.setBounds(150, 60, 180, 20);
-		anmelden.setBounds(200, 110, 128, 20);
-		registrieren.setBounds(50, 110, 128, 20);
-		beenden.setBounds(200, 140, 128, 20);
-		
-		loginPanel.add(bLabel);
-		loginPanel.add(bField);
-		loginPanel.add(pLabel);
-		loginPanel.add(pField);
-		loginPanel.add(anmelden);
-		loginPanel.add(registrieren);
-		loginPanel.add(beenden);
-		
-		getContentPane().add(loginPanel);
-		
-		actionlogin();
-	}
-	
-	public void actionlogin() {
-		anmelden.addActionListener(this);
-		registrieren.addActionListener(this);
-		beenden.addActionListener(this);
-	}
+    JLabel bLabel = new JLabel("Username: ");
+    JLabel pLabel = new JLabel("Password: ");
+    JTextField bField = new JTextField();
+    JPasswordField pField = new JPasswordField();
+    JButton anmelden = new JButton("Anmelden");
+    JButton registrieren = new JButton("Registrieren");
+    JButton beenden = new JButton("Beenden");
+    JPanel loginPanel = new JPanel();
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == anmelden) {
-			String username = bField.getText();
-			char[] charpassword = pField.getPassword();
-			String password = new String(charpassword);
-			user = app.getFile().readUser(username);
-			boolean isValide = (user != null && user.checkPassword(password));
-			if (isValide) {
-				JOptionPane.showMessageDialog(null, "Sie wurden erfolgreich bei Battleship angemeldet");
-				app.loginDone(user);
-				emptyFields();
-				
-			} else {
-				JOptionPane.showMessageDialog(null, "Benutzername oder Passwort falsch");
-			}
-		} else if (e.getSource() == registrieren) {
-			app.register();
-			emptyFields();
-		} else if (e.getSource() == beenden) {
-			System.exit(0);
-		}
-	}
-	
-	//text fields empty
-	public void emptyFields() {
-		bField.setText("");
-		pField.setText("");
-	}
-	
+    Login(Application app) {
+        this.app = app;
+
+        setTitle("Login Autentification Battleship");
+        //Centering of the window
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int top = (screenSize.height - 200) / 2;
+        int left = (screenSize.width - 400) / 2;
+        setSize(400, 200);
+        setLocation(left, top);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBackground(Color.lightGray);
+        setResizable(false);
+
+        loginPanel.setLayout(null);
+
+        bLabel.setBounds(50, 30, 100, 20);
+        bField.setBounds(150, 30, 180, 20);
+        pLabel.setBounds(50, 60, 100, 20);
+        pField.setBounds(150, 60, 180, 20);
+        anmelden.setBounds(200, 110, 128, 20);
+        registrieren.setBounds(50, 110, 128, 20);
+        beenden.setBounds(200, 140, 128, 20);
+
+        loginPanel.add(bLabel);
+        loginPanel.add(bField);
+        loginPanel.add(pLabel);
+        loginPanel.add(pField);
+        loginPanel.add(anmelden);
+        loginPanel.add(registrieren);
+        loginPanel.add(beenden);
+
+        getContentPane().add(loginPanel);
+
+        actionlogin();
+    }
+
+    public void actionlogin() {
+        anmelden.addActionListener(this);
+        registrieren.addActionListener(this);
+        beenden.addActionListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == anmelden) {
+            String username = bField.getText();
+            char[] charpassword = pField.getPassword();
+            String password = new String(charpassword);
+            battleship.logic.User lUser = new battleship.logic.User();
+            try {
+                lUser.login(username, password);
+                app.loginDone();
+            } catch (WrongCredentialsException wce) {
+                // JOptionPane.showMessageDialog(null, "Benutzername oder Passwort falsch");
+                JOptionPane.showMessageDialog(null, wce.getMessage());
+            } finally {
+                emptyFields();
+            }
+        } else if (e.getSource() == registrieren) {
+            app.register();
+            emptyFields();
+        } else if (e.getSource() == beenden) {
+            System.exit(0);
+        }
+    }
+
+    //text fields empty
+    public void emptyFields() {
+        bField.setText("");
+        pField.setText("");
+    }
+
 }

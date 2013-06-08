@@ -1,6 +1,7 @@
 package battleship.logic;
 
 import battleship.objects.DuplicateUsersException;
+import battleship.objects.IncompleteDataException;
 import battleship.objects.NotMatchingPasswordsException;
 import battleship.objects.WrongCredentialsException;
 
@@ -9,16 +10,16 @@ import battleship.objects.WrongCredentialsException;
  * @author H. Kaestner
  */
 public class User {
-    private battleship.objects.User user = null;
+    private battleship.objects.User user = null; // TODO create user object
 
     /**
      *
-     * @param name
+     * @param username
      * @param password1
      * @param password2
      * @return uid
      */
-    public int createNewUser(String name, String password1, String password2) throws DuplicateUsersException, NotMatchingPasswordsException{
+    public int createNewUser(String username, String password1, String password2) throws DuplicateUsersException, NotMatchingPasswordsException, IncompleteDataException{
         /* TODO check if username exists
         if(username exists) {
             throw new DuplicateUsersException("Ein Benutzer mit diesem Namen existiert schon.");
@@ -27,6 +28,7 @@ public class User {
         if(password1.equals(password2)) {
             throw new NotMatchingPasswordsException("Die Passwörter stimmen nicht miteinander überein.");
         }
+        // TODO throw exceotion for incomplete data
         // TODO create new entry in DAO...
 
         return 1;
@@ -34,14 +36,22 @@ public class User {
 
     /**
      *
-     * @param name
+     * @param username
      * @param password
      * @return uid
      * @throws Exception
      */
-    public int login(String name, String password) throws WrongCredentialsException {
+    public int login(String username, String password) throws WrongCredentialsException {
         // TODO everyhting
         // throw new DuplicateUsersException("Wir konnten keinen Benutzer mit den angegebenen Daten finden.");
         return 1;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public battleship.objects.User getUser() {
+        return user;
     }
 }
