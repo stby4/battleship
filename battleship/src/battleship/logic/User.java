@@ -17,10 +17,15 @@ public class User {
     private battleship.objects.User user = null; // TODO create user object
 
     /**
+     *
      * @param username
      * @param password1
      * @param password2
-     * @return uid
+     * @return
+     * @throws DuplicateUsersException
+     * @throws NotMatchingPasswordsException
+     * @throws IncompleteDataException
+     * @throws IOException
      */
     public String createNewUser(String username, String password1, String password2) throws DuplicateUsersException, NotMatchingPasswordsException, IncompleteDataException, IOException {
         battleship.data.User dUser = new battleship.data.User();

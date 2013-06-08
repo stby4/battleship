@@ -15,6 +15,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import battleship.data.User;
+import battleship.objects.IncompleteDataException;
 import battleship.objects.WrongCredentialsException;
 
 /**
@@ -90,6 +91,8 @@ public class Login extends JFrame implements ActionListener {
             try {
                 lUser.login(username, password);
                 app.loginDone();
+            } catch (IncompleteDataException ide) {
+                JOptionPane.showMessageDialog(null, ide.getMessage());
             } catch (WrongCredentialsException wce) {
                 // JOptionPane.showMessageDialog(null, "Benutzername oder Passwort falsch");
                 JOptionPane.showMessageDialog(null, wce.getMessage());

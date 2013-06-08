@@ -106,9 +106,9 @@ public class Register extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, due.getMessage());
             } catch (NotMatchingPasswordsException nmpe) { // password fields do not match
                 JOptionPane.showMessageDialog(null, nmpe.getMessage());
-            } catch (IncompleteDataException ide) {
+            } catch (IncompleteDataException ide) { // user left some data fields clear
                 JOptionPane.showMessageDialog(null, ide.getMessage());
-            } catch (IOException ioe) {
+            } catch (IOException ioe) { // error in saving the data
                 JOptionPane.showMessageDialog(null, "There was an error while storing your data. Please try again.");
             }
 		} else if (e.getSource() == zurueck) {
