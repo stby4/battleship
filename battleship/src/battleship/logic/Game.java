@@ -4,6 +4,7 @@ import battleship.objects.Ship;
 import battleship.objects.Field;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -56,6 +57,9 @@ public class Game {
         shipTypes.add(frigate);
 
         this.placeShipsComputer();
+        for(Ship ship : shipTypes) {
+            ship.setSet(false);
+        }
     }
 
     /**
@@ -72,11 +76,12 @@ public class Game {
     }
 
     private void placeShipsComputer() {
+        List<Ship> computerShips = this.shipTypes;
         Random random = new Random();
         int sizeX = this.fieldComputer.getSizeX();
         int sizeY = this.fieldComputer.getSizeY();
 
-        for (Ship ship : this.shipTypes) {
+        for (Ship ship : computerShips) {
             do {
                 int posX = random.nextInt(sizeX + 1);
                 int posY = random.nextInt(sizeY + 1);
@@ -195,6 +200,6 @@ public class Game {
      * @return
      */
     public ArrayList<Ship> getShipTypes() {
-        return shipTypes;
+        return this.shipTypes;
     }
 }

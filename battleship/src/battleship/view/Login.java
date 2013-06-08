@@ -74,6 +74,7 @@ public class Login extends JFrame implements ActionListener {
     }
 
     public void actionlogin() {
+        getRootPane().setDefaultButton(anmelden);
         anmelden.addActionListener(this);
         registrieren.addActionListener(this);
         beenden.addActionListener(this);

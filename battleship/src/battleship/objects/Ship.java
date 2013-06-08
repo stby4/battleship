@@ -40,6 +40,10 @@ public class Ship {
         return isset;
     }
 
+    public void setSet(boolean isset) {
+        this.isset = isset;
+    }
+
     public boolean getSunk() {
         return sunk;
     }

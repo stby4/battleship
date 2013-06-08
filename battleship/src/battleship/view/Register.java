@@ -82,6 +82,7 @@ public class Register extends JFrame implements ActionListener {
     }
 
     public void actionregister() {
+        getRootPane().setDefaultButton(weiter);
         weiter.addActionListener(this);
         zurueck.addActionListener(this);
         beenden.addActionListener(this);

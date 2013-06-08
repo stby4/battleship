@@ -67,6 +67,9 @@ public class Field {
     }
 
     public Fieldelements getFieldStatus(int posX, int posY) {
+        if (posX < 0 || posX >= this.sizeX || posY < 0 || posY >= this.sizeY) {
+            return Fieldelements.ERROR;
+        }
         return this.field.get(posX).get(posY);
     }
 
