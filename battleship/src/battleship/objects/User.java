@@ -6,7 +6,7 @@ package battleship.objects;
  * @author H. Kaestner
  */
 public class User implements java.io.Serializable {
-    private int uid = -1;
+    private String uid = null;
 	private String name = ""; // name must be unique, hence it can be used as primary key
 	private String password = "";
 	private int victories = 0;
@@ -18,17 +18,17 @@ public class User implements java.io.Serializable {
      * @param name
      * @param password
      */
-	public User(int uid, String name, String password) {
+	public User(String uid, String name, String password) {
         this.setUid(uid);
 		this.setName(name);
 		this.setPassword(password);
 	}
 
-    public int getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 

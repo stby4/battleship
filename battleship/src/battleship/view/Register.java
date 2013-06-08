@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -98,7 +99,7 @@ public class Register extends JFrame implements ActionListener {
             battleship.logic.User lUser = new battleship.logic.User();
             try {
                 lUser.createNewUser(username, password, password2);
-                JOptionPane.showMessageDialog(null, "Danke für die Registrierung bei Battleship");
+                JOptionPane.showMessageDialog(null, "Welcome to battleship!");
                 emptyFields();
                 app.menu();
             } catch (DuplicateUsersException due) { // user name already taken
@@ -107,6 +108,8 @@ public class Register extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, nmpe.getMessage());
             } catch (IncompleteDataException ide) {
                 JOptionPane.showMessageDialog(null, ide.getMessage());
+            } catch (IOException ioe) {
+                JOptionPane.showMessageDialog(null, "There was an error while storing your data. Please try again.");
             }
 		} else if (e.getSource() == zurueck) {
 			emptyFields();

@@ -43,15 +43,15 @@ public class Game {
         this.fieldUser = new Field(10, 10);
         this.fieldComputer = new Field(10, 10);
 
-        Ship ac_carrier = new Ship(5, "Flugzeugträger", "ac_carrier.png");
+        Ship ac_carrier = new Ship(5, "Aircraft carrier", "ac_carrier.png");
         shipTypes.add(ac_carrier);
-        Ship cruiser = new Ship(4, "Kreuzer", "destroyer.jpg");
+        Ship cruiser = new Ship(4, "Cruiser", "destroyer.jpg");
         shipTypes.add(cruiser);
-        Ship destroyer = new Ship(3, "Zerstörer", "destroyer3.png");
+        Ship destroyer = new Ship(3, "Destroyer", "destroyer3.png");
         shipTypes.add(destroyer);
-        Ship submarine = new Ship(3, "U-Boot", "submarine2.png");
+        Ship submarine = new Ship(3, "Submarine", "submarine2.png");
         shipTypes.add(submarine);
-        Ship frigate = new Ship(2, "Fregatte", "frigate.png");
+        Ship frigate = new Ship(2, "Frigate", "frigate.png");
         shipTypes.add(frigate);
 
         this.placeShipsComputer();
@@ -189,4 +189,11 @@ public class Game {
         return Playerelements.ERROR;
     }
 
+    /**
+     *
+     * @return
+     */
+    public ArrayList<Ship> getShipTypes() {
+        return shipTypes;
+    }
 }

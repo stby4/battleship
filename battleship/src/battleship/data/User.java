@@ -48,18 +48,33 @@ public class User extends binaryFile {
         return users;
     }
 
-    public battleship.objects.User get(String username, String password) throws IOException, ClassNotFoundException {
+    public battleship.objects.User get(String username, String password) {
         List<battleship.objects.User> users = null;
         try {
             users = readAll();
-        } finally {
             for (battleship.objects.User user : users) {
                 if (username.equals(user.getName()) && password.equals(user.getPassword())) {
                     return user;
                 }
             }
+        } catch(Exception e) {
+            // do nothing, so null will be returned
         }
         return null; // unlikely...
     }
 
+    public boolean checkUsernameExists(String username) {
+        List<battleship.objects.User> users = null;
+        try {
+            users = readAll();
+            for (battleship.objects.User user : users) {
+                if (username.equals(user.getName())) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            // do nothing, so false will be returned
+        }
+        return false;
+    }
 }
