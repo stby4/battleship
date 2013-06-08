@@ -16,9 +16,14 @@ public class User extends binaryFile {
     private int uid = -1;
 
     public void store(battleship.objects.User user) throws IOException {
-
-        List<battleship.objects.User> users = new ArrayList<battleship.objects.User>();
-        users.add(user);
+        List<battleship.objects.User> users = null;
+        try {
+            users = readAll();
+        } catch (Exception e) {
+            users = new ArrayList<battleship.objects.User>();
+        } finally {
+            users.add(user);
+        }
 
         ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
         ObjectOutput out = null;
@@ -28,8 +33,7 @@ public class User extends binaryFile {
             byte[] data = byteOut.toByteArray();
 
             this.write("user", data);
-        }
-        finally {
+        } finally {
             out.close();
             byteOut.close();
         }
@@ -57,10 +61,10 @@ public class User extends binaryFile {
                     return user;
                 }
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             // do nothing, so null will be returned
         }
-        return null; // unlikely...
+        return null;
     }
 
     public boolean checkUsernameExists(String username) {

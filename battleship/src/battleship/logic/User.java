@@ -28,14 +28,14 @@ public class User {
      * @throws IOException
      */
     public String createNewUser(String username, String password1, String password2) throws DuplicateUsersException, NotMatchingPasswordsException, IncompleteDataException, IOException {
-        battleship.data.User dUser = new battleship.data.User();
         if (username.equals("") || password1.equals("") || password2.equals("")) {
             throw new IncompleteDataException("Please fill out all fields.");
         }
+        battleship.data.User dUser = new battleship.data.User();
         if (dUser.checkUsernameExists(username)) {
             throw new DuplicateUsersException("This username has already been taken. Please choose another one.");
         }
-        if (password1.equals(password2)) {
+        if (!password1.equals(password2)) {
             throw new NotMatchingPasswordsException("The passwords do not match. Please try again.");
         }
 
@@ -52,10 +52,16 @@ public class User {
      * @throws WrongCredentialsException
      * @throws IncompleteDataException
      */
-    public int login(String username, String password) throws WrongCredentialsException, IncompleteDataException {
-        // TODO everyhting
-        // throw new DuplicateUsersException("Wir konnten keinen Benutzer mit den angegebenen Daten finden.");
-        return 1;
+    public String login(String username, String password) throws WrongCredentialsException, IncompleteDataException {
+        if (username.equals("") || password.equals("")) {
+            throw new IncompleteDataException("Please fill out all fields.");
+        }
+        battleship.data.User dUser = new battleship.data.User();
+        user = dUser.get(username, password);
+        if(null == user) {
+            throw new WrongCredentialsException("A user with the given credentials does not exist. Please register if you have not already done so.");
+        }
+        return user.getUid();
     }
 
     /**
