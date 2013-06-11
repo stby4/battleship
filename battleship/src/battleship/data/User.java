@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @link http://stackoverflow.com/questions/2836646/java-serializable-object-to-byte-array
  * @link http://stackoverflow.com/questions/12977290/write-and-read-multiple-byte-in-file-with-java
  */
-public class User extends binaryFile {
+public class User extends BinaryFile {
 
     private static final String FILENAME = "user";
 

@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 public class User {
     private static User user = null;
-    private battleship.objects.User oUser = null; // TODO create user object
+    private battleship.objects.User oUser;
 
     private User() {
 

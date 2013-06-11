@@ -10,7 +10,7 @@ import java.util.List;
  * @author H. Kaestner
  * @link http://stackoverflow.com/questions/2836646/java-serializable-object-to-byte-array
  */
-public class Game extends binaryFile {
+public class Game extends BinaryFile {
 
     private static final String FILENAME = "game";
 

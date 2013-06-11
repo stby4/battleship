@@ -4,10 +4,10 @@ package battleship.data;
 import java.io.*;
 
 /**
- * binaryFile
+ * BinaryFile
  * @author Hinrich Kaestner
  */
-abstract public class binaryFile {
+abstract public class BinaryFile {
 
     public byte[] read(String filename) throws IOException{
         File file = new File(filename+".bin");

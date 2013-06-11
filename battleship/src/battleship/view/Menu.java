@@ -87,10 +87,10 @@ public class Menu extends JFrame implements ActionListener {
 
         getContentPane().add(menuPanel);
 
-        actionmenu();
+        actionMenu();
     }
 
-    public void actionmenu() {
+    public void actionMenu() {
         game.addActionListener(this);
         loadGame.addActionListener(this);
         highscore.addActionListener(this);

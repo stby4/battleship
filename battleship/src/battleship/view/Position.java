@@ -18,15 +18,15 @@ import javax.swing.JPanel;
 
 /**
  * Position Battleship
- * @author Tom Ohme
  *
+ * @author Tom Ohme
  */
 public class Position extends JFrame implements ActionListener {
 
     private static final long serialVersionUID = 1L;
     private Application app;
     private Field myOcean;
-    private battleship.logic.Game game = null;
+    private battleship.logic.Game game;
 
     JLabel label = new JLabel("Set Ship:");
     JLabel label2 = new JLabel();
@@ -73,25 +73,26 @@ public class Position extends JFrame implements ActionListener {
         //create Field
         myOcean = new Field();
         myOcean.setBounds(30, 28, 271, 271);
-        myOcean.setVisible(true);
         positionPanel.add(myOcean);
     }
 
     public void setShips() {
-        for(Ship ship : game.getShipTypes()) {
-            if(!ship.isSet()) {
+        for (Ship ship : game.getShipTypes()) {
+            if (!ship.isSet()) {
                 label2.setText(ship.getName());
-                label3.setText(ship.getLength()+" Felder");
+                label3.setText(ship.getLength() + " Felder");
                 JPanel picture = new PicturePanel(ship.getImage(), 200, 120);
                 picture.setBounds(350, 180, 200, 120);
                 positionPanel.add(picture);
                 positionPanel.setComponentZOrder(picture, 1);
-                synchronized (myOcean) {
-                    try {
-                        //myOcean.wait();
-                    } catch (Exception e) {
+                FieldMouseEvent event = new FieldMouseEvent();
+                event.register(positionPanel);
+                Thread mouse = new Thread(event);
+                mouse.start();
+                try {
+                    mouse.wait();
+                } catch (Exception e) {
 
-                    }
                 }
                 // TODO Hinrich, get mouseclick coords and vertical/horizontal
                 //ship.setPosition();
@@ -121,10 +122,10 @@ public class Position extends JFrame implements ActionListener {
 
         getContentPane().add(positionPanel);
 
-        actionposition();
+        actionPosition();
     }
 
-    public void actionposition() {
+    public void actionPosition() {
         next.addActionListener(this);
         back.addActionListener(this);
     }

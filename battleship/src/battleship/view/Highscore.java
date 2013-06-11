@@ -69,10 +69,10 @@ public class Highscore extends JFrame implements ActionListener {
 		
 		getContentPane().add(highscorePanel);
 		
-		actionhighscore();
+		actionHighscore();
 	}
 	
-	public void actionhighscore() {
+	public void actionHighscore() {
 		back.addActionListener(this);
 	}
 	

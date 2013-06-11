@@ -7,7 +7,7 @@ import java.io.IOException;
  * @author H. Kaestner
  */
 public class Instance {
-    private static Instance instance = null;
+    private static Instance instance;
     private Gameplay gameplay;
 
     private Instance() {}
