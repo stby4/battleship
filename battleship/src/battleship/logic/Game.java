@@ -22,16 +22,6 @@ public class Game implements java.io.Serializable {
     private Field fieldComputer;
     private ArrayList<Ship> shipTypes;
 
-	/*
-     * TODO
-	 * - start new game
-	 * - let user place ships (maybe in Field)
-	 * - let user and computer shoot at each other (maybe in Field)
-	 * - log scores
-	 * - determine the winner
-	 * - write scores in user data
-	 */
-
     public Game(int sizeX, int sizeY, ArrayList<Ship> ships) {
         this.fieldUser = new Field(sizeX, sizeY);
         this.fieldComputer = new Field(sizeX, sizeY);

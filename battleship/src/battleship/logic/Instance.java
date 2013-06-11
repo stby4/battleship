@@ -1,6 +1,6 @@
 package battleship.logic;
 
-import battleship.objects.*;
+import java.io.IOException;
 
 /**
  * logic.Instance
@@ -20,15 +20,19 @@ public class Instance {
     }
 
     public void newGame(battleship.objects.User user) {
-        this.gameplay = new Gameplay(user);
+        gameplay = new Gameplay(user);
     }
 
-    public void loadGame(int gid) {
-        // TODO load game from DAO
+    public boolean loadGame(String gid) {
+        gameplay = new battleship.data.Game().get(gid);
+        if(null == gameplay) {
+            return false;
+        }
+        return true;
     }
 
-    public void storeGame() {
-        // TODO sent gameplay to DAO
+    public void storeGame() throws IOException {
+        new battleship.data.Game().store(gameplay);
     }
 
     public Gameplay getGameplay() {

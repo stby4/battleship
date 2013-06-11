@@ -47,6 +47,7 @@ public class Application {
 
     public void loginDone() {
         highscore = new Highscore(this);
+        login.setVisible(false);
         menu();
     }
 
@@ -84,6 +85,7 @@ public class Application {
         position = new Position(this);
         menu.setVisible(false);
         position.setVisible(true);
+        position.setShips();
     }
 
     public void game() {

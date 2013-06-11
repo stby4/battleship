@@ -120,6 +120,8 @@ public class Field extends JPanel implements ActionListener {
             System.out.println(x); //zum testen
             System.out.println(y); //zum testen
 
+            this.notifyAll();
+
 
             //ship.setPosition(x, y, direction)
             //Feld weiss einf�rben +Felder horizontal oder vertical f�r Schiff //+Felder speichern

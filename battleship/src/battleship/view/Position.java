@@ -73,9 +73,11 @@ public class Position extends JFrame implements ActionListener {
         //create Field
         myOcean = new Field();
         myOcean.setBounds(30, 28, 271, 271);
+        myOcean.setVisible(true);
         positionPanel.add(myOcean);
+    }
 
-
+    public void setShips() {
         for(Ship ship : game.getShipTypes()) {
             if(!ship.isSet()) {
                 label2.setText(ship.getName());
@@ -84,6 +86,13 @@ public class Position extends JFrame implements ActionListener {
                 picture.setBounds(350, 180, 200, 120);
                 positionPanel.add(picture);
                 positionPanel.setComponentZOrder(picture, 1);
+                synchronized (myOcean) {
+                    try {
+                        //myOcean.wait();
+                    } catch (Exception e) {
+
+                    }
+                }
                 // TODO Hinrich, get mouseclick coords and vertical/horizontal
                 //ship.setPosition();
                 game.placeShipUser(ship);

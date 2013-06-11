@@ -52,7 +52,7 @@ public class Gameplay implements java.io.Serializable {
             case USER:
                 do {
                     // nothing, so far
-                    // TODO let user shoot: GUI connection
+                    // TODO let user shoot: GUI connection (see getCurrentPlayer())
                 } while(Field.Fieldelements.SHOT != game.placeShotUser(1, 1));
                 currentPlayer = Game.Playerelements.COMPUTER;
                 break;
