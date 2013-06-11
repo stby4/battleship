@@ -11,7 +11,7 @@ public class User implements java.io.Serializable {
 	private String password = "";
 	private int victories = 0;
 	private int defeats = 0;
-    private int lastGame = -1;
+    private String lastGame = null;
 
     /**
      *
@@ -67,11 +67,11 @@ public class User implements java.io.Serializable {
         return this.password;
     }
 
-    public int getLastGame() {
+    public String getLastGame() {
         return lastGame;
     }
 
-    public void setLastGame(int lastGame) {
+    public void setLastGame(String lastGame) {
         this.lastGame = lastGame;
     }
 

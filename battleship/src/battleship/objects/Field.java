@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  * @author H. Kaestner
  */
-public class Field {
+public class Field implements java.io.Serializable {
     static public enum Fieldelements {
         WATER, // virgin field
         SHIP,  // ship in perfect condition

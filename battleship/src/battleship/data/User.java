@@ -13,26 +13,32 @@ import java.util.ArrayList;
  */
 public class User extends binaryFile {
 
-    private int uid = -1;
+    private static final String FILENAME = "user";
 
     public void store(battleship.objects.User user) throws IOException {
-        List<battleship.objects.User> users = null;
+        List<battleship.objects.User> userList = null;
         try {
-            users = readAll();
+            userList = readAll();
+            for(battleship.objects.User userHelper : userList) {
+                if(user.getUid().equals(userHelper.getUid())) {
+                    userList.remove(userHelper);
+                    //break; // let list run through all saved game to make it a bit more failure resistant
+                }
+            }
         } catch (Exception e) {
-            users = new ArrayList<battleship.objects.User>();
+            userList = new ArrayList<battleship.objects.User>();
         } finally {
-            users.add(user);
+            userList.add(user);
         }
 
         ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
         ObjectOutput out = null;
         try {
             out = new ObjectOutputStream(byteOut);
-            out.writeObject(users);
+            out.writeObject(userList);
             byte[] data = byteOut.toByteArray();
 
-            this.write("user", data);
+            this.write(FILENAME, data);
         } finally {
             out.close();
             byteOut.close();
@@ -41,22 +47,22 @@ public class User extends binaryFile {
 
     private List<battleship.objects.User> readAll() throws IOException, ClassNotFoundException {
         ByteArrayInputStream byteIn = null;
-        List<battleship.objects.User> users = null;
+        List<battleship.objects.User> userList = null;
         try {
-            byteIn = new ByteArrayInputStream(this.read("user"));
+            byteIn = new ByteArrayInputStream(this.read(FILENAME));
             ObjectInput in = new ObjectInputStream(byteIn);
-            users = (List<battleship.objects.User>) in.readObject();
+            userList = (List<battleship.objects.User>) in.readObject();
         } finally {
             byteIn.close();
         }
-        return users;
+        return userList;
     }
 
     public battleship.objects.User get(String username, String password) {
-        List<battleship.objects.User> users = null;
+        List<battleship.objects.User> userList;
         try {
-            users = readAll();
-            for (battleship.objects.User user : users) {
+            userList = readAll();
+            for (battleship.objects.User user : userList) {
                 if (username.equals(user.getName()) && password.equals(user.getPassword())) {
                     return user;
                 }
@@ -68,10 +74,10 @@ public class User extends binaryFile {
     }
 
     public boolean checkUsernameExists(String username) {
-        List<battleship.objects.User> users = null;
+        List<battleship.objects.User> userList;
         try {
-            users = readAll();
-            for (battleship.objects.User user : users) {
+            userList = readAll();
+            for (battleship.objects.User user : userList) {
                 if (username.equals(user.getName())) {
                     return true;
                 }

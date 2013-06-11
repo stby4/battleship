@@ -84,7 +84,10 @@ public class Position extends JFrame implements ActionListener {
                 picture.setBounds(350, 180, 200, 120);
                 positionPanel.add(picture);
                 positionPanel.setComponentZOrder(picture, 1);
-                // TODO set ships
+                // TODO Hinrich, get mouseclick coords and vertical/horizontal
+                //ship.setPosition();
+                game.placeShipUser(ship);
+                // TODO Tom, display ship
             }
         }
 

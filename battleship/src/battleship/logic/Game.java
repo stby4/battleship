@@ -12,7 +12,7 @@ import java.util.Random;
  *
  * @author H. Kaestner
  */
-public class Game {
+public class Game implements java.io.Serializable {
     static public enum Playerelements {
         USER,
         COMPUTER,

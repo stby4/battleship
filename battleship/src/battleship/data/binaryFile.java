@@ -2,8 +2,6 @@ package battleship.data;
 
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * binaryFile
@@ -27,5 +25,8 @@ abstract public class binaryFile {
         output.flush();
         output.close();
     }
+
+    //abstract public void store(Object object);
+    //abstract public Object get(Object object);
 
 }

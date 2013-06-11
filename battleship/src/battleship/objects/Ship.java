@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *
  * @author H. Kaestner
  */
-public class Ship {
+public class Ship implements java.io.Serializable {
     private boolean isset = false;
     private int length = 2;
     private int posX = 0; // start longitude

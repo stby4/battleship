@@ -3,6 +3,8 @@ package battleship.logic;
 import battleship.objects.Field;
 import battleship.objects.User;
 
+import java.util.UUID;
+
 /**
  * Gameplay
  * @author H. Kaestner
@@ -11,10 +13,12 @@ public class Gameplay implements java.io.Serializable {
     private User user;
     private Game game;
     private Game.Playerelements currentPlayer = Game.Playerelements.ERROR;
+    private String gid;
 
     public Gameplay(User user) {
         this.user = user;
         game = new Game();
+        this.gid = UUID.randomUUID().toString();
 
         // determine the player who will NOT do the first move
         if(user.getDefeats() > user.getVictories()) {
@@ -55,7 +59,20 @@ public class Gameplay implements java.io.Serializable {
         }
     }
 
+    public User getUser() {
+        return user;
+    }
+
     public Game getGame() {
         return game;
+    }
+
+    public String getGid() {
+        return gid;
+    }
+
+    public Game.Playerelements getCurrentPlayer() {
+        // TODO probably move some logic from shootout to this function, so the GUI can access it
+        return currentPlayer;
     }
 }

@@ -17,8 +17,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  * Field Battleship
- * @author Tom Ohme
  *
+ * @author Tom Ohme
  */
 public class Field extends JPanel implements ActionListener {
 
@@ -30,24 +30,24 @@ public class Field extends JPanel implements ActionListener {
 
     public void paintComponent(Graphics g) {
         g.setColor(Color.BLACK);
-        g.fillRect(0,0,271,271);
+        g.fillRect(0, 0, 271, 271);
         g.setColor(Color.WHITE);
         //10 X 10 square
-        for (int i=0; i<11; i++) {
-            g.drawLine(20,20+i*25,271,20+i*25);
+        for (int i = 0; i < 11; i++) {
+            g.drawLine(20, 20 + i * 25, 271, 20 + i * 25);
         }
-        for (int i=0; i<11; i++) {
-            g.drawLine(20+i*25,20,20+i*25,271);
+        for (int i = 0; i < 11; i++) {
+            g.drawLine(20 + i * 25, 20, 20 + i * 25, 271);
         }
 
-        char ch='0';
-        for (int i=0; i<10; i++) {                    //Spalten Koordinaten oben
-            g.drawString(ch+" ",30+25*i,13);
+        char ch = '0';
+        for (int i = 0; i < 10; i++) {                    //Spalten Koordinaten oben
+            g.drawString(ch + " ", 30 + 25 * i, 13);
             ch++;
         }
-        ch='A';
-        for (int i=0; i<10; i++) {                    //Spalten Koordinaten links
-            g.drawString(ch+" ",10,40+25*i);
+        ch = 'A';
+        for (int i = 0; i < 10; i++) {                    //Spalten Koordinaten links
+            g.drawString(ch + " ", 10, 40 + 25 * i);
             ch++;
         }
 
@@ -73,12 +73,13 @@ public class Field extends JPanel implements ActionListener {
     }
 
     private class MouseEventDemo implements MouseListener {
+        private int x;
+        private int y;
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            int x = (int)(e.getPoint().getX()/25);
-            int y = (int)(e.getPoint().getY()/25);
-
+            x = (int) (e.getPoint().getX() / 25);
+            y = (int) (e.getPoint().getY() / 25);
 
 
             try {
@@ -123,6 +124,14 @@ public class Field extends JPanel implements ActionListener {
             //ship.setPosition(x, y, direction)
             //Feld weiss einf�rben +Felder horizontal oder vertical f�r Schiff //+Felder speichern
 
+        }
+
+        private int getX() {
+            return x;
+        }
+
+        private int getY() {
+            return y;
         }
 
         @Override

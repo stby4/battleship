@@ -11,6 +11,7 @@ import static org.junit.Assert.*;
 
 /**
  * Unit test for data.User
+ * Delete user.bin before running the test
  *
  * @author Hinrich Kaestner
  */
@@ -57,5 +58,18 @@ public class DataUserTest {
         assertTrue(file.checkUsernameExists("Peter"));
         assertTrue(file.checkUsernameExists("Hinrich"));
         assertFalse(file.checkUsernameExists("Tom"));
+    }
+
+    @Test
+    public void testUpdateUserInfo() throws Exception {
+        User user = new User(UUID.randomUUID().toString(), "Gerd", "password5");
+        file.store(user);
+        User user1 = file.get("Gerd", "password5");
+        assertNull(user1.getLastGame());
+        String gid = UUID.randomUUID().toString();
+        user1.setLastGame(gid);
+        file.store(user1);
+        User user2 = file.get("Gerd", "password5");
+        assertEquals(gid, user2.getLastGame());
     }
 }
