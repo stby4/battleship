@@ -18,8 +18,8 @@ public class Game extends BinaryFile {
         List<Gameplay> gameplayList = null;
         try {
             gameplayList = readAll();
-            for(Gameplay gameplayHelper : gameplayList) {
-                if(gameplay.getUser().getUid().equals(gameplayHelper.getUser().getUid())) {
+            for (Gameplay gameplayHelper : gameplayList) {
+                if (gameplay.getUser().getUid().equals(gameplayHelper.getUser().getUid())) {
                     gameplayList.remove(gameplay);
                     //break; // let list run through all saved game to make it a bit more failure resistant
                 }
@@ -27,32 +27,34 @@ public class Game extends BinaryFile {
         } catch (Exception e) {
             gameplayList = new ArrayList<Gameplay>();
         } finally {
+            assert gameplayList != null;
             gameplayList.add(gameplay);
         }
 
         ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
-        ObjectOutput out = null;
+        ObjectOutput out;
         try {
             out = new ObjectOutputStream(byteOut);
             out.writeObject(gameplayList);
             byte[] data = byteOut.toByteArray();
 
             this.write(FILENAME, data);
-        } finally {
             out.close();
+        } finally {
             byteOut.close();
         }
     }
 
-    private List<Gameplay> readAll() throws IOException, ClassNotFoundException{
-        ByteArrayInputStream byteIn = null;
+    private List<Gameplay> readAll() {
+        ByteArrayInputStream byteIn;
         List<Gameplay> gameplayList = null;
         try {
             byteIn = new ByteArrayInputStream(this.read(FILENAME));
             ObjectInput in = new ObjectInputStream(byteIn);
+            //noinspection unchecked
             gameplayList = (List<Gameplay>) in.readObject();
-        } finally {
             byteIn.close();
+        } catch (Exception ignore) {
         }
         return gameplayList;
     }
@@ -62,7 +64,7 @@ public class Game extends BinaryFile {
         try {
             gameplayList = readAll();
             for (Gameplay gameplay : gameplayList) {
-                if(gid.equals(gameplay.getGid())) {
+                if (gid.equals(gameplay.getGid())) {
                     return gameplay;
                 }
             }

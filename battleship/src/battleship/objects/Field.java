@@ -29,6 +29,7 @@ public class Field implements java.io.Serializable {
 
     private ArrayList<Ship> ships = new ArrayList<Ship>();
 
+    @SuppressWarnings("SameParameterValue")
     public Field(int sizeX, int sizeY) {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
@@ -47,10 +48,6 @@ public class Field implements java.io.Serializable {
 
     public int getSizeY() {
         return sizeY;
-    }
-
-    public ArrayList<Ship> getShips() {
-        return this.ships;
     }
 
     /**
@@ -73,7 +70,7 @@ public class Field implements java.io.Serializable {
         return this.field.get(posX).get(posY);
     }
 
-    public Fieldelements setFieldStatus(int posX, int posY, Fieldelements status) {
+    Fieldelements setFieldStatus(int posX, int posY, Fieldelements status) {
         if (posX < 0 || posX >= this.sizeX || posY < 0 || posY >= this.sizeY) {
             return Fieldelements.ERROR;
         }

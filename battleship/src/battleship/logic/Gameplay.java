@@ -1,7 +1,6 @@
 package battleship.logic;
 
 import battleship.objects.Field;
-import battleship.objects.Ship;
 import battleship.objects.User;
 
 import java.util.UUID;
@@ -42,7 +41,7 @@ public class Gameplay implements java.io.Serializable {
         return winner;
     }
 
-    public void shootout() {
+    void shootout() {
         switch (currentPlayer) {
             case COMPUTER:
                 do {

@@ -25,10 +25,7 @@ public class Instance {
 
     public boolean loadGame(String gid) {
         gameplay = new battleship.data.Game().get(gid);
-        if(null == gameplay) {
-            return false;
-        }
-        return true;
+        return null != gameplay;
     }
 
     public void storeGame() throws IOException {

@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 public class DataGameTest {
 
     private Game file = null;
-    String gid = null;
+    private String gid = null;
 
     @Before
     public void setUp() throws Exception {

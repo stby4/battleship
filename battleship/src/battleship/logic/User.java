@@ -31,10 +31,10 @@ public class User {
 
     /**
      *
-     * @param username
-     * @param password1
-     * @param password2
-     * @return
+     * @param username user name
+     * @param password1 password, first entry
+     * @param password2 password, second entry
+     * @return user ID
      * @throws DuplicateUsersException
      * @throws NotMatchingPasswordsException
      * @throws IncompleteDataException
@@ -59,13 +59,12 @@ public class User {
     }
 
     /**
-     * @param username
-     * @param password
-     * @return
+     * @param username user name
+     * @param password password
      * @throws WrongCredentialsException
      * @throws IncompleteDataException
      */
-    public String login(String username, String password) throws WrongCredentialsException, IncompleteDataException {
+    public void login(String username, String password) throws WrongCredentialsException, IncompleteDataException {
         if (username.equals("") || password.equals("")) {
             throw new IncompleteDataException("Please fill out all fields.");
         }
@@ -74,11 +73,10 @@ public class User {
         if(null == oUser) {
             throw new WrongCredentialsException("An user with the given credentials does not exist. Please register if you have not already done so.");
         }
-        return oUser.getUid();
     }
 
     /**
-     * @return
+     * @return user object
      */
     public battleship.objects.User getUser() {
         return oUser;

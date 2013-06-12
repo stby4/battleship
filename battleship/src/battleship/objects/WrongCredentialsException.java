@@ -4,6 +4,7 @@ package battleship.objects;
  * NotMatchingPasswordsException
  * @author H. Kaestner
  */
+@SuppressWarnings("SameParameterValue")
 public class WrongCredentialsException extends Exception
 {
     public WrongCredentialsException()

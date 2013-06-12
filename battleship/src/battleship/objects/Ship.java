@@ -36,6 +36,7 @@ public class Ship implements java.io.Serializable {
         this.isset = true;
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean isSet() {
         return isset;
     }
@@ -44,6 +45,7 @@ public class Ship implements java.io.Serializable {
         this.isset = false;
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean getSunk() {
         return sunk;
     }

@@ -28,32 +28,34 @@ public class User extends BinaryFile {
         } catch (Exception e) {
             userList = new ArrayList<battleship.objects.User>();
         } finally {
+            assert userList != null;
             userList.add(user);
         }
 
         ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
-        ObjectOutput out = null;
+        ObjectOutput out;
         try {
             out = new ObjectOutputStream(byteOut);
             out.writeObject(userList);
             byte[] data = byteOut.toByteArray();
 
             this.write(FILENAME, data);
-        } finally {
             out.close();
+        } finally {
             byteOut.close();
         }
     }
 
-    private List<battleship.objects.User> readAll() throws IOException, ClassNotFoundException {
-        ByteArrayInputStream byteIn = null;
+    private List<battleship.objects.User> readAll() {
+        ByteArrayInputStream byteIn;
         List<battleship.objects.User> userList = null;
         try {
             byteIn = new ByteArrayInputStream(this.read(FILENAME));
             ObjectInput in = new ObjectInputStream(byteIn);
+            //noinspection unchecked
             userList = (List<battleship.objects.User>) in.readObject();
-        } finally {
             byteIn.close();
+        } catch (Exception ignore) {
         }
         return userList;
     }

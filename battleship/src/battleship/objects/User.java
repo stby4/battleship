@@ -28,18 +28,16 @@ public class User implements java.io.Serializable {
         return uid;
     }
 
-    public void setUid(String uid) {
+    void setUid(String uid) {
         this.uid = uid;
     }
 
     /**
      *
      * @param name
-     * @return
      */
-	public boolean setName(String name) {
+    void setName(String name) {
 		this.name = name;
-		return true;
 	}
 
     /**
@@ -54,9 +52,8 @@ public class User implements java.io.Serializable {
 	 * @param String password
 	 * @return boolean password successful set
 	 */
-	public boolean setPassword(String password) {
+    void setPassword(String password) {
 		this.password = password;
-		return true;
 	}
 
     /**

@@ -1,7 +1,6 @@
 package test;
 
 import battleship.objects.User;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,20 +17,14 @@ import static org.junit.Assert.*;
 public class DataUserTest {
 
     private battleship.data.User file = null;
-    String uid = null;
 
     @Before
     public void setUp() throws Exception {
-        this.uid = UUID.randomUUID().toString();
-        User user = new User(this.uid, "Hinrich", "password1");
+        String uid = UUID.randomUUID().toString();
+        User user = new User(uid, "Hinrich", "password1");
         file = new battleship.data.User();
 
         file.store(user);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-
     }
 
     @Test
