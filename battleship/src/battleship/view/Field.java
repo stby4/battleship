@@ -19,7 +19,6 @@ public class Field extends JPanel implements ActionListener, MouseListener {
     private static final long serialVersionUID = 1L;
 
     public Field() {
-        //addMouseListener(new MouseEventDemo());
         this.addMouseListener(this);
     }
 
@@ -45,20 +44,6 @@ public class Field extends JPanel implements ActionListener, MouseListener {
             g.drawString(ch + " ", 10, 40 + 25 * i);
             ch++;
         }
-
-//	    int sqStat=0;                                     
-//	    for (int r=0; r<10; r++) {                     
-//	    	for (int c=0; c<10;c++) {   
-//	    		if (sqStat==2) {   
-//	    			g.setColor(Color.RED);                  //hit
-//	    			g.fillOval(c*28+30, r*28+30, 10,10);   
-//	    		} else if (sqStat==3) {   
-//	    			g.setColor(Color.BLUE);                 //water  
-//	    			g.fillOval(c*28+30, r*28+30, 10,10);   
-//	    		}   
-//	    	} 
-//	    }
-
     }
 
     public void register(IFieldObserver observer) {
