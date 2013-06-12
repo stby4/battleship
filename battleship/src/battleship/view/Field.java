@@ -73,28 +73,20 @@ public class Field extends JPanel implements ActionListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        int x = (int) (e.getPoint().getX() / 25);
-        int y = (int) (e.getPoint().getY() / 25);
+        int x = (int) (e.getPoint().getX() / 25)-1;
+        int y = (int) (e.getPoint().getY() / 25)-1;
         this.observer.fieldClicked(x, y);
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
+    public void mousePressed(MouseEvent e) {}
 
     @Override
-    public void mouseReleased(MouseEvent e) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
+    public void mouseReleased(MouseEvent e) {}
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
+    public void mouseEntered(MouseEvent e) {}
 
     @Override
-    public void mouseExited(MouseEvent e) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
+    public void mouseExited(MouseEvent e) {}
 }

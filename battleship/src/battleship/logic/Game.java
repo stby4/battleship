@@ -48,7 +48,7 @@ public class Game implements java.io.Serializable {
 
         this.placeShipsComputer();
         for(Ship ship : shipTypes) {
-            ship.setSet(false);
+            ship.unset();
         }
     }
 
@@ -192,13 +192,5 @@ public class Game implements java.io.Serializable {
             return Playerelements.USER;
         }
         return Playerelements.ERROR;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public ArrayList<Ship> getShipTypes() {
-        return this.shipTypes;
     }
 }

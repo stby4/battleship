@@ -10,8 +10,6 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
@@ -46,7 +44,7 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
         int left = (screenSize.width - 600) / 2;
         setSize(600, 400);
         setLocation(left, top);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         //setBackground(Color.lightGray);
         setResizable(false);
 
@@ -123,19 +121,23 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
 
     @Override
     public void fieldClicked(int x, int y) {
-        battleship.objects.Field.Directionelements direction = battleship.objects.Field.Directionelements.HORIZONTAL;
+        battleship.objects.Field.Directionelements direction = null;
         JPanel panel = new JPanel();
         JLabel label = new JLabel("Place the ship:");
         Object[] dirOptions = {"vertical", "horizontal"};
-        int directionHelper = JOptionPane.showOptionDialog(panel, label, "Choose the direction", JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, dirOptions, null);
+        int directionHelper = JOptionPane.showOptionDialog(panel, label, "Choose the direction", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, dirOptions, null);
         if (0 == directionHelper) {
             direction = battleship.objects.Field.Directionelements.VERTICAL;
+        } else if (1 == directionHelper) {
+            direction = battleship.objects.Field.Directionelements.HORIZONTAL;
         }
 
         Ship ship = game.getNextUnsetShip();
-        if (null != ship) {
+        if (null != ship && null != direction) {
             ship.setPosition(x, y, direction);
-            game.placeShipUser(ship);
+            if (!game.placeShipUser(ship)) {
+                ship.unset();
+            }
             ship = game.getNextUnsetShip();
             if (null != ship) {
                 showShipDetails(ship);

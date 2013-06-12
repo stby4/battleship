@@ -40,8 +40,8 @@ public class Ship implements java.io.Serializable {
         return isset;
     }
 
-    public void setSet(boolean isset) {
-        this.isset = isset;
+    public void unset() {
+        this.isset = false;
     }
 
     public boolean getSunk() {

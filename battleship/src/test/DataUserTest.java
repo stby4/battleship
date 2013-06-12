@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 /**
  * Unit test for data.User
- * Delete user.bin before running the test
+ * Delete *.bin before running the test
  *
  * @author Hinrich Kaestner
  */
