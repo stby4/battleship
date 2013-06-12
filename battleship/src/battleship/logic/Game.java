@@ -22,6 +22,7 @@ public class Game implements java.io.Serializable {
     private Field fieldComputer;
     private ArrayList<Ship> shipTypes;
 
+    /* comments to hide this constructor from the code analyser
     public Game(int sizeX, int sizeY, ArrayList<Ship> ships) {
         this.fieldUser = new Field(sizeX, sizeY);
         this.fieldComputer = new Field(sizeX, sizeY);
@@ -29,6 +30,7 @@ public class Game implements java.io.Serializable {
 
         this.placeShipsComputer();
     }
+    */
 
     public Game() {
         this.shipTypes = new ArrayList<Ship>();
@@ -166,7 +168,7 @@ public class Game implements java.io.Serializable {
 
         // random element
         Random random = new Random();
-        sumProbability = random.nextInt((int) sumProbability--);
+        sumProbability = random.nextInt((int) --sumProbability);
         sumProbability++; // must at least be 1
         int posY = -1;
         int posX = -1;
