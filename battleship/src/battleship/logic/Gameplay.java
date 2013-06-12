@@ -1,6 +1,7 @@
 package battleship.logic;
 
 import battleship.objects.Field;
+import battleship.objects.Ship;
 import battleship.objects.User;
 
 import java.util.UUID;

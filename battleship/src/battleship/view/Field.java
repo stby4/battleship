@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 
 /**
@@ -11,12 +13,14 @@ import javax.swing.JPanel;
  *
  * @author Tom Ohme
  */
-public class Field extends JPanel implements ActionListener {
+public class Field extends JPanel implements ActionListener, MouseListener {
 
+    private IFieldObserver observer;
     private static final long serialVersionUID = 1L;
 
     public Field() {
         //addMouseListener(new MouseEventDemo());
+        this.addMouseListener(this);
     }
 
     public void paintComponent(Graphics g) {
@@ -57,9 +61,40 @@ public class Field extends JPanel implements ActionListener {
 
     }
 
+    public void register(IFieldObserver observer) {
+        this.observer = observer;
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
 
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        int x = (int) (e.getPoint().getX() / 25);
+        int y = (int) (e.getPoint().getY() / 25);
+        this.observer.fieldClicked(x, y);
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 }

@@ -10,18 +10,17 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * Position Battleship
  *
  * @author Tom Ohme
  */
-public class Position extends JFrame implements ActionListener {
+public class Position extends JFrame implements ActionListener, IFieldObserver {
 
     private static final long serialVersionUID = 1L;
     private Application app;
@@ -72,38 +71,9 @@ public class Position extends JFrame implements ActionListener {
 
         //create Field
         myOcean = new Field();
+        myOcean.register(this);
         myOcean.setBounds(30, 28, 271, 271);
         positionPanel.add(myOcean);
-    }
-
-    public void setShips() {
-        for (Ship ship : game.getShipTypes()) {
-            if (!ship.isSet()) {
-                label2.setText(ship.getName());
-                label3.setText(ship.getLength() + " Felder");
-                JPanel picture = new PicturePanel(ship.getImage(), 200, 120);
-                picture.setBounds(350, 180, 200, 120);
-                positionPanel.add(picture);
-                positionPanel.setComponentZOrder(picture, 1);
-                FieldMouseEvent event = new FieldMouseEvent();
-                event.register(positionPanel);
-                Thread mouse = new Thread(event);
-                mouse.start();
-                try {
-                    mouse.wait();
-                } catch (Exception e) {
-
-                }
-                // TODO Hinrich, get mouseclick coords and vertical/horizontal
-                //ship.setPosition();
-                game.placeShipUser(ship);
-                // TODO Tom, display ship
-            }
-        }
-
-        //if alle Schiff gesetzt next Button erstellt  --> Game
-        //next.setBounds();
-
 
         positionPanel.add(label);
         positionPanel.add(label2);
@@ -121,6 +91,8 @@ public class Position extends JFrame implements ActionListener {
         positionPanel.setBackground(Color.BLACK);
 
         getContentPane().add(positionPanel);
+
+        showShipDetails(game.getNextUnsetShip());
 
         actionPosition();
     }
@@ -140,4 +112,34 @@ public class Position extends JFrame implements ActionListener {
         }
     }
 
+    private void showShipDetails(Ship ship) {
+        label2.setText(ship.getName());
+        label3.setText(ship.getLength() + " fields");
+        JPanel picture = new PicturePanel(ship.getImage(), 200, 120);
+        picture.setBounds(350, 180, 200, 120);
+        positionPanel.add(picture);
+        positionPanel.setComponentZOrder(picture, 1);
+    }
+
+    @Override
+    public void fieldClicked(int x, int y) {
+        battleship.objects.Field.Directionelements direction = battleship.objects.Field.Directionelements.HORIZONTAL;
+        JPanel panel = new JPanel();
+        JLabel label = new JLabel("Place the ship:");
+        Object[] dirOptions = {"vertical", "horizontal"};
+        int directionHelper = JOptionPane.showOptionDialog(panel, label, "Choose the direction", JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, dirOptions, null);
+        if (0 == directionHelper) {
+            direction = battleship.objects.Field.Directionelements.VERTICAL;
+        }
+
+        Ship ship = game.getNextUnsetShip();
+        if (null != ship) {
+            ship.setPosition(x, y, direction);
+            game.placeShipUser(ship);
+            ship = game.getNextUnsetShip();
+            if (null != ship) {
+                showShipDetails(ship);
+            }
+        }
+    }
 }

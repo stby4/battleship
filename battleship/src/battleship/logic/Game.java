@@ -52,6 +52,15 @@ public class Game implements java.io.Serializable {
         }
     }
 
+    public Ship getNextUnsetShip() {
+        for (Ship ship :shipTypes) {
+            if(!ship.isSet()) {
+                return ship;
+            }
+        }
+        return null;
+    }
+
     /**
      * adds a ship to the user field
      * @param ship Ship

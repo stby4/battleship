@@ -85,7 +85,6 @@ public class Application {
         position = new Position(this);
         menu.setVisible(false);
         position.setVisible(true);
-        position.setShips();
     }
 
     public void game() {

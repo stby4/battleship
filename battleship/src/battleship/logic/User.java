@@ -72,7 +72,7 @@ public class User {
         battleship.data.User dUser = new battleship.data.User();
         oUser = dUser.get(username, password);
         if(null == oUser) {
-            throw new WrongCredentialsException("A user with the given credentials does not exist. Please register if you have not already done so.");
+            throw new WrongCredentialsException("An user with the given credentials does not exist. Please register if you have not already done so.");
         }
         return oUser.getUid();
     }
