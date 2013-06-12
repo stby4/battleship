@@ -10,8 +10,6 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
@@ -25,6 +23,7 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
     private static final long serialVersionUID = 1L;
     private Application app;
     private Field myOcean;
+    private battleship.view.Ship myShips;
     private battleship.logic.Game game;
 
     JLabel label = new JLabel("Set Ship:");
@@ -74,7 +73,7 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
         myOcean.register(this);
         myOcean.setBounds(30, 28, 271, 271);
         positionPanel.add(myOcean);
-
+        
         positionPanel.add(label);
         positionPanel.add(label2);
         positionPanel.add(label3);
@@ -135,6 +134,9 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
         Ship ship = game.getNextUnsetShip();
         if (null != ship) {
             ship.setPosition(x, y, direction);
+            //create Ships
+            myShips = new battleship.view.Ship(ship);
+            myOcean.add(myShips);
             game.placeShipUser(ship);
             ship = game.getNextUnsetShip();
             if (null != ship) {

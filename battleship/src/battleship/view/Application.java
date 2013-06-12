@@ -1,7 +1,6 @@
 package battleship.view;
 
 import battleship.logic.Instance;
-import battleship.objects.User;
 
 /**
  * Application Battleship
