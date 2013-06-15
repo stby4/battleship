@@ -10,6 +10,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ * PositionFinished Battleship
+ * @author Tom Ohme
+ *
+ */
 public class PositionFinished extends JFrame implements ActionListener {
 
     private static final long serialVersionUID = 1L;

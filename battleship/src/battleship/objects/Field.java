@@ -9,7 +9,10 @@ import java.util.ArrayList;
  * @author H. Kaestner
  */
 public class Field implements java.io.Serializable {
-    static public enum Fieldelements {
+
+	private static final long serialVersionUID = 1L;
+
+	static public enum Fieldelements {
         WATER, // virgin field
         SHIP,  // ship in perfect condition
         HIT,   // ship with a hit
