@@ -83,8 +83,8 @@ public class Application {
         instance.newGame(lUser.getUser());
         position = new Position(this);
         menu.setVisible(false);
-//        position.setVisible(true);
-        game.setVisible(true);
+        position.setVisible(true);
+//        game.setVisible(true);
     }
 
     public void game() {
