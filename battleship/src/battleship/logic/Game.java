@@ -13,7 +13,10 @@ import java.util.Random;
  * @author Hinrich Kaestner, Tom Ohme
  */
 public class Game implements java.io.Serializable {
-    public static enum Playerelements {
+
+	private static final long serialVersionUID = 1L;
+
+	public static enum Playerelements {
         USER,
         COMPUTER,
         ERROR

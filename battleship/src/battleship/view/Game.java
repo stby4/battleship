@@ -3,7 +3,6 @@ package battleship.view;
 import battleship.logic.Gameplay;
 import battleship.logic.Instance;
 import battleship.logic.Game.Playerelements;
-import battleship.objects.*;
 import battleship.objects.Field.Fieldelements;
 
 import java.awt.Color;
@@ -25,17 +24,22 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
     private static final long serialVersionUID = 1L;
     private Application app;
     private Gameplay gameplay;
+    private battleship.logic.Game game;
     private Field myOcean;
     private Field enemyOcean;
 
     //Anzeigen wer dran ist (Spieler oder Computer)
     JPanel detailsPanel = new JPanel();
     JLabel username = new JLabel("You");
-    JLabel userShot = new JLabel("0" + " shots");
-    JLabel userHit = new JLabel("0" + " hit");
+    JLabel userShotAnz = new JLabel();
+    JLabel userShot = new JLabel("shots");
+    JLabel userHitAnz = new JLabel();
+    JLabel userHit = new JLabel("hit");
     JLabel opponentname = new JLabel("Opponent");
-    JLabel opponentShot = new JLabel("0" + " shots");
-    JLabel opponentHit = new JLabel("0" + " hit");
+    JLabel opponentShotAnz = new JLabel();
+    JLabel opponentShot = new JLabel("shots");
+    JLabel opponentHitAnz = new JLabel();
+    JLabel opponentHit = new JLabel("hit");
 
     JButton exit = new JButton("EXIT");
     JPanel gamePanel = new JPanel();
@@ -82,6 +86,7 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         myOcean = new Field();
         myOcean.setBounds(30, 78, 271, 271);
         myOcean.removeAll();
+        drawShipUser(Playerelements.USER);
         gamePanel.add(myOcean);
 
         //create enemyOcean Field
@@ -118,6 +123,15 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
             //instead store game
             app.gameExit();
         }
+    }
+    
+    public void drawShipUser(Playerelements player) {
+    	ArrayList<battleship.objects.Ship> userShips = game.getField(player).getShips();
+    	for (battleship.objects.Ship ship : userShips) {
+			Ship userShip = new Ship(ship, myOcean.getGraphics());
+			myOcean.add(userShip);
+			myOcean.setVisible(true);
+		}
     }
 
     public void drawSunkShips(Playerelements player) {
@@ -163,5 +177,23 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         } else {
             detailsPanel.setBackground(Color.RED);
         }
+    }
+    
+    public int shotOnField() {
+    	int shotUser = 0;
+    	int shotComputer = 0;
+    	if (gameplay.getCurrentPlayer() == Playerelements.USER) {
+    		shotUser++;
+    		return shotUser;
+    	} else {
+    		shotComputer++;
+    		return shotComputer;
+    	}	
+    }
+    
+    public int shotOnShip() {
+    	int shotUser = 0;
+    	int shotComputer = 0;
+    	if ()
     }
 }

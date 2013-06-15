@@ -88,7 +88,6 @@ public class Application {
         position = new Position(this);
         menu.setVisible(false);
         position.setVisible(true);
-//        game.setVisible(true);
     }
 
     public void positionFinished() {
