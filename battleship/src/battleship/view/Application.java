@@ -64,7 +64,6 @@ public class Application {
 
     public void menu() {
         positionFinished = new PositionFinished(this);
-        game = new Game(this);
         if (highscore != null) {
             highscore.setVisible(false);
         }
@@ -98,6 +97,7 @@ public class Application {
     }
 
     public void game() {
+        game = new Game(this);
         positionFinished.setVisible(false);
         game.setVisible(true);
     }

@@ -30,7 +30,7 @@ public class Shot extends JPanel {
 	}
 
 	public void paintComponent(Graphics g) {
-		if (Fieldelements.HIT != null) {
+		if (fieldelements == Fieldelements.HIT) {
 			g.setColor(hit);
 			g.fillRect(x*25+23, y*25+23, 20, 20); //mouseClicked
 

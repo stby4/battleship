@@ -1,8 +1,10 @@
 package battleship.logic;
 
 import battleship.objects.Field;
+import battleship.objects.Ship;
 import battleship.objects.User;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -73,7 +75,22 @@ public class Gameplay implements java.io.Serializable {
     }
 
     public Field.Fieldelements shoot(int x, int y) {
-        return game.placeShotUser(x, y);
+        Field.Fieldelements disaster = game.placeShotUser(x, y);
+        switch(disaster) {
+            case HIT: break;
+            case SUNK: break;
+            case ERROR: break;
+            default:
+                switch (currentPlayer) {
+                    case COMPUTER:
+                        currentPlayer = Game.Playerelements.USER;
+                        break;
+                    case USER:
+                        currentPlayer = Game.Playerelements.COMPUTER;
+                        break;
+                }
+        }
+        return disaster;
     }
 
     /**
@@ -109,7 +126,6 @@ public class Gameplay implements java.io.Serializable {
      * @return current player
      */
     public Game.Playerelements getCurrentPlayer() {
-        // TODO probably move some logic from shootout to this function, so the GUI can access it
         return currentPlayer;
     }
 }

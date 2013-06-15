@@ -6,9 +6,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * PositionFinished Battleship
@@ -33,7 +31,7 @@ public class PositionFinished extends JFrame implements ActionListener {
         int left = (screenSize.width - 600) / 2;
         setSize(600, 400);
         setLocation(left, top);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         //setBackground(Color.BLACK);
         setResizable(false);
 

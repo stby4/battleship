@@ -72,6 +72,29 @@ public class Game implements java.io.Serializable {
     }
 
     /**
+     * Returns a list of all sunken ships.
+     *
+     * @param player The player whose sunken ships will be searched.
+     * @return A list of all sunken ships.
+     */
+    public List<Ship> getSunkShips(Playerelements player) {
+        Field field;
+        if(Playerelements.COMPUTER == player) {
+            field = fieldComputer;
+        } else {
+            field = fieldUser;
+        }
+
+        ArrayList<Ship> ships = field.getShips();
+        for(Ship ship : ships) {
+            if(!ship.getSunk()) {
+                ships.remove(ship);
+            }
+        }
+        return ships;
+    }
+
+    /**
      * adds a ship to the user field
      *
      * @param ship Ship
@@ -129,7 +152,7 @@ public class Game implements java.io.Serializable {
         for (int posX = 0; posX < sizeX; posX++) {
             for (int posY = 0; posY < sizeY; posY++) {
                 // set probability for each field to 1
-                probability[sizeX][sizeY] = 1.;
+                probability[posX][posY] = 1;
 
                 // check neighbouring fields for hits and set probability to 1000
                 if (Field.Fieldelements.HIT == fieldUser.getFieldStatus(posX, posY - 1) ||

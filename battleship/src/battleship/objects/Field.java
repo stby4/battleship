@@ -205,4 +205,8 @@ public class Field implements java.io.Serializable {
                 return getFieldStatus(posX, posY);
         }
     }
+
+    public ArrayList<Ship> getShips() {
+        return ships;
+    }
 }
