@@ -3,6 +3,7 @@ package battleship.view;
 import battleship.logic.Gameplay;
 import battleship.logic.Instance;
 import battleship.logic.Game.Playerelements;
+import battleship.objects.*;
 import battleship.objects.Field.Fieldelements;
 
 import java.awt.Color;
@@ -10,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -118,8 +120,19 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         }
     }
 
-    public void drawSunkShips() {
-
+    public void drawSunkShips(Playerelements player) {
+        Field ocean;
+        if(Playerelements.USER == player) {
+            ocean = myOcean;
+        } else {
+            ocean = enemyOcean;
+        }
+        ArrayList<battleship.objects.Ship> sunkShips = gameplay.getGame().getSunkShips(player);
+        for(battleship.objects.Ship ship : sunkShips) {
+            Ship sunkShip = new Ship(ship, ocean.getGraphics());
+            sunkShip.setVisible(true);
+            ocean.add(sunkShip);
+        }
     }
 
     @Override
@@ -127,7 +140,8 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         //if (gameplay.getCurrentPlayer() == Playerelements.USER) {
         if (true) {
             System.out.println("X: " + x + " Y: " + y);
-            switch(gameplay.shoot(x, y)) {
+            Fieldelements desaster = gameplay.shoot(x, y);
+            switch(desaster) {
                 case SHOT:
                     Shot shot = new Shot(enemyOcean.getGraphics(), x, y, Fieldelements.SHOT);
                     enemyOcean.add(shot);
@@ -138,7 +152,7 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
                     enemyOcean.add(hit);
                     break;
                 case SUNK:
-
+                    drawSunkShips(Playerelements.COMPUTER);
                     break;
             }
         }
