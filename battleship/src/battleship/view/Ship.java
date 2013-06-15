@@ -3,7 +3,7 @@ package battleship.view;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import battleship.objects.Field.Directionelements;
 
@@ -11,21 +11,27 @@ public class Ship extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private battleship.objects.Ship ship;
+    private static final Color shipColor = Color.ORANGE;
 	
-	public Ship(battleship.objects.Ship ship) {
+	public Ship(battleship.objects.Ship ship, Graphics g) {
+        super();
 		this.ship = ship;
+        this.paintComponent(g);
 	}
 
 	public void paintComponent(Graphics g) {
 		int l = ship.getLength();
 		if (Directionelements.VERTICAL == ship.getDirection()) {
-			g.setColor(Color.WHITE); 
-			g.fillRect(ship.getPosX()*25, ship.getPosY()*25, 25, 25*l);
-		
+			g.setColor(shipColor);
+			g.fillRect(ship.getPosX()*25+23, ship.getPosY()*25+23, 20, 25*l-5);
+
 		} else {
-			g.setColor(Color.WHITE); 
-			g.fillRect(ship.getPosX()*25, ship.getPosY()*25, 25*l,25);
+			g.setColor(shipColor);
+			g.fillRect(ship.getPosX()*25+23, ship.getPosY()*25+23, 25*l-5,20);
 		}
+        //super.paintComponent(g);
+        //g.dispose();
 	}
+
 
 }

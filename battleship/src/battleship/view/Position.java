@@ -25,7 +25,6 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
     private static final long serialVersionUID = 1L;
     private Application app;
     private Field myOcean;
-    private battleship.view.Ship myShips;
     private battleship.logic.Game game;
 
     JLabel label = new JLabel("Set Ship:");
@@ -140,11 +139,13 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
             ship.setPosition(x, y, direction);
             if (!game.placeShipUser(ship)) {
                 ship.unset();
+            } else {
+                //create Ships
+                battleship.view.Ship myShip = new battleship.view.Ship(ship, myOcean.getGraphics());
+                myShip.setVisible(true);
+                myOcean.add(myShip);
             }
-            //create Ships
-            myShips = new battleship.view.Ship(ship);
-            myOcean.add(myShips);
-            game.placeShipUser(ship);
+
             ship = game.getNextUnsetShip();
             if (null != ship) {
                 showShipDetails(ship);

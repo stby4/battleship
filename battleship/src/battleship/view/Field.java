@@ -1,5 +1,7 @@
 package battleship.view;
 
+import battleship.objects.*;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -41,7 +43,7 @@ public class Field extends JPanel implements ActionListener, MouseListener {
         }
         ch = 'A';
         for (int i = 0; i < 10; i++) {                    //Spalten Koordinaten links
-            g.drawString(ch + " ", 10, 40 + 25 * i);
+            g.drawString(ch + " ", 5, 40 + 25 * i);
             ch++;
         }
     }

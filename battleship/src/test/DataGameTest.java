@@ -6,13 +6,13 @@ import battleship.objects.User;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.UUID;
 
 import static org.junit.Assert.*;
 
 /**
  * Unit test for data.Game
- * Delete *.bin before running the test
  *
  * @author Hinrich Kaestner
  */
@@ -23,6 +23,8 @@ public class DataGameTest {
 
     @Before
     public void setUp() throws Exception {
+        File store = new File("game.bin");
+        store.delete();
         Gameplay gameplay = new Gameplay(new User(UUID.randomUUID().toString(), "Tom", "password1"));
         gid = gameplay.getGid();
         file = new Game();

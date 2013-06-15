@@ -3,7 +3,10 @@ package test;
 import battleship.objects.DuplicateUsersException;
 import battleship.objects.IncompleteDataException;
 import battleship.objects.NotMatchingPasswordsException;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.io.File;
 
 import static org.junit.Assert.*;
 /**
@@ -14,6 +17,12 @@ import static org.junit.Assert.*;
 public class LogicUserTest {
 
     private battleship.logic.User lUser = battleship.logic.User.getInstance();
+
+    @Before
+    public void setUp() throws Exception {
+        File store = new File("user.bin");
+        store.delete();
+    }
 
     @Test
     public void testCreateNewUser() throws Exception {

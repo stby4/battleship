@@ -4,13 +4,13 @@ import battleship.objects.User;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.UUID;
 
 import static org.junit.Assert.*;
 
 /**
  * Unit test for data.User
- * Delete *.bin before running the test
  *
  * @author Hinrich Kaestner
  */
@@ -20,6 +20,8 @@ public class DataUserTest {
 
     @Before
     public void setUp() throws Exception {
+        File store = new File("game.bin");
+        store.delete();
         String uid = UUID.randomUUID().toString();
         User user = new User(uid, "Hinrich", "password1");
         file = new battleship.data.User();
