@@ -10,9 +10,9 @@ import java.util.UUID;
 
 
 /**
- * logic.User
+ * Create new useers, login existing users and request the currently logged in user.
  *
- * @author H. Kaestner
+ * @author Hinrich Kaestner, Tom Ohme
  */
 public class User {
     private static User user = null;
@@ -22,6 +22,11 @@ public class User {
 
     }
 
+    /**
+     * This class is a singleton.
+     *
+     * @return an instance of User
+     */
     public static User getInstance() {
         if(null == user) {
             user = new User();
@@ -30,6 +35,7 @@ public class User {
     }
 
     /**
+     * Checks if the entered data is valid and creates a new user.
      *
      * @param username user name
      * @param password1 password, first entry
@@ -59,6 +65,8 @@ public class User {
     }
 
     /**
+     * Checks if the entered data is valid and logs the user in.
+     *
      * @param username user name
      * @param password password
      * @throws WrongCredentialsException
@@ -76,7 +84,9 @@ public class User {
     }
 
     /**
-     * @return user object
+     * Returns the current user.
+     *
+     * @return current user
      */
     public battleship.objects.User getUser() {
         return oUser;

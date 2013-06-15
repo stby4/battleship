@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * most important class!!!!!
+ * This class handles the placement of ships, and shots.
  *
- * @author H. Kaestner
+ * @author Hinrich Kaestner, Tom Ohme
  */
 public class Game implements java.io.Serializable {
-    static public enum Playerelements {
+    public static enum Playerelements {
         USER,
         COMPUTER,
         ERROR
@@ -32,6 +32,9 @@ public class Game implements java.io.Serializable {
     }
     */
 
+    /**
+     * Sets up a new game with predefined field sizes (10x10 fields) and ships
+     */
     public Game() {
         this.shipTypes = new ArrayList<Ship>();
         this.fieldUser = new Field(10, 10);
@@ -54,6 +57,11 @@ public class Game implements java.io.Serializable {
         }
     }
 
+    /**
+     * Returns the first ship in the list that has not yet been set.
+     *
+     * @return first unset Ship, or null if all ships are set
+     */
     public Ship getNextUnsetShip() {
         for (Ship ship :shipTypes) {
             if(!ship.isSet()) {
@@ -65,17 +73,28 @@ public class Game implements java.io.Serializable {
 
     /**
      * adds a ship to the user field
+     *
      * @param ship Ship
-     * @return boolean
+     * @return true if ship was placed in the user field, false if not
      */
     public boolean placeShipUser(Ship ship) {
         return fieldUser.addShip(ship);
     }
 
+    /**
+     * Places a shot from the user on the computers field.
+     *
+     * @param posX x coordinate of the shot
+     * @param posY y coordinate of the shot
+     * @return The new status of the field where the shot was aimed at.
+     */
     public Field.Fieldelements placeShotUser(int posX, int posY) {
         return fieldComputer.shoot(posX, posY);
     }
 
+    /**
+     * Automatically places all ships on the computers field.
+     */
     private void placeShipsComputer() {
         List<Ship> computerShips = this.shipTypes;
         Random random = new Random();
@@ -93,10 +112,11 @@ public class Game implements java.io.Serializable {
     }
 
     /**
-     * automatically places a shot on the gamers field
-     * algorithm based on an idea by someone at the TU Munich who didn't write his name in the comments of his/her C code
+     * Automatically places a shot on the gamers field.
+     * This algorithm is based on an idea by someone at the TU Munich, Germany, who didn't write his name in the
+     * comments of his/her C code.
      *
-     * @return Field.Fieldelements
+     * @return The new status of the field where the shot was aimed at.
      */
     public Field.Fieldelements placeShotComputer() {
         int sizeX = this.fieldUser.getSizeX();
@@ -184,7 +204,9 @@ public class Game implements java.io.Serializable {
     }
 
     /**
-     * @return Playerelements
+     * Determines the winner of a game. The game is over as soon as this method returns a valid player.
+     *
+     * @return COMPUTER if the computer won, USER if the user won, ERROR if no one has won so far
      */
     public Playerelements getWinner() {
         if (this.fieldComputer.getAllShipsSunk()) {

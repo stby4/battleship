@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * User
+ * Stores and reads saved users
  *
- * @author Hinrich Kaestner
+ * @author Hinrich Kaestner, Tom Ohme
  * @link http://stackoverflow.com/questions/2836646/java-serializable-object-to-byte-array
  * @link http://stackoverflow.com/questions/12977290/write-and-read-multiple-byte-in-file-with-java
  */
@@ -15,6 +15,12 @@ public class User extends BinaryFile {
 
     private static final String FILENAME = "user";
 
+    /**
+     * Saves an user.
+     *
+     * @param user User object
+     * @throws IOException
+     */
     public void store(battleship.objects.User user) throws IOException {
         List<battleship.objects.User> userList = null;
         try {
@@ -46,6 +52,11 @@ public class User extends BinaryFile {
         }
     }
 
+    /**
+     * Reads all saved User objects and returns them in a list.
+     *
+     * @return list of all saved users
+     */
     private List<battleship.objects.User> readAll() {
         ByteArrayInputStream byteIn;
         List<battleship.objects.User> userList = null;
@@ -60,6 +71,13 @@ public class User extends BinaryFile {
         return userList;
     }
 
+    /**
+     * Returns a specific User, referenced by its user name and password
+     *
+     * @param username user name
+     * @param password password
+     * @return User that matches the credentials, or null
+     */
     public battleship.objects.User get(String username, String password) {
         List<battleship.objects.User> userList;
         try {
@@ -75,6 +93,12 @@ public class User extends BinaryFile {
         return null;
     }
 
+    /**
+     * Checcks whether an user name exists or not.
+     *
+     * @param username user name that will be searched for
+     * @return true if a user was found with the name, false if not
+     */
     public boolean checkUsernameExists(String username) {
         List<battleship.objects.User> userList;
         try {

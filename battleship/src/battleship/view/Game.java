@@ -6,17 +6,14 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * Game Battleship
  * @author Tom Ohme
  *
  */
-public class Game extends JFrame implements ActionListener {
+public class Game extends JFrame implements ActionListener, IFieldObserver {
 
     private static final long serialVersionUID = 1L;
     private Application app;
@@ -44,7 +41,7 @@ public class Game extends JFrame implements ActionListener {
         int left = (screenSize.width - 650) / 2;
         setSize(650, 450);
         setLocation(left, top);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         //setBackground(Color.lightGray);
         setResizable(false);
 
@@ -73,12 +70,14 @@ public class Game extends JFrame implements ActionListener {
 
         //create myOcean Field
         myOcean = new Field();
-        myOcean.setBounds(30, 78, 271, 271); 
+        myOcean.setBounds(30, 78, 271, 271);
+        myOcean.removeAll();
         gamePanel.add(myOcean);
 
         //create enemyOcean Field
         enemyOcean = new Field();
 		enemyOcean.setBounds(325, 78, 271, 271);
+        enemyOcean.register(this);
         gamePanel.add(enemyOcean);
 
         //wird dynamisch
@@ -112,4 +111,8 @@ public class Game extends JFrame implements ActionListener {
     }
 
 
+    @Override
+    public void fieldClicked(int x, int y) {
+        System.out.println("X: "+x+" Y: "+y);
+    }
 }

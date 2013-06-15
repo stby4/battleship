@@ -7,13 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author H. Kaestner
+ * Stores and reads saved games (saved as Gameplay objects).
+ *
+ * @author Hinrich Kaestner, Tom Ohme
  * @link http://stackoverflow.com/questions/2836646/java-serializable-object-to-byte-array
  */
 public class Game extends BinaryFile {
 
     private static final String FILENAME = "game";
 
+    /**
+     * Saves a gameplay.
+     *
+     * @param gameplay Gameplay object that includes the latest game
+     * @throws IOException
+     */
     public void store(Gameplay gameplay) throws IOException {
         List<Gameplay> gameplayList = null;
         try {
@@ -45,6 +53,11 @@ public class Game extends BinaryFile {
         }
     }
 
+    /**
+     * Reads all saved Gameplay objects and returns them in a list.
+     *
+     * @return list of all saved gameplays
+     */
     private List<Gameplay> readAll() {
         ByteArrayInputStream byteIn;
         List<Gameplay> gameplayList = null;
@@ -59,6 +72,12 @@ public class Game extends BinaryFile {
         return gameplayList;
     }
 
+    /**
+     * Returns a specific Gameplay, referenced by the gameplay ID gid.
+     *
+     * @param gid gameplay ID
+     * @return Gameplay with the matching gid, or null
+     */
     public Gameplay get(String gid) {
         List<Gameplay> gameplayList;
         try {

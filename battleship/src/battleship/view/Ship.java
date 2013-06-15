@@ -29,8 +29,6 @@ public class Ship extends JPanel {
 			g.setColor(shipColor);
 			g.fillRect(ship.getPosX()*25+23, ship.getPosY()*25+23, 25*l-5,20);
 		}
-        //super.paintComponent(g);
-        //g.dispose();
 	}
 
 

@@ -6,8 +6,9 @@ import battleship.objects.User;
 import java.util.UUID;
 
 /**
- * Gameplay
- * @author H. Kaestner
+ * starts a new game, has the logic of the games rules
+ *
+ * @author Hinrich Kaestner, Tom Ohme
  */
 public class Gameplay implements java.io.Serializable {
     private User user;
@@ -15,6 +16,11 @@ public class Gameplay implements java.io.Serializable {
     private Game.Playerelements currentPlayer = Game.Playerelements.ERROR;
     private String gid;
 
+    /**
+     * Creates a new Gameplay and subsequently a new Game
+     *
+     * @param user The user who wants to play.
+     */
     public Gameplay(User user) {
         this.user = user;
         game = new Game();
@@ -28,6 +34,7 @@ public class Gameplay implements java.io.Serializable {
         }
     }
 
+    // @deprecated
     public Game.Playerelements startGame() {
         Game.Playerelements winner = game.getWinner();
         do {
@@ -41,6 +48,7 @@ public class Gameplay implements java.io.Serializable {
         return winner;
     }
 
+    // @deprecated
     void shootout() {
         switch (currentPlayer) {
             case COMPUTER:
@@ -59,18 +67,38 @@ public class Gameplay implements java.io.Serializable {
         }
     }
 
+    /**
+     * Returns the user of this game.
+     *
+     * @return user
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Returns the Game class that is used in this gameplay.
+     *
+     * @return game
+     */
     public Game getGame() {
         return game;
     }
 
+    /**
+     * Returns the game ID of this game.
+     *
+     * @return game ID
+     */
     public String getGid() {
         return gid;
     }
 
+    /**
+     * Returns the current Player.
+     *
+     * @return current player
+     */
     public Game.Playerelements getCurrentPlayer() {
         // TODO probably move some logic from shootout to this function, so the GUI can access it
         return currentPlayer;
