@@ -4,14 +4,15 @@ import battleship.logic.Instance;
 
 /**
  * Application Battleship
- * @author Tom Ohme
  *
+ * @author Tom Ohme
  */
 public class Application {
     private Login login;
     private Register register;
     private Menu menu;
     private Position position;
+    private PositionFinished positionFinished;
     private Game game;
     private Highscore highscore;
     private Instance instance;
@@ -56,18 +57,22 @@ public class Application {
     }
 
     /*
-	public void registerDone() {
+    public void registerDone() {
 		login();
 	}
 	*/
 
     public void menu() {
+        positionFinished = new PositionFinished(this);
         game = new Game(this);
         if (highscore != null) {
             highscore.setVisible(false);
         }
         if (position != null) {
             position.setVisible(false);
+        }
+        if (positionFinished != null) {
+            positionFinished.setVisible(false);
         }
         if (game != null) {
             game.setVisible(false);
@@ -87,14 +92,19 @@ public class Application {
 //        game.setVisible(true);
     }
 
-    public void game() {
+    public void positionFinished() {
         position.setVisible(false);
+        positionFinished.setVisible(true);
+    }
+
+    public void game() {
+        positionFinished.setVisible(false);
         game.setVisible(true);
     }
-    
+
     public void gameExit() {
-    	game.setVisible(false);
-    	menu.setVisible(true);
+        game.setVisible(false);
+        menu.setVisible(true);
     }
 
     public void loadGame() {

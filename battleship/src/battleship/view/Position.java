@@ -28,7 +28,6 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
     private JLabel label = new JLabel("Set Ship:");
     private JLabel label2 = new JLabel();
     private JLabel label3 = new JLabel();
-    private JButton next = new JButton("NEXT");
     private JButton back = new JButton("BACK");
     private JPanel positionPanel = new JPanel();
 
@@ -63,9 +62,6 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
         back.setBackground(Color.BLACK);
         back.setForeground(Color.WHITE);
         back.setFocusable(false);
-        next.setBackground(Color.BLACK);
-        next.setForeground(Color.WHITE);
-        next.setFocusable(false);
 
         //create Field
         myOcean = new Field();
@@ -77,13 +73,11 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
         positionPanel.add(label2);
         positionPanel.add(label3);
         positionPanel.add(back);
-        positionPanel.add(next);
 
         positionPanel.setComponentZOrder(label, 0);
         positionPanel.setComponentZOrder(label2, 0);
         positionPanel.setComponentZOrder(label3, 0);
         positionPanel.setComponentZOrder(back, 0);
-        positionPanel.setComponentZOrder(next, 0);
         positionPanel.setComponentZOrder(myOcean, 0);
 
         positionPanel.setBackground(Color.BLACK);
@@ -96,15 +90,12 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
     }
 
     public void actionPosition() {
-        next.addActionListener(this);
         back.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == next) {
-            app.game();
-        } else if (e.getSource() == back) {
+        if (e.getSource() == back) {
             app.menu();
         }
     }
@@ -146,9 +137,9 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
             if (null != ship) {
                 showShipDetails(ship);
             } else {
-            	//anzeigen eines Schiffs wo schisst bevor Spiel beginn
-            	next.setBounds(440, 325, 110, 25);
+                app.positionFinished();
             }
+
         }
     }
 }

@@ -1,5 +1,9 @@
 package battleship.view;
 
+import battleship.logic.Gameplay;
+import battleship.logic.Instance;
+import battleship.logic.Game.Playerelements;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -17,6 +21,7 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
 
     private static final long serialVersionUID = 1L;
     private Application app;
+    private Gameplay gameplay;
     private Field myOcean;
     private Field enemyOcean;
 
@@ -34,6 +39,8 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
 
     public Game(Application app) {
         this.app = app;
+        Instance instance = Instance.getInstance();
+        gameplay = instance.getGameplay();
 
         setTitle("Game Battleship");
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -110,9 +117,12 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         }
     }
 
-
     @Override
     public void fieldClicked(int x, int y) {
-        System.out.println("X: "+x+" Y: "+y);
+        if(gameplay.getCurrentPlayer() == Playerelements.USER) {
+            System.out.println("X: "+x+" Y: "+y);
+
+
+        }
     }
 }

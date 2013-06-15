@@ -34,7 +34,10 @@ public class Gameplay implements java.io.Serializable {
         }
     }
 
-    // @deprecated
+    /**
+     * @deprecated does not allow for GUI to connect
+     * @return winner
+     */
     public Game.Playerelements startGame() {
         Game.Playerelements winner = game.getWinner();
         do {
@@ -48,7 +51,9 @@ public class Gameplay implements java.io.Serializable {
         return winner;
     }
 
-    // @deprecated
+    /**
+     * @deprecated probably not required any more
+     */
     void shootout() {
         switch (currentPlayer) {
             case COMPUTER:
@@ -65,6 +70,10 @@ public class Gameplay implements java.io.Serializable {
                 currentPlayer = Game.Playerelements.COMPUTER;
                 break;
         }
+    }
+
+    public Field.Fieldelements shoot(int x, int y) {
+        return game.placeShotUser(x, y);
     }
 
     /**
