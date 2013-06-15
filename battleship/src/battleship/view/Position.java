@@ -25,12 +25,12 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
     private Field myOcean;
     private battleship.logic.Game game;
 
-    JLabel label = new JLabel("Set Ship:");
-    JLabel label2 = new JLabel();
-    JLabel label3 = new JLabel();
-    JButton next = new JButton("NEXT");
-    JButton back = new JButton("BACK");
-    JPanel positionPanel = new JPanel();
+    private JLabel label = new JLabel("Set Ship:");
+    private JLabel label2 = new JLabel();
+    private JLabel label3 = new JLabel();
+    private JButton next = new JButton("NEXT");
+    private JButton back = new JButton("BACK");
+    private JPanel positionPanel = new JPanel();
 
     public Position(Application app) {
         this.app = app;
