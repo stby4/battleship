@@ -191,9 +191,4 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
     	}	
     }
     
-    public int shotOnShip() {
-    	int shotUser = 0;
-    	int shotComputer = 0;
-    	if ()
-    }
 }

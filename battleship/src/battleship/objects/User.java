@@ -6,7 +6,9 @@ package battleship.objects;
  * @author H. Kaestner
  */
 public class User implements java.io.Serializable {
-    private String uid = null;
+
+	private static final long serialVersionUID = 1L;
+	private String uid = null;
 	private String name = ""; // name must be unique, hence it can be used as primary key
 	private String password = "";
 	private int victories = 0;
@@ -86,5 +88,9 @@ public class User implements java.io.Serializable {
 
     public void addVictory() {
         this.victories++;
+    }
+    
+    public int getGamesNr() {
+    	return victories+defeats;
     }
 }

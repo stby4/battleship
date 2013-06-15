@@ -57,7 +57,7 @@ public class User extends BinaryFile {
      *
      * @return list of all saved users
      */
-    private List<battleship.objects.User> readAll() {
+    public List<battleship.objects.User> readAll() {
         ByteArrayInputStream byteIn;
         List<battleship.objects.User> userList = null;
         try {
