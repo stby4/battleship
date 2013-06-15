@@ -27,11 +27,11 @@ public class PicturePanel extends JPanel {
         this.x =x;
         this.y = y;
         //this.setPreferredSize(new Dimension(600, 337));
-        /*try {
+        try {
             image = ImageIO.read(new File("graphics/" +file));
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     protected void paintComponent(Graphics g) {

@@ -10,8 +10,6 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
@@ -30,8 +28,8 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
     JLabel label = new JLabel("Set Ship:");
     JLabel label2 = new JLabel();
     JLabel label3 = new JLabel();
-    JButton next = new JButton("Next");
-    JButton back = new JButton("Back");
+    JButton next = new JButton("NEXT");
+    JButton back = new JButton("BACK");
     JPanel positionPanel = new JPanel();
 
     public Position(Application app) {
@@ -105,7 +103,6 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == next) {
-            //wird angezeigt wenn alle Schiff gesetzt sind noch Bild vlt. mit Schüssen
             app.game();
         } else if (e.getSource() == back) {
             app.menu();
@@ -145,10 +142,12 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
                 myShip.setVisible(true);
                 myOcean.add(myShip);
             }
-
             ship = game.getNextUnsetShip();
             if (null != ship) {
                 showShipDetails(ship);
+            } else {
+            	//anzeigen eines Schiffs wo schisst bevor Spiel beginn
+            	next.setBounds(440, 325, 110, 25);
             }
         }
     }
