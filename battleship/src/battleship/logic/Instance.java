@@ -1,5 +1,7 @@
 package battleship.logic;
 
+import battleship.data.*;
+
 import java.io.IOException;
 
 /**
@@ -51,6 +53,9 @@ public class Instance {
      * @throws IOException
      */
     public void storeGame() throws IOException {
+        battleship.objects.User user = User.getInstance().getUser();
+        user.setLastGame(gameplay.getGid());
+        new battleship.data.User().store(user);
         new battleship.data.Game().store(gameplay);
     }
 

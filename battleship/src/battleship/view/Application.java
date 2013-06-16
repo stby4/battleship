@@ -2,6 +2,8 @@ package battleship.view;
 
 import battleship.logic.Instance;
 
+import java.io.IOException;
+
 /**
  * Application Battleship
  *
@@ -102,6 +104,11 @@ public class Application {
     }
 
     public void gameExit() {
+        try {
+            instance.storeGame();
+        } catch(IOException ioe) {
+            // TODO Tom make popup that informs user about error
+        }
         game.setVisible(false);
         menu.setVisible(true);
     }

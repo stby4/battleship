@@ -91,13 +91,13 @@ public class Game implements java.io.Serializable {
             field = fieldUser;
         }
 
-        ArrayList<Ship> ships = field.getShips();
-        for(Ship ship : ships) {
-            if(!ship.getSunk()) {
-                ships.remove(ship);
+        ArrayList<Ship> sunkShips = new ArrayList<Ship>();
+        for(Ship ship : field.getShips()) {
+            if(ship.getSunk()) {
+                sunkShips.add(ship);
             }
         }
-        return ships;
+        return sunkShips;
     }
 
     /**
