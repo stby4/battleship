@@ -1,5 +1,8 @@
 package battleship.view;
 
+import battleship.logic.Instance;
+import battleship.logic.User;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -102,6 +105,9 @@ public class Menu extends JFrame implements ActionListener {
         if (e.getSource() == game) {
             app.position();
         } else if (e.getSource() == loadGame) {
+            Instance instance = Instance.getInstance();
+            instance.loadGame(User.getInstance().getUser().getLastGame());
+            app.game();
             //app.loadgame if game exist (read from text file) �berspringen des Schiffe setzen
         } else if (e.getSource() == highscore) {
             app.highscore(); //show highscore all users + Difference between vicoties and defeats (read from other text file)

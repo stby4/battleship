@@ -152,9 +152,9 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
     public void drawSunkShips(Playerelements player) {
         Field ocean;
         if (Playerelements.USER == player) {
-            ocean = myOcean;
-        } else {
             ocean = enemyOcean;
+        } else {
+            ocean = myOcean;
         }
         ArrayList<battleship.objects.Ship> sunkShips = gameplay.getGame().getSunkShips(player);
         for (battleship.objects.Ship ship : sunkShips) {
@@ -182,12 +182,14 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
             case SHOT:
                 Shot shot = new Shot(myOcean.getGraphics(), x, y, Fieldelements.SHOT);
                 myOcean.add(shot);
-                shot.setVisible(true);
                 break;
             case HIT:
                 Shot hit = new Shot(myOcean.getGraphics(), x, y, Fieldelements.HIT);
                 myOcean.add(hit);
-                hit.setVisible(true);
+                opponentHits++;
+                break;
+            case SUNK:
+                drawSunkShips(Playerelements.COMPUTER);
                 opponentHits++;
                 break;
         }
@@ -206,18 +208,20 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
                 case SHOT:
                     Shot shot = new Shot(enemyOcean.getGraphics(), x, y, Fieldelements.SHOT);
                     enemyOcean.add(shot);
+                    userShots++;
                     break;
                 case HIT:
                     Shot hit = new Shot(enemyOcean.getGraphics(), x, y, Fieldelements.HIT);
                     enemyOcean.add(hit);
+                    userShots++;
                     userHits++;
                     break;
                 case SUNK:
                     drawSunkShips(Playerelements.COMPUTER);
+                    userShots++;
                     userHits++;
                     break;
             }
-            userShots++;
             // prepare the next shot
             progressGameplay();
         }
@@ -253,5 +257,4 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         opponentHitAnz.setText("" + opponentHits);
         opponentShotAnz.setText("" + opponentShots);
     }
-
 }
