@@ -54,7 +54,7 @@ public class Game implements java.io.Serializable {
         shipTypes.add(destroyer);
         Ship submarine = new Ship(3, "Submarine", "submarine2.png");
         shipTypes.add(submarine);
-        Ship frigate = new Ship(2, "Frigate", "frigate3.jpg");
+        Ship frigate = new Ship(2, "Frigate", "frigate.png");
         shipTypes.add(frigate);
 
         this.placeShipsComputer();
