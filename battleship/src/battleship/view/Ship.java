@@ -21,10 +21,14 @@ public class Ship extends JPanel {
             shipColor = new Color(225, 34, 41);
         }
 		this.ship = ship;
-        this.paintComponent(g);
+        this.paintShip(g);
 	}
 
-	public void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
+
+    }
+
+	public void paintShip(Graphics g) {
         //super.paintComponent(g);
 		int l = ship.getLength();
 		if (Directionelements.VERTICAL == ship.getDirection()) {

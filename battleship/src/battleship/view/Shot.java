@@ -22,14 +22,18 @@ public class Shot extends JPanel {
     private Fieldelements fieldelements;
 	
 	public Shot(Graphics g, int x, int y, Fieldelements fieldelements) {
-        super();
+        //super();
         this.x = x;
         this.y = y;
         this.fieldelements = fieldelements;
-        this.paintComponent(g);
+        this.paintShot(g);
 	}
 
-	public void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
+
+    }
+
+	public void paintShot(Graphics g) {
 		if (fieldelements == Fieldelements.HIT) {
 			g.setColor(hit);
 			g.fillRect(x*25+23, y*25+23, 20, 20); //mouseClicked
