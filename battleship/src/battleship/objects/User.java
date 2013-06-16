@@ -93,4 +93,8 @@ public class User implements java.io.Serializable {
     public int getGamesNr() {
     	return victories+defeats;
     }
+    
+    public int getDifference() {
+    	return victories-defeats;
+    }
 }
