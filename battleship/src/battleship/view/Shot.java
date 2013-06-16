@@ -15,8 +15,8 @@ import battleship.objects.Field.Fieldelements;
 public class Shot extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private static final Color hit = Color.RED;
-    private static final Color noHit = Color.BLUE;
+	private static final Color hit = new Color(228, 219, 16);
+    private static final Color noHit = new Color(26, 71, 190);
     private int x;
     private int y;
     private Fieldelements fieldelements;

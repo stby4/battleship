@@ -5,16 +5,21 @@ import java.awt.Graphics;
 
 import javax.swing.*;
 
+import battleship.objects.*;
+import battleship.objects.Field;
 import battleship.objects.Field.Directionelements;
 
 public class Ship extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private battleship.objects.Ship ship;
-    private static final Color shipColor = Color.ORANGE;
+    private Color shipColor = new Color(186, 237, 116);
 	
-	public Ship(battleship.objects.Ship ship, Graphics g) {
+	public Ship(battleship.objects.Ship ship, Graphics g, Field.Fieldelements status) {
         super();
+        if(Field.Fieldelements.SUNK == status) {
+            shipColor = new Color(225, 34, 41);
+        }
 		this.ship = ship;
         this.paintComponent(g);
 	}

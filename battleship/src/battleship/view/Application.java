@@ -98,7 +98,7 @@ public class Application {
     }
 
     public void game() {
-        game = new Game(this);
+        game = new Game(this, false);
         positionFinished.setVisible(false);
         game.setVisible(true);
     }
@@ -114,7 +114,8 @@ public class Application {
     }
 
     public void loadGame() {
-        //kommt noch überspringen des Schiffe setzen
+        game = new Game(this, true);
+        game.setVisible(true);
     }
 
     public void highscore() {

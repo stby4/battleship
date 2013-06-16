@@ -130,7 +130,7 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
                 ship.unset();
             } else {
                 //create Ships
-                battleship.view.Ship myShip = new battleship.view.Ship(ship, myOcean.getGraphics());
+                battleship.view.Ship myShip = new battleship.view.Ship(ship, myOcean.getGraphics(), battleship.objects.Field.Fieldelements.SHIP);
                 myShip.setVisible(true);
                 myOcean.add(myShip);
             }
