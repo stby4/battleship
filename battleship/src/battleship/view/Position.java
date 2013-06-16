@@ -107,6 +107,7 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
         picture.setBounds(350, 180, 200, 120);
         positionPanel.add(picture);
         positionPanel.setComponentZOrder(picture, 1);
+        picture.repaint();
     }
 
     @Override
