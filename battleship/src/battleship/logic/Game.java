@@ -24,6 +24,9 @@ public class Game implements java.io.Serializable {
     private Field fieldUser;
     private Field fieldComputer;
     private ArrayList<Ship> shipTypes;
+    private int lastShotComputerX;
+    private int lastShotComputerY;
+
 
     /* comments to hide this constructor from the code analyser
     public Game(int sizeX, int sizeY, ArrayList<Ship> ships) {
@@ -149,8 +152,8 @@ public class Game implements java.io.Serializable {
         int sizeY = this.fieldUser.getSizeY();
 
         // probability that a field contains a ship (not in percent, 1000 is best)
-        double[][] probability = new double[sizeX][sizeY];
-        double sumProbability = 0;
+        int[][] probability = new int[sizeX][sizeY];
+        int sumProbability = 0;
 
         for (int posX = 0; posX < sizeX; posX++) {
             for (int posY = 0; posY < sizeY; posY++) {
@@ -206,26 +209,29 @@ public class Game implements java.io.Serializable {
 
         // calculate sum of all points
         // TODO check if probability must be smaller numbers
-        for (int posX = 0; posX < sizeX; sizeX++) {
+        for (int posX = 0; posX < sizeX; posX++) {
             for (int posY = 0; posY < sizeY; posY++) {
                 sumProbability += probability[posX][posY];
             }
         }
 
         // random element
+        sumProbability = Math.abs(sumProbability);
+        sumProbability++;
         Random random = new Random();
-        sumProbability = random.nextInt((int) --sumProbability);
-        sumProbability++; // must at least be 1
+        sumProbability = random.nextInt(sumProbability);
         int posY = -1;
         int posX = -1;
         while (posY < sizeY - 1 && sumProbability >= 0) {
             posY++;
             posX = -1;
-            while (posX < sizeX && sumProbability >= 0) {
+            while (posX < sizeX - 1 && sumProbability >= 0) {
                 posX++;
                 sumProbability = sumProbability - probability[posX][posY];
             }
         }
+        lastShotComputerX = posX;
+        lastShotComputerY = posY;
         return fieldUser.shoot(posX, posY);
     }
 
@@ -250,5 +256,13 @@ public class Game implements java.io.Serializable {
         } else {
             return fieldComputer;
         }
+    }
+
+    public int getLastShotComputerX() {
+        return lastShotComputerX;
+    }
+
+    public int getLastShotComputerY() {
+        return lastShotComputerY;
     }
 }

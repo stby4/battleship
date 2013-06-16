@@ -74,12 +74,13 @@ public class Ship implements java.io.Serializable {
         return length;
     }
 
+    // TODO somehting is wrong here
     public Field.Fieldelements shoot(int posX, int posY) {
         int posXHelper = this.posX;
         int posYHelper = this.posY;
         for (int i = 0; i < this.length; i++) {
-            Field.Fieldelements statusHelper = this.shots.get(i);
             if (posXHelper == posX && posYHelper == posY) { // check that coordinates are actually part of the ship
+                Field.Fieldelements statusHelper = this.shots.get(i);
                 if (Field.Fieldelements.SUNK == statusHelper || Field.Fieldelements.HIT == statusHelper) { // "occupied"
                     return Field.Fieldelements.ERROR;
                 }

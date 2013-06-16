@@ -74,6 +74,18 @@ public class Gameplay implements java.io.Serializable {
         }
     }
 
+    public Field.Fieldelements shoot() {
+        Field.Fieldelements disaster = game.placeShotComputer();
+        switch (disaster) {
+            case HIT: break;
+            case SUNK: break;
+            case ERROR: break;
+            default:
+                currentPlayer = Game.Playerelements.USER;
+        }
+        return disaster;
+    }
+
     public Field.Fieldelements shoot(int x, int y) {
         Field.Fieldelements disaster = game.placeShotUser(x, y);
         switch(disaster) {
@@ -81,14 +93,7 @@ public class Gameplay implements java.io.Serializable {
             case SUNK: break;
             case ERROR: break;
             default:
-                switch (currentPlayer) {
-                    case COMPUTER:
-                        currentPlayer = Game.Playerelements.USER;
-                        break;
-                    case USER:
-                        currentPlayer = Game.Playerelements.COMPUTER;
-                        break;
-                }
+                currentPlayer = Game.Playerelements.COMPUTER;
         }
         return disaster;
     }
