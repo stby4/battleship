@@ -115,6 +115,7 @@ public class Application {
 
     public void loadGame() {
         game = new Game(this, true);
+        menu.setVisible(false);
         game.setVisible(true);
     }
 
