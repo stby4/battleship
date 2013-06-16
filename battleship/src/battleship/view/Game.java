@@ -8,8 +8,7 @@ import battleship.objects.Field.Fieldelements;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -37,7 +36,7 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
     private JLabel userShot = new JLabel("shots");
     private JLabel userHitAnz = new JLabel("0");
     private JLabel userHit = new JLabel("hit");
-    private JLabel opponentname = new JLabel("Opponent");
+    private JLabel opponentName = new JLabel("Opponent");
     private JLabel opponentShotAnz = new JLabel("0");
     private JLabel opponentShot = new JLabel("shots");
     private JLabel opponentHitAnz = new JLabel("0");
@@ -69,7 +68,7 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         userShot.setBounds(155, 25, 70, 25);
         userHitAnz.setBounds(140, 40, 70, 25);
         userHit.setBounds(155, 40, 110, 25);
-        opponentname.setBounds(420, 10, 110, 25);
+        opponentName.setBounds(420, 10, 110, 25);
         opponentShotAnz.setBounds(420, 25, 110, 25);
         opponentShot.setBounds(435, 25, 110, 25);
         opponentHitAnz.setBounds(420, 40, 110, 25);
@@ -79,7 +78,7 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         detailsPanel.add(userShot);
         detailsPanel.add(userHitAnz);
         detailsPanel.add(userHit);
-        detailsPanel.add(opponentname);
+        detailsPanel.add(opponentName);
         detailsPanel.add(opponentShotAnz);
         detailsPanel.add(opponentShot);
         detailsPanel.add(opponentHitAnz);
@@ -96,7 +95,6 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         myOcean = new Field();
         myOcean.setBounds(30, 78, 271, 271);
         myOcean.removeAll();
-        drawShipUser();
         gamePanel.add(myOcean);
 
         //create enemyOcean Field
@@ -119,6 +117,8 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
 
         getContentPane().add(gamePanel);
 
+        drawShipUser();
+
         actiongame();
     }
 
@@ -133,14 +133,20 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
             app.gameExit();
         }
     }
-    
+
     public void drawShipUser() {
-    	ArrayList<battleship.objects.Ship> userShips = gameplay.getGame().getField(Playerelements.USER).getShips();
-    	for (battleship.objects.Ship ship : userShips) {
-			Ship userShip = new Ship(ship, myOcean.getGraphics());
-			myOcean.add(userShip);
-			myOcean.setVisible(true);
-		}
+        ArrayList<battleship.objects.Ship> userShips = gameplay.getGame().getField(Playerelements.USER).getShips();
+        for (battleship.objects.Ship ship : userShips) {
+            try {
+                Ship userShip = new Ship(ship, myOcean.getGraphics());
+                myOcean.add(userShip);
+                myOcean.setVisible(true);
+            } catch (NullPointerException ignore) {
+                myOcean.setVisible(true);
+                gamePanel.setVisible(true);
+                this.setVisible(true);
+            }
+        }
     }
 
     public void drawSunkShips(Playerelements player) {
@@ -163,8 +169,7 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
 
         try {
             Thread.sleep(1000);
-        }
-        catch(InterruptedException ignore) {
+        } catch (InterruptedException ignore) {
         }
 
         Fieldelements lastShot;
@@ -195,14 +200,12 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
     @Override
     public void fieldClicked(int x, int y) {
         if (gameplay.getCurrentPlayer() == Playerelements.USER) {
-        //if (true) {
             System.out.println("X: " + x + " Y: " + y);
             Fieldelements disaster = gameplay.shoot(x, y);
             switch (disaster) {
                 case SHOT:
                     Shot shot = new Shot(enemyOcean.getGraphics(), x, y, Fieldelements.SHOT);
                     enemyOcean.add(shot);
-                    shot.setVisible(true);
                     break;
                 case HIT:
                     Shot hit = new Shot(enemyOcean.getGraphics(), x, y, Fieldelements.HIT);
@@ -214,11 +217,10 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
                     userHits++;
                     break;
             }
+            userShots++;
+            // prepare the next shot
+            progressGameplay();
         }
-        userShots++;
-
-        // prepare the next shot
-        progressGameplay();
     }
 
     private void progressGameplay() {
@@ -228,7 +230,7 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
             gameplay.getUser().addDefeat();
             // TODO Tom show "You lose" message
             app.menu();
-        } else if(Playerelements.USER == winner) {
+        } else if (Playerelements.USER == winner) {
             gameplay.getUser().addDefeat();
             // TODO Tom show "You win" message
             app.menu();
@@ -244,12 +246,12 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
             shootComputer();
         }
     }
-    
+
     private void updateStatistics() {
-        userHitAnz.setText(""+userHits);
-        userShotAnz.setText(""+userShots);
-        opponentHitAnz.setText(""+opponentHits);
-        opponentShotAnz.setText(""+opponentShots);
+        userHitAnz.setText("" + userHits);
+        userShotAnz.setText("" + userShots);
+        opponentHitAnz.setText("" + opponentHits);
+        opponentShotAnz.setText("" + opponentShots);
     }
-    
+
 }
