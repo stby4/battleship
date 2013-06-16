@@ -228,11 +228,15 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         Playerelements winner = gameplay.getGame().getWinner();
         if (Playerelements.COMPUTER == winner) {
             gameplay.getUser().addDefeat();
-            // TODO Tom show "You lose" message
+            JPanel panel = new JPanel();
+            Object[] options = {"OK"};
+            JOptionPane.showOptionDialog(panel, "You lose", "Message", JOptionPane.PLAIN_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
             app.menu();
         } else if (Playerelements.USER == winner) {
-            gameplay.getUser().addDefeat();
-            // TODO Tom show "You win" message
+            gameplay.getUser().addVictory();
+            JPanel panel = new JPanel();
+            Object[] options = {"OK"};
+            JOptionPane.showOptionDialog(panel, "You win", "Message", JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
             app.menu();
         }
 
