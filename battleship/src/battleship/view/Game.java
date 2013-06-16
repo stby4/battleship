@@ -240,7 +240,7 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
             gameplay.getUser().addVictory();
             JPanel panel = new JPanel();
             Object[] options = {"OK"};
-            JOptionPane.showOptionDialog(panel, "You win", "Message", JOptionPane.PLAIN_MESSAGE, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            JOptionPane.showOptionDialog(panel, "You win", "Message", JOptionPane.PLAIN_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
             app.menu();
         }
 
