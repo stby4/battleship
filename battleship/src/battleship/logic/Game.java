@@ -4,7 +4,6 @@ import battleship.objects.Ship;
 import battleship.objects.Field;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -14,16 +13,19 @@ import java.util.Random;
  */
 public class Game implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public static enum Playerelements {
+    public static enum Playerelements {
         USER,
         COMPUTER,
         ERROR
     }
+
     private Field fieldUser;
     private Field fieldComputer;
     private ArrayList<Ship> shipTypes;
+    private ArrayList<Ship> shipsUserHelper;
+    private ArrayList<Ship> shipsComputerHelper;
     private int lastShotComputerX;
     private int lastShotComputerY;
 
@@ -57,10 +59,18 @@ public class Game implements java.io.Serializable {
         Ship frigate = new Ship(2, "Frigate", "frigate.png");
         shipTypes.add(frigate);
 
+        this.shipsComputerHelper = clone(shipTypes);
+        this.shipsUserHelper = clone(shipTypes);
+
         this.placeShipsComputer();
-        for(Ship ship : shipTypes) {
-            ship.unset();
+    }
+
+    private ArrayList<Ship> clone(ArrayList<Ship> original) {
+        ArrayList<Ship> clone = new ArrayList<Ship>(original.size());
+        for (Ship ship : original) {
+            clone.add(ship.clone());
         }
+        return clone;
     }
 
     /**
@@ -69,8 +79,8 @@ public class Game implements java.io.Serializable {
      * @return first unset Ship, or null if all ships are set
      */
     public Ship getNextUnsetShip() {
-        for (Ship ship :shipTypes) {
-            if(!ship.isSet()) {
+        for (Ship ship : shipsUserHelper) {
+            if (!ship.isSet()) {
                 return ship;
             }
         }
@@ -85,15 +95,15 @@ public class Game implements java.io.Serializable {
      */
     public ArrayList<Ship> getSunkShips(Playerelements player) {
         Field field;
-        if(Playerelements.COMPUTER == player) {
+        if (Playerelements.COMPUTER == player) {
             field = fieldComputer;
         } else {
             field = fieldUser;
         }
 
         ArrayList<Ship> sunkShips = new ArrayList<Ship>();
-        for(Ship ship : field.getShips()) {
-            if(ship.getSunk()) {
+        for (Ship ship : field.getShips()) {
+            if (ship.getSunk()) {
                 sunkShips.add(ship);
             }
         }
@@ -125,18 +135,22 @@ public class Game implements java.io.Serializable {
      * Automatically places all ships on the computers field.
      */
     private void placeShipsComputer() {
-        List<Ship> computerShips = this.shipTypes;
         Random random = new Random();
         int sizeX = this.fieldComputer.getSizeX();
         int sizeY = this.fieldComputer.getSizeY();
 
-        for (Ship ship : computerShips) {
+        boolean isSet;
+        for (Ship ship : shipsComputerHelper) {
             do {
                 int posX = random.nextInt(sizeX + 1);
                 int posY = random.nextInt(sizeY + 1);
                 int pick = random.nextInt(Field.Directionelements.values().length);
                 ship.setPosition(posX, posY, Field.Directionelements.values()[pick]);
-            } while (!fieldComputer.addShip(ship));
+                isSet = fieldComputer.addShip(ship);
+                if (!isSet) {
+                    ship.unset();
+                }
+            } while (!isSet);
         }
     }
 
@@ -251,7 +265,7 @@ public class Game implements java.io.Serializable {
     }
 
     public Field getField(Playerelements player) {
-        if(Playerelements.USER == player) {
+        if (Playerelements.USER == player) {
             return fieldUser;
         } else {
             return fieldComputer;

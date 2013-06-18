@@ -126,6 +126,8 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         if (rebuild) {
             rebuildShots();
         }
+
+        progressGameplay();
     }
 
     public void actiongame() {
@@ -165,7 +167,17 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
                         case HIT:
                             Shot hit = new Shot(ocean.getGraphics(), x, y, Fieldelements.HIT);
                             ocean.add(hit);
+                            if(0 == i) {
+                                opponentHits++;
+                            } else {
+                                userHits++;
+                            }
                             break;
+                    }
+                    if(0 == i) {
+                        opponentShots++;
+                    } else {
+                        userShots++;
                     }
                 }
             }

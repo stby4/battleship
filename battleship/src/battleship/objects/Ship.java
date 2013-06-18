@@ -7,11 +7,11 @@ import java.util.ArrayList;
  *
  * @author H. Kaestner
  */
-public class Ship implements java.io.Serializable {
+public class Ship implements java.io.Serializable, Cloneable {
     private boolean isset = false;
     private int length = 2;
-    private int posX = 0; // start longitude
-    private int posY = 0; // start latitude
+    private int posX = -1; // start longitude
+    private int posY = -1; // start latitude
     private Field.Directionelements direction = Field.Directionelements.HORIZONTAL;
     private boolean sunk = false;
     private String name = "";
@@ -42,6 +42,8 @@ public class Ship implements java.io.Serializable {
     }
 
     public void unset() {
+        this.posX = -1;
+        this.posY = -1;
         this.isset = false;
     }
 
@@ -113,5 +115,13 @@ public class Ship implements java.io.Serializable {
             }
         }
         return Field.Fieldelements.ERROR; // just in case
+    }
+
+    public Ship clone() {
+        try {
+            return (Ship) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new InternalError();
+        }
     }
 }
