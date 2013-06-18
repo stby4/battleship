@@ -37,43 +37,10 @@ public class Gameplay implements java.io.Serializable {
     }
 
     /**
-     * @deprecated does not allow for GUI to connect
-     * @return winner
+     * Place a shot by the computer on the users field.
+     *
+     * @return new status of the field
      */
-    public Game.Playerelements startGame() {
-        Game.Playerelements winner = game.getWinner();
-        do {
-            shootout();
-        } while(Game.Playerelements.ERROR == winner);
-        if(Game.Playerelements.USER == winner) {
-            user.addVictory();
-        } else {
-            user.addDefeat();
-        }
-        return winner;
-    }
-
-    /**
-     * @deprecated probably not required any more
-     */
-    void shootout() {
-        switch (currentPlayer) {
-            case COMPUTER:
-                do {
-                    // nothing
-                } while(Field.Fieldelements.SHOT != game.placeShotComputer());
-                currentPlayer = Game.Playerelements.USER;
-                break;
-            case USER:
-                do {
-                    // nothing, so far
-                    // TODO let user shoot: GUI connection (see getCurrentPlayer())
-                } while(Field.Fieldelements.SHOT != game.placeShotUser(1, 1));
-                currentPlayer = Game.Playerelements.COMPUTER;
-                break;
-        }
-    }
-
     public Field.Fieldelements shoot() {
         Field.Fieldelements disaster = game.placeShotComputer();
         switch (disaster) {
@@ -87,7 +54,7 @@ public class Gameplay implements java.io.Serializable {
     }
 
     /**
-     * Playce a shot by the user on the computer field.
+     * Place a shot by the user on the computer field.
      *
      * @param x X value of the shot
      * @param y Y value of the shot

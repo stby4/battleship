@@ -114,6 +114,12 @@ public class User implements java.io.Serializable {
      */
     public void addDefeat() {
         this.defeats++;
+        battleship.data.User dUser = new battleship.data.User();
+        try {
+        dUser.store(this);
+        } catch (Exception ignore) {
+
+        }
     }
 
     /**
@@ -130,6 +136,12 @@ public class User implements java.io.Serializable {
      */
     public void addVictory() {
         this.victories++;
+        battleship.data.User dUser = new battleship.data.User();
+        try {
+            dUser.store(this);
+        } catch (Exception ignore) {
+
+        }
     }
 
     /**
