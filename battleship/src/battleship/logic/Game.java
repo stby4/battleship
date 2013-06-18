@@ -96,9 +96,9 @@ public class Game implements java.io.Serializable {
     public ArrayList<Ship> getSunkShips(Playerelements player) {
         Field field;
         if (Playerelements.COMPUTER == player) {
-            field = fieldComputer;
-        } else {
             field = fieldUser;
+        } else {
+            field = fieldComputer;
         }
 
         ArrayList<Ship> sunkShips = new ArrayList<Ship>();

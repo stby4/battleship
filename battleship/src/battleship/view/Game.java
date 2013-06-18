@@ -196,7 +196,6 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
             } catch (NullPointerException ignore) {
                 myOcean.setVisible(true);
                 gamePanel.setVisible(true);
-                this.setVisible(true);
             }
         }
     }
@@ -211,7 +210,6 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         ArrayList<battleship.objects.Ship> sunkShips = gameplay.getGame().getSunkShips(player);
         for (battleship.objects.Ship ship : sunkShips) {
             Ship sunkShip = new Ship(ship, ocean.getGraphics(), Fieldelements.SUNK);
-            sunkShip.setVisible(true);
             ocean.add(sunkShip);
         }
     }
@@ -269,6 +267,9 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
                     drawSunkShips(Playerelements.USER);
                     userHits++;
                     break;
+                case ERROR:
+                    userShots--;
+                    break;
             }
             userShots++;
             // prepare the next shot
@@ -300,7 +301,9 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         // prepare the next round
         if (gameplay.getCurrentPlayer() == Playerelements.USER) {
             detailsPanel.setBackground(detailsPanelGreen);
+            enemyOcean.register(this);
         } else {
+            enemyOcean.unregisterAll();
             detailsPanel.setBackground(detailsPanelRed);
             shootComputer();
         }

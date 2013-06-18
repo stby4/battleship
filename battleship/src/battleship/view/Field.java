@@ -52,6 +52,10 @@ public class Field extends JPanel implements ActionListener, MouseListener {
         this.observer = observer;
     }
 
+    public void unregisterAll() {
+        this.observer = null;
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
