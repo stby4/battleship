@@ -31,8 +31,6 @@ public class Application {
     private void init() {
         login = new Login(this);
         register = new Register(this);
-        //file = new BinaryFile();
-        //file.createFile(); TODO use appropriate way to save data (see UML)
     }
 
     private void start() {
