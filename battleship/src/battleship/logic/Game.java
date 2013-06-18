@@ -222,7 +222,6 @@ public class Game implements java.io.Serializable {
         }
 
         // calculate sum of all points
-        // TODO check if probability must be smaller numbers
         for (int posX = 0; posX < sizeX; posX++) {
             for (int posY = 0; posY < sizeY; posY++) {
                 sumProbability += probability[posX][posY];

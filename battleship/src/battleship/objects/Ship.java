@@ -18,6 +18,13 @@ public class Ship implements java.io.Serializable, Cloneable {
     private String image = "";
     private ArrayList<Field.Fieldelements> shots = new ArrayList<Field.Fieldelements>();
 
+    /**
+     * Create a new ship.
+     *
+     * @param length ship length (field units)
+     * @param name a descriptive name
+     * @param image image file with a picture of this ship
+     */
     public Ship(int length, String name, String image) {
         this.length = length;
         this.name = name;
@@ -29,6 +36,13 @@ public class Ship implements java.io.Serializable, Cloneable {
         }
     }
 
+    /**
+     * Set the ships position
+     *
+     * @param posX X value
+     * @param posY Y value
+     * @param direction direction (vertical or horizontal)
+     */
     public void setPosition(int posX, int posY, Field.Directionelements direction) {
         this.posX = posX;
         this.posY = posY;
@@ -36,47 +50,96 @@ public class Ship implements java.io.Serializable, Cloneable {
         this.isset = true;
     }
 
+    /**
+     * Check if this ship has already been positioned.
+     *
+     * @return true if positioned, false if not
+     */
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean isSet() {
         return isset;
     }
 
+    /**
+     * Delete the previously set position.
+     */
     public void unset() {
         this.posX = -1;
         this.posY = -1;
         this.isset = false;
     }
 
+    /**
+     * Check if this ship is still floating.
+     *
+     * @return true if sunk, false if not
+     */
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean getSunk() {
         return sunk;
     }
 
+    /**
+     * Get the ships name.
+     *
+     * @return ship name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Get the ships image.
+     *
+     * @return ship image (filename)
+     */
     public String getImage() {
         return image;
     }
 
+    /**
+     * get the ships position, X value
+     *
+     * @return positions X value
+     */
     public int getPosX() {
         return posX;
     }
 
+    /**
+     * get the ships position, Y value
+     *
+     * @return positions Y value
+     */
     public int getPosY() {
         return posY;
     }
 
+    /**
+     * get the ships direction (vertical or horizontal)
+     *
+     * @return ship direction
+     */
     public Field.Directionelements getDirection() {
         return direction;
     }
 
+    /**
+     * Get the ships length.
+     *
+     * @return ship length
+     */
     public int getLength() {
         return length;
     }
 
-    // TODO somehting is wrong here
+    /**
+     * Check if this ship is hit by a shot and update the ship status.
+     *
+     * @param posX shots X value
+     * @param posY shots Y value
+     * @return Error when the ship is not hit or all fields have already been shot at, the new field status if not
+     */
     public Field.Fieldelements shoot(int posX, int posY) {
         int posXHelper = this.posX;
         int posYHelper = this.posY;
@@ -117,6 +180,11 @@ public class Ship implements java.io.Serializable, Cloneable {
         return Field.Fieldelements.ERROR; // just in case
     }
 
+    /**
+     * Clone the ship object.
+     *
+     * @return cloned ship
+     */
     public Ship clone() {
         try {
             return (Ship) super.clone();
