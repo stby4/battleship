@@ -3,16 +3,22 @@ package battleship.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
+import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.text.Document;
 
+import battleship.logic.PdfGenerator;
 import battleship.objects.User;
 
 /**
@@ -101,7 +107,13 @@ public class Highscore extends JFrame implements ActionListener {
 		if (e.getSource() == back) {
 			app.menu();
 		} else if (e.getSource() == print) {
-			//create pdf
+			PdfGenerator generator = new PdfGenerator();
+			Document document = new Document(PageSize.A4, 50, 50, 50, 50);
+			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("BattleshipHighscore.pdf") );
+			document.open();
+			List<User> userList = new battleship.data.User().readAll();
+			document = generator.createPDFDocument(userList, document);
+			document.close();
 		}
 	}
 	

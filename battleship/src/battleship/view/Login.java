@@ -93,7 +93,6 @@ public class Login extends JFrame implements ActionListener {
             } catch (IncompleteDataException ide) {
                 JOptionPane.showMessageDialog(null, ide.getMessage());
             } catch (WrongCredentialsException wce) {
-                // JOptionPane.showMessageDialog(null, "Benutzername oder Passwort falsch");
                 JOptionPane.showMessageDialog(null, wce.getMessage());
             } finally {
                 emptyFields();
