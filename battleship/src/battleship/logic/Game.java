@@ -264,6 +264,12 @@ public class Game implements java.io.Serializable {
         return Playerelements.ERROR;
     }
 
+    /**
+     * Returns the user or computer field.
+     *
+     * @param player The owner of the field.
+     * @return the owners field
+     */
     public Field getField(Playerelements player) {
         if (Playerelements.USER == player) {
             return fieldUser;
@@ -272,10 +278,20 @@ public class Game implements java.io.Serializable {
         }
     }
 
+    /**
+     * Get the X position of the computers last shot.
+     *
+     * @return x position of last shot
+     */
     public int getLastShotComputerX() {
         return lastShotComputerX;
     }
 
+    /**
+     * Get the Y position of the computers last shot.
+     *
+     * @return y position of last shot
+     */
     public int getLastShotComputerY() {
         return lastShotComputerY;
     }

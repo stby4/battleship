@@ -3,7 +3,7 @@ package battleship.objects;
 /**
  * User class
  *
- * @author H. Kaestner
+ * @author Hinrich Kaestner, Tom Ohme
  */
 public class User implements java.io.Serializable {
 
@@ -16,9 +16,11 @@ public class User implements java.io.Serializable {
     private String lastGame = null;
 
     /**
+     * Create a new user object.
      *
-     * @param name
-     * @param password
+     * @param uid user ID
+     * @param name user name
+     * @param password user password
      */
 	public User(String uid, String name, String password) {
         this.setUid(uid);
@@ -26,74 +28,124 @@ public class User implements java.io.Serializable {
 		this.setPassword(password);
 	}
 
+    /**
+     * Get the user ID.
+     *
+     * @return user ID
+     */
     public String getUid() {
         return uid;
     }
 
+    /**
+     * Set the user ID
+     *
+     * @param uid user ID
+     */
     void setUid(String uid) {
         this.uid = uid;
     }
 
     /**
+     * Set the user name.
      *
-     * @param name
+     * @param name user name
      */
     void setName(String name) {
 		this.name = name;
 	}
 
     /**
+     * Get the user name.
      *
-     * @return
+     * @return user name
      */
     public String getName() {
         return this.name;
     }
-	
-	/*
-	 * @param String password
-	 * @return boolean password successful set
-	 */
+
+    /**
+     * Set the password.
+     *
+     * @param password password
+     */
     void setPassword(String password) {
 		this.password = password;
 	}
 
     /**
+     * Get the password.
      *
-     * @return
+     * @return password
      */
     public String getPassword() {
         return this.password;
     }
 
+    /**
+     * Get the last name.
+     *
+     * @return last name
+     */
     public String getLastGame() {
         return lastGame;
     }
 
+    /**
+     * Set the last name.
+     *
+     * @param lastGame last name
+     */
     public void setLastGame(String lastGame) {
         this.lastGame = lastGame;
     }
 
+    /**
+     * Get defeat count.
+     *
+     * @return defeats
+     */
     public int getDefeats() {
         return defeats;
     }
 
+    /**
+     * Increase defeat count by 1.
+     */
     public void addDefeat() {
         this.defeats++;
     }
 
+    /**
+     * Get victory count.
+     *
+     * @return victories
+     */
     public int getVictories() {
         return victories;
     }
 
+    /**
+     * Increase victory count by 1.
+     */
     public void addVictory() {
         this.victories++;
     }
-    
+
+    /**
+     * Count all played games.
+     *
+     * @return game count
+     */
     public int getGamesNr() {
     	return victories+defeats;
     }
-    
+
+    /**
+     * Get the difference between victories and defeats.
+     *
+     * @return difference between victories and defeats
+     */
     public int getDifference() {
     	return victories-defeats;
     }

@@ -3,9 +3,9 @@ package battleship.objects;
 import java.util.ArrayList;
 
 /**
- * Ship
+ * Ship object
  *
- * @author H. Kaestner
+ * @author Hinrich Kaestner, Tom Ohme
  */
 public class Ship implements java.io.Serializable, Cloneable {
     private boolean isset = false;

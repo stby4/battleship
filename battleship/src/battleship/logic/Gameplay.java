@@ -86,6 +86,13 @@ public class Gameplay implements java.io.Serializable {
         return disaster;
     }
 
+    /**
+     * Playce a shot by the user on the computer field.
+     *
+     * @param x X value of the shot
+     * @param y Y value of the shot
+     * @return new status of the field
+     */
     public Field.Fieldelements shoot(int x, int y) {
         Field.Fieldelements disaster = game.placeShotUser(x, y);
         switch(disaster) {

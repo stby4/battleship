@@ -7,9 +7,9 @@ import java.util.List;
 
 
 /**
- * Field
+ * Field, handels placement of ships and shots
  *
- * @author H. Kaestner
+ * @author Hinrich Kaestner, Tom Ohme
  */
 public class Field implements java.io.Serializable {
 
@@ -35,6 +35,12 @@ public class Field implements java.io.Serializable {
 
     private ArrayList<Ship> ships = new ArrayList<Ship>();
 
+    /**
+     * Create a new field with a custom size.
+     *
+     * @param sizeX field width
+     * @param sizeY field height
+     */
     @SuppressWarnings("SameParameterValue")
     public Field(int sizeX, int sizeY) {
         this.sizeX = sizeX;
@@ -48,15 +54,26 @@ public class Field implements java.io.Serializable {
         }
     }
 
+    /**
+     * Returns the field width.
+     *
+     * @return field width
+     */
     public int getSizeX() {
         return sizeX;
     }
 
+    /**
+     * Returns the field height
+     *
+     * @return field height
+     */
     public int getSizeY() {
         return sizeY;
     }
 
     /**
+     * Checks if all ships on this field are sunk.
      *
      * @return boolean true if all ships are sunk, false if not
      */
@@ -69,6 +86,13 @@ public class Field implements java.io.Serializable {
         return true;
     }
 
+    /**
+     * Get the status of a specific field.
+     *
+     * @param posX field X value
+     * @param posY field Y value
+     * @return field status
+     */
     public Fieldelements getFieldStatus(int posX, int posY) {
         if (posX < 0 || posX >= this.sizeX || posY < 0 || posY >= this.sizeY) {
             return Fieldelements.ERROR;
@@ -76,6 +100,14 @@ public class Field implements java.io.Serializable {
         return this.field.get(posX).get(posY);
     }
 
+    /**
+     * Set a new status for a specific field.
+     *
+     * @param posX field X value
+     * @param posY field Y value
+     * @param status the new, desired status
+     * @return the new status (not necessarily the same as the desired status)
+     */
     Fieldelements setFieldStatus(int posX, int posY, Fieldelements status) {
         if (posX < 0 || posX >= this.sizeX || posY < 0 || posY >= this.sizeY) {
             return Fieldelements.ERROR;
@@ -111,6 +143,12 @@ public class Field implements java.io.Serializable {
         return this.getFieldStatus(posX, posY);
     }
 
+    /**
+     * Add a new ship to the field.
+     *
+     * @param ship the ship
+     * @return true if ship was successfully set, false if not
+     */
     public boolean addShip(Ship ship) {
         int shipPosX = ship.getPosX();
         int shipPosY = ship.getPosY();
@@ -181,6 +219,13 @@ public class Field implements java.io.Serializable {
         return false;
     }
 
+    /**
+     * Shoot on a specific field.
+     *
+     * @param posX X value of the shot
+     * @param posY Y value of the shot
+     * @return new status of the specific field
+     */
     public Fieldelements shoot(int posX, int posY) {
         switch (setFieldStatus(posX, posY, Fieldelements.SHOT)) {
             case HIT:
@@ -209,6 +254,11 @@ public class Field implements java.io.Serializable {
         }
     }
 
+    /**
+     * Get all ships on this field.
+     *
+     * @return all ships
+     */
     public ArrayList<Ship> getShips() {
         return ships;
     }
