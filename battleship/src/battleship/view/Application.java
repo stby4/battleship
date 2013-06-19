@@ -2,6 +2,7 @@ package battleship.view;
 
 import battleship.logic.Instance;
 
+import javax.swing.*;
 import java.io.IOException;
 
 /**
@@ -23,9 +24,13 @@ public class Application {
      * @param args
      */
     public static void main(String[] args) {
-        Application app = new Application();
-        app.init();
-        app.start();
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                Application app = new Application();
+                app.init();
+                app.start();
+            }
+        });
     }
 
     private void init() {

@@ -255,10 +255,10 @@ public class Game implements java.io.Serializable {
      */
     public Playerelements getWinner() {
         if (this.fieldComputer.getAllShipsSunk()) {
-            return Playerelements.COMPUTER;
+            return Playerelements.USER;
         }
         if (this.fieldUser.getAllShipsSunk()) {
-            return Playerelements.USER;
+            return Playerelements.COMPUTER;
         }
         return Playerelements.ERROR;
     }

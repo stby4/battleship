@@ -184,6 +184,7 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         }
         drawSunkShips(Playerelements.COMPUTER);
         drawSunkShips(Playerelements.USER);
+        updateStatistics();
     }
 
     public void drawShipUser() {

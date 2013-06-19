@@ -1,9 +1,9 @@
 package battleship.view;
 
 /**
- * Position Battleship
+ * Observer interface for mouse clicks on field
  *
- * @author Hinrich Kaestner
+ * @author Hinrich Kaestner, Tom Ohme
  */
 public interface IFieldObserver {
     void fieldClicked(int x, int y);
