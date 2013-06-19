@@ -160,28 +160,25 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
                 for (int y = 0; y < field.getSizeY(); y++) {
                     switch (field.getFieldStatus(x, y)) {
                         case SHOT:
-                            //Shot shot = new Shot(ocean.getGraphics(), x, y, Fieldelements.SHOT);
-                            //ocean.add(shot);
-                            ocean.repaint();
+                            if (0 == i) {
+                                opponentShots++;
+                            } else {
+                                userShots++;
+                            }
                             break;
                         case HIT:
-                            //Shot hit = new Shot(ocean.getGraphics(), x, y, Fieldelements.HIT);
-                            //ocean.add(hit);
-                            ocean.repaint();
-                            if(0 == i) {
+                            if (0 == i) {
                                 opponentHits++;
+                                opponentShots++;
                             } else {
                                 userHits++;
+                                userShots++;
                             }
                             break;
                     }
-                    if(0 == i) {
-                        opponentShots++;
-                    } else {
-                        userShots++;
-                    }
                 }
             }
+            ocean.repaint();
         }
         //drawSunkShips(Playerelements.COMPUTER);
         //drawSunkShips(Playerelements.USER);

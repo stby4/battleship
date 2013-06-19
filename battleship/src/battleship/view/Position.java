@@ -102,10 +102,8 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
     }
 
     private void showShipDetails(Ship ship) {
-        /*
         label2.setText(ship.getName());
         label3.setText(ship.getLength() + " fields");
-        */
         JPanel picture = new PicturePanel(ship.getImage(), 200, 120);
         picture.setBounds(350, 180, 200, 120);
         positionPanel.add(picture);
