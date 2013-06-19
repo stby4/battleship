@@ -1,7 +1,7 @@
 package battleship.view;
 
-import battleship.logic.Gameplay;
-import battleship.logic.Instance;
+import battleship.logic.*;
+import battleship.logic.Game;
 import battleship.objects.Ship;
 
 import java.awt.Color;
@@ -64,7 +64,8 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
         back.setFocusable(false);
 
         //create Field
-        myOcean = new Field();
+        myOcean = new Field(gameplay.getGame().getField(Game.Playerelements.USER));
+        myOcean.setShowAllShips(true);
         myOcean.register(this);
         myOcean.setBounds(30, 28, 271, 271);
         positionPanel.add(myOcean);
@@ -132,9 +133,9 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
                 ship.unset();
             } else {
                 //create Ships
-                battleship.view.Ship myShip = new battleship.view.Ship(ship, myOcean.getGraphics(), battleship.objects.Field.Fieldelements.SHIP);
-                myShip.setVisible(true);
-                myOcean.add(myShip);
+                //battleship.view.Ship myShip = new battleship.view.Ship(ship, myOcean.getGraphics(), battleship.objects.Field.Fieldelements.SHIP);
+                //myShip.setVisible(true);
+                //myOcean.add(myShip);
             }
             ship = game.getNextUnsetShip();
             if (null != ship) {
@@ -142,7 +143,7 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
             } else {
                 app.positionFinished();
             }
-
+            myOcean.repaint();
         }
     }
 }

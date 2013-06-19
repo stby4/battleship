@@ -94,13 +94,14 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         exit.setFocusable(false);
 
         //create myOcean Field
-        myOcean = new Field();
+        myOcean = new Field(gameplay.getGame().getField(Playerelements.USER));
+        myOcean.setShowAllShips(true);
         myOcean.setBounds(30, 78, 271, 271);
         myOcean.removeAll();
         gamePanel.add(myOcean);
 
         //create enemyOcean Field
-        enemyOcean = new Field();
+        enemyOcean = new Field(gameplay.getGame().getField(Playerelements.COMPUTER));
         enemyOcean.setBounds(325, 78, 271, 271);
         enemyOcean.register(this);
         gamePanel.add(enemyOcean);
@@ -119,9 +120,7 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
 
         getContentPane().add(gamePanel);
 
-        drawShipUser();
-
-        actiongame();
+        actionGame();
 
         if (rebuild) {
             rebuildShots();
@@ -130,7 +129,7 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         progressGameplay();
     }
 
-    public void actiongame() {
+    public void actionGame() {
         exit.addActionListener(this);
     }
 
@@ -161,12 +160,14 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
                 for (int y = 0; y < field.getSizeY(); y++) {
                     switch (field.getFieldStatus(x, y)) {
                         case SHOT:
-                            Shot shot = new Shot(ocean.getGraphics(), x, y, Fieldelements.SHOT);
-                            ocean.add(shot);
+                            //Shot shot = new Shot(ocean.getGraphics(), x, y, Fieldelements.SHOT);
+                            //ocean.add(shot);
+                            ocean.repaint();
                             break;
                         case HIT:
-                            Shot hit = new Shot(ocean.getGraphics(), x, y, Fieldelements.HIT);
-                            ocean.add(hit);
+                            //Shot hit = new Shot(ocean.getGraphics(), x, y, Fieldelements.HIT);
+                            //ocean.add(hit);
+                            ocean.repaint();
                             if(0 == i) {
                                 opponentHits++;
                             } else {
@@ -182,47 +183,19 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
                 }
             }
         }
-        drawSunkShips(Playerelements.COMPUTER);
-        drawSunkShips(Playerelements.USER);
+        //drawSunkShips(Playerelements.COMPUTER);
+        //drawSunkShips(Playerelements.USER);
         updateStatistics();
-    }
-
-    public void drawShipUser() {
-        ArrayList<battleship.objects.Ship> userShips = gameplay.getGame().getField(Playerelements.USER).getShips();
-        for (battleship.objects.Ship ship : userShips) {
-            try {
-                Ship userShip = new Ship(ship, myOcean.getGraphics(), Fieldelements.SHIP);
-                myOcean.add(userShip);
-                myOcean.setVisible(true);
-            } catch (NullPointerException ignore) {
-                myOcean.setVisible(true);
-                gamePanel.setVisible(true);
-            }
-        }
-    }
-
-    public void drawSunkShips(Playerelements player) {
-        Field ocean;
-        if (Playerelements.USER == player) {
-            ocean = enemyOcean;
-        } else {
-            ocean = myOcean;
-        }
-        ArrayList<battleship.objects.Ship> sunkShips = gameplay.getGame().getSunkShips(player);
-        for (battleship.objects.Ship ship : sunkShips) {
-            Ship sunkShip = new Ship(ship, ocean.getGraphics(), Fieldelements.SUNK);
-            ocean.add(sunkShip);
-        }
     }
 
     private void shootComputer() {
         detailsPanel.setBackground(Color.RED);
-
+/*
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ignore) {
         }
-
+*/
         Fieldelements lastShot;
         battleship.logic.Game game = gameplay.getGame();
 
@@ -231,19 +204,20 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         int y = game.getLastShotComputerY();
         switch (lastShot) {
             case SHOT:
-                Shot shot = new Shot(myOcean.getGraphics(), x, y, Fieldelements.SHOT);
-                myOcean.add(shot);
+                //Shot shot = new Shot(myOcean.getGraphics(), x, y, Fieldelements.SHOT);
+                //myOcean.add(shot);
                 break;
             case HIT:
-                Shot hit = new Shot(myOcean.getGraphics(), x, y, Fieldelements.HIT);
-                myOcean.add(hit);
+                //Shot hit = new Shot(myOcean.getGraphics(), x, y, Fieldelements.HIT);
+                //myOcean.add(hit);
                 opponentHits++;
                 break;
             case SUNK:
-                drawSunkShips(Playerelements.COMPUTER);
+                //drawSunkShips(Playerelements.COMPUTER);
                 opponentHits++;
                 break;
         }
+        myOcean.repaint();
         opponentShots++;
 
         // prepare the next shot
@@ -256,22 +230,23 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
             Fieldelements disaster = gameplay.shoot(x, y);
             switch (disaster) {
                 case SHOT:
-                    Shot shot = new Shot(enemyOcean.getGraphics(), x, y, Fieldelements.SHOT);
-                    enemyOcean.add(shot);
+                    //Shot shot = new Shot(enemyOcean.getGraphics(), x, y, Fieldelements.SHOT);
+                    //enemyOcean.add(shot);
                     break;
                 case HIT:
-                    Shot hit = new Shot(enemyOcean.getGraphics(), x, y, Fieldelements.HIT);
-                    enemyOcean.add(hit);
+                    //Shot hit = new Shot(enemyOcean.getGraphics(), x, y, Fieldelements.HIT);
+                    //enemyOcean.add(hit);
                     userHits++;
                     break;
                 case SUNK:
-                    drawSunkShips(Playerelements.USER);
+                    //drawSunkShips(Playerelements.USER);
                     userHits++;
                     break;
                 case ERROR:
                     userShots--;
                     break;
             }
+            enemyOcean.repaint();
             userShots++;
             // prepare the next shot
             progressGameplay();

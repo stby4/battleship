@@ -1,6 +1,7 @@
 package battleship.view;
 
 import battleship.objects.*;
+import battleship.objects.Ship;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -19,12 +20,21 @@ public class Field extends JPanel implements ActionListener, MouseListener {
 
     private IFieldObserver observer;
     private static final long serialVersionUID = 1L;
+    private boolean showAllShips = false;
+    private battleship.objects.Field field;
+    private Color shipColor = new Color(186, 237, 116);
+    private Color shipSunkColor = new Color(225, 34, 41);
+    private static final Color hit = new Color(228, 219, 16);
+    private static final Color noHit = new Color(26, 71, 190);
 
-    public Field() {
+    public Field(battleship.objects.Field field) {
+        this.field = field;
         this.addMouseListener(this);
     }
 
     public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, 271, 271);
         g.setColor(Color.WHITE);
@@ -46,6 +56,53 @@ public class Field extends JPanel implements ActionListener, MouseListener {
             g.drawString(ch + " ", 5, 40 + 25 * i);
             ch++;
         }
+
+        // draw ships
+        for (Ship ship : field.getShips()) {
+            if (ship.getSunk() || showAllShips) {
+                paintShip(g, ship);
+            }
+        }
+
+        // draw shots
+        for (int x = 0; x < field.getSizeX(); x++) {
+            for (int y = 0; y < field.getSizeY(); y++) {
+                battleship.objects.Field.Fieldelements status = field.getFieldStatus(x, y);
+                if (status == battleship.objects.Field.Fieldelements.HIT) {
+                    paintHit(g, x, y);
+                } else if (status == battleship.objects.Field.Fieldelements.SHOT) {
+                    paintShot(g, x, y);
+                }
+            }
+        }
+    }
+
+    private void paintShot(Graphics g, int x, int y) {
+        g.setColor(noHit);
+        g.fillOval(x * 25 + 23, y * 25 + 23, 20, 20); //mouseClicked
+    }
+
+    private void paintHit(Graphics g, int x, int y) {
+        g.setColor(hit);
+        g.fillRect(x * 25 + 23, y * 25 + 23, 20, 20); //mouseClicked
+    }
+
+    private void paintShip(Graphics g, Ship ship) {
+        g.setColor(shipColor);
+        if (ship.getSunk()) {
+            g.setColor(shipSunkColor);
+        }
+        int l = ship.getLength();
+        if (battleship.objects.Field.Directionelements.VERTICAL == ship.getDirection()) {
+            g.fillRect(ship.getPosX() * 25 + 23, ship.getPosY() * 25 + 23, 20, 25 * l - 5);
+
+        } else {
+            g.fillRect(ship.getPosX() * 25 + 23, ship.getPosY() * 25 + 23, 25 * l - 5, 20);
+        }
+    }
+
+    public void setShowAllShips(boolean display) {
+        this.showAllShips = display;
     }
 
     public void register(IFieldObserver observer) {
