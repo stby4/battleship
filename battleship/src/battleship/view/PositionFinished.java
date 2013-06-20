@@ -1,17 +1,14 @@
 package battleship.view;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
-
 /**
- * PositionFinished Battleship
- * @author Tom Ohme
+ * positionFinished Panel
  *
+ * @author Hinrich Kaestner, Tom Ohme
  */
 public class PositionFinished extends JFrame implements ActionListener {
 
@@ -21,6 +18,11 @@ public class PositionFinished extends JFrame implements ActionListener {
     JButton next = new JButton("NEXT");
     JPanel positionFinishedPanel = new JPanel();
 
+    /**
+     * show a picture before the game starts
+     *
+     * @param app
+     */
     public PositionFinished(Application app) {
         this.app = app;
 
@@ -58,10 +60,18 @@ public class PositionFinished extends JFrame implements ActionListener {
         actionMenu();
     }
 
+    /**
+     * add ActionListener on next
+     */
     public void actionMenu() {
         next.addActionListener(this);
     }
 
+    /**
+     * next Button the user comes to the game
+     *
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == next) {

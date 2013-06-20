@@ -1,17 +1,15 @@
 package battleship.view;
 
-import java.awt.Graphics;
-import java.awt.Image;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
-
 /**
- * PicturePanel Battleship
- * @author Tom Ohme
+ * picture Panel
  *
+ * @author Hinrich Kaestner, Tom Ohme
  */
 public class PicturePanel extends JPanel {
 
@@ -20,8 +18,12 @@ public class PicturePanel extends JPanel {
     private int x;
     private int y;
 
-    /*
+    /**
      * Picture for GUI
+     *
+     * @param file
+     * @param x
+     * @param y
      */
     public PicturePanel(String file, int x, int y) {
         this.x =x;
@@ -34,6 +36,11 @@ public class PicturePanel extends JPanel {
         }
     }
 
+    /**
+     * print the Image to the right position
+     *
+     * @param g
+     */
     protected void paintComponent(Graphics g) {
         super.paintComponents(g);
         if (image != null) {

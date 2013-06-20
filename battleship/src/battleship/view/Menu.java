@@ -3,21 +3,15 @@ package battleship.view;
 import battleship.logic.Instance;
 import battleship.logic.User;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 /**
- * Menu Battleship
- * @author Tom Ohme
+ * menu Panel
  *
+ * @author Hinrich Kaestner, Tom Ohme
  */
 public class Menu extends JFrame implements ActionListener {
 
@@ -31,6 +25,11 @@ public class Menu extends JFrame implements ActionListener {
     JButton logout	= new JButton("LOGOUT");
     JPanel menuPanel = new JPanel();
 
+    /**
+     * menu panel with 4 Buttons
+     *
+     * @param app
+     */
     public Menu(Application app) {
         this.app = app;
 
@@ -93,6 +92,9 @@ public class Menu extends JFrame implements ActionListener {
         actionMenu();
     }
 
+    /**
+     * add ActionListener on game, loadGame, highscore and logout
+     */
     public void actionMenu() {
         game.addActionListener(this);
         loadGame.addActionListener(this);
@@ -100,6 +102,14 @@ public class Menu extends JFrame implements ActionListener {
         logout.addActionListener(this);
     }
 
+    /**
+     * game Button for start a new game
+     * loadGame Button for load a beginning game
+     * highscore Button show the 7 best users
+     * logout Button the user is logged out
+     *
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == game) {
@@ -109,7 +119,7 @@ public class Menu extends JFrame implements ActionListener {
             instance.loadGame(User.getInstance().getUser().getLastGame());
             app.loadGame();
         } else if (e.getSource() == highscore) {
-            app.highscore(); //show highscore all users + Difference between vicoties and defeats (read from other text file)
+            app.highscore();
         } else if (e.getSource() == logout) {
             app.login();
         }

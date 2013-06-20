@@ -1,29 +1,17 @@
 package battleship.view;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.FileOutputStream;
-import java.net.URL;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.text.Document;
-
 import battleship.objects.User;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
 /**
- * Highscore Battleship
- * @author Tom Ohme
- * 
+ * highscore Panel
+ *
+ * @author Hinrich Kaestner, Tom Ohme
  */
 public class Highscore extends JFrame implements ActionListener {
 
@@ -36,9 +24,13 @@ public class Highscore extends JFrame implements ActionListener {
 	JLabel showDefeats = new JLabel("Defeats");
 	JLabel showDifference = new JLabel("Difference");
 	JButton back = new JButton("BACK");
-	JButton print = new JButton("PRINT"); 
 	JPanel highscorePanel = new JPanel();
 
+    /**
+     * set the highscore Panel with the titel
+     *
+     * @param app
+     */
 	public Highscore(Application app) {
 		this.app = app;
 		
@@ -65,7 +57,6 @@ public class Highscore extends JFrame implements ActionListener {
 		showDefeats.setBounds(365, 30, 110, 25);
 		showDifference.setBounds(475, 30, 110, 25);
 		back.setBounds(50, 325, 110, 25);
-		print.setBounds(440, 325, 110, 25);
 		
 		showUsername.setForeground(Color.ORANGE);
 		showGames.setForeground(Color.ORANGE);
@@ -75,9 +66,6 @@ public class Highscore extends JFrame implements ActionListener {
 		back.setBackground(Color.BLACK);
 		back.setForeground(Color.WHITE);
 		back.setFocusable(false);
-		print.setBackground(Color.BLACK);
-		print.setForeground(Color.WHITE);
-		print.setFocusable(false);
 		
 		highscorePanel.add(showUsername);
 		highscorePanel.add(showGames);
@@ -85,7 +73,6 @@ public class Highscore extends JFrame implements ActionListener {
 		highscorePanel.add(showDefeats);
 		highscorePanel.add(showDifference);
 		highscorePanel.add(back);
-		highscorePanel.add(print);
 		
 		showUser();
 		
@@ -95,22 +82,30 @@ public class Highscore extends JFrame implements ActionListener {
 		
 		actionHighscore();
 	}
-	
+
+    /**
+     * add ActionListener on back and print
+     */
 	public void actionHighscore() {
 		back.addActionListener(this);
-		print.addActionListener(this);
 	}
-	
+
+    /**
+     * back Button it goes to the menu
+     *
+     * @param e
+     */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == back) {
 			app.menu();
-		} else if (e.getSource() == print) {
-		
-	
 		}
 	}
-	
+
+    /**
+     * show the best 7 username sort by there difference between victories and defeats
+     * and there number of games, victories, defeats and the difference between victories and defeats
+     */
 	public void showUser() {
 		List<User> userList = new battleship.data.User().readAll();
 		for (int i=0; i<userList.size()-1; i++) {
@@ -147,7 +142,7 @@ public class Highscore extends JFrame implements ActionListener {
 					highscorePanel.add(difference);
 					y=y+30;
 				} else {
-					JLabel empty = new JLabel("keine Einträge vorhanden");
+					JLabel empty = new JLabel("keine Eintrï¿½ge vorhanden");
 					empty.setFont(new Font("Arial", Font.BOLD, 16));
 					empty.setBounds(200, 175, 200, 25);
 					empty.setForeground(Color.WHITE);
@@ -159,6 +154,13 @@ public class Highscore extends JFrame implements ActionListener {
 		
 	}
 
+    /**
+     * sort the users by the difference between victories and defeats
+     *
+     * @param inUserLeft
+     * @param inUserRight
+     * @return
+     */
 	public int compare(User inUserLeft, User inUserRight) {
 		int difference = inUserLeft.getDifference() - inUserRight.getDifference();
 		if (difference == 0) {

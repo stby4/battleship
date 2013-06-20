@@ -1,22 +1,19 @@
 package battleship.view;
 
-import battleship.logic.*;
 import battleship.logic.Game;
+import battleship.logic.Gameplay;
+import battleship.logic.Instance;
 import battleship.objects.Ship;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Toolkit;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
-
 /**
- * Position Battleship
+ * position Panel
  *
- * @author Tom Ohme
+ * @author Hinrich Kaestner, Tom Ohme
  */
 public class Position extends JFrame implements ActionListener, IFieldObserver {
 
@@ -31,6 +28,11 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
     private JButton back = new JButton("BACK");
     private JPanel positionPanel = new JPanel();
 
+    /**
+     * show the Field for set the ships
+     *
+     * @param app
+     */
     public Position(Application app) {
         this.app = app;
         Instance instance = Instance.getInstance();
@@ -90,10 +92,18 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
         actionPosition();
     }
 
+    /**
+     * add ActionListener on back
+     */
     public void actionPosition() {
         back.addActionListener(this);
     }
 
+    /**
+     * back Button to get to the menu
+     *
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == back) {
@@ -101,6 +111,11 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
         }
     }
 
+    /**
+     * shows the current to be set ship, name and length
+     *
+     * @param ship
+     */
     private void showShipDetails(Ship ship) {
         label2.setText(ship.getName());
         label3.setText(ship.getLength() + " fields");
@@ -111,6 +126,14 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
         picture.repaint();
     }
 
+    /**
+     * after click on the field a popup is display with the choice between horizontal and vertical
+     * the position of the ship x, y and direction are saved
+     * if the ship is set, the next ship will be displayed
+     *
+     * @param x
+     * @param y
+     */
     @Override
     public void fieldClicked(int x, int y) {
         battleship.objects.Field.Directionelements direction = null;

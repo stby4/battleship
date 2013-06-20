@@ -1,20 +1,18 @@
 package battleship.view;
 
-import battleship.objects.*;
 import battleship.objects.Ship;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.JPanel;
 
 /**
- * Field Battleship
+ * playing field
  *
- * @author Tom Ohme
+ * @author Hinrich Kaestner, Tom Ohme
  */
 public class Field extends JPanel implements ActionListener, MouseListener {
 
@@ -27,11 +25,19 @@ public class Field extends JPanel implements ActionListener, MouseListener {
     private static final Color hit = new Color(228, 219, 16);
     private static final Color noHit = new Color(26, 71, 190);
 
+    /**
+     * add MouseListener
+     */
     public Field(battleship.objects.Field field) {
         this.field = field;
         this.addMouseListener(this);
     }
 
+    /**
+     * draws the field(10x10), ships and shots
+     *
+     * @param g
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
@@ -77,16 +83,37 @@ public class Field extends JPanel implements ActionListener, MouseListener {
         }
     }
 
+    /**
+     * paint Shot on field when no hit (color blue)
+     *
+     * @param g
+     * @param x
+     * @param y
+     */
     private void paintShot(Graphics g, int x, int y) {
         g.setColor(noHit);
         g.fillOval(x * 25 + 23, y * 25 + 23, 20, 20); //mouseClicked
     }
 
+    /**
+     * paint Shot on field when hit (color yellow)
+     *
+     * @param g
+     * @param x
+     * @param y
+     */
     private void paintHit(Graphics g, int x, int y) {
         g.setColor(hit);
         g.fillRect(x * 25 + 23, y * 25 + 23, 20, 20); //mouseClicked
     }
 
+    /**
+     *  draws the ship vertical or horizontal starting point x and y coordinates
+     *  when a ship sunk it is marked red
+     *
+     * @param g
+     * @param ship
+     */
     private void paintShip(Graphics g, Ship ship) {
         g.setColor(shipColor);
         if (ship.getSunk()) {
@@ -101,14 +128,27 @@ public class Field extends JPanel implements ActionListener, MouseListener {
         }
     }
 
+    /**
+     * set of the ships
+     *
+     * @param display
+     */
     public void setShowAllShips(boolean display) {
         this.showAllShips = display;
     }
 
+    /**
+     * interface for mouse click
+     *
+     * @param observer
+     */
     public void register(IFieldObserver observer) {
         this.observer = observer;
     }
 
+    /**
+     * set observer on null
+     */
     public void unregisterAll() {
         this.observer = null;
     }
@@ -119,6 +159,11 @@ public class Field extends JPanel implements ActionListener, MouseListener {
 
     }
 
+    /**
+     * mouseClicked Event gives the x and y coordinates after click to the observer
+     *
+     * @param e
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         if (null != this.observer) {

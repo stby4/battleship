@@ -1,28 +1,19 @@
 package battleship.view;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-
 import battleship.objects.DuplicateUsersException;
 import battleship.objects.IncompleteDataException;
 import battleship.objects.NotMatchingPasswordsException;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+
 /**
- * Registrierung Battleship
- * @author Tom Ohme
+ * register Panel
  *
+ * @author Hinrich Kaestner, Tom Ohme
  */
 public class Register extends JFrame implements ActionListener {
 
@@ -35,13 +26,13 @@ public class Register extends JFrame implements ActionListener {
     private JTextField bField = new JTextField();
     private JPasswordField pField = new JPasswordField();
     private JPasswordField pField2 = new JPasswordField();
-    private JButton register = new JButton("Register");
+    private JButton signUp = new JButton("Sign up");
     private JButton back = new JButton("Back");
     private JButton quit = new JButton("Quit");
     private JPanel registerPanel = new JPanel();
 
     /**
-     * Register
+     * register panel with 3 input fields and 3 buttons
      *
      * @param app Application
      */
@@ -67,7 +58,7 @@ public class Register extends JFrame implements ActionListener {
         pField.setBounds(150, 45, 180, 20);
         pLabel2.setBounds(50, 75, 100, 20);
         pField2.setBounds(150, 75, 180, 20);
-        register.setBounds(200, 110, 128, 20);
+        signUp.setBounds(200, 110, 128, 20);
         back.setBounds(50, 110, 128, 20);
         quit.setBounds(200, 140, 128, 20);
 
@@ -77,7 +68,7 @@ public class Register extends JFrame implements ActionListener {
         registerPanel.add(pField);
         registerPanel.add(pLabel2);
         registerPanel.add(pField2);
-        registerPanel.add(register);
+        registerPanel.add(signUp);
         registerPanel.add(back);
         registerPanel.add(quit);
 
@@ -86,16 +77,26 @@ public class Register extends JFrame implements ActionListener {
         actionregister();
     }
 
+    /**
+     * add ActionListener on signUp, back and quit
+     */
     public void actionregister() {
-        getRootPane().setDefaultButton(register);
-        register.addActionListener(this);
+        getRootPane().setDefaultButton(signUp);
+        signUp.addActionListener(this);
         back.addActionListener(this);
         quit.addActionListener(this);
     }
 
+    /**
+     * signUp Button if the user not exist, he is registered
+     * back Button the user comes to the login Window
+     * quit Button leave the Register
+     *
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == register) {
+        if (e.getSource() == signUp) {
             String username = bField.getText();
             char[] charpassword = pField.getPassword();
             char[] charpassword2 = pField2.getPassword();
@@ -124,7 +125,9 @@ public class Register extends JFrame implements ActionListener {
         }
     }
 
-    //text fields empty
+    /**
+     * empties the fields
+     */
     public void emptyFields() {
         bField.setText("");
         pField.setText("");

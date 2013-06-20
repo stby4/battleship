@@ -1,22 +1,19 @@
 package battleship.view;
 
+import battleship.logic.Game.Playerelements;
 import battleship.logic.Gameplay;
 import battleship.logic.Instance;
-import battleship.logic.Game.Playerelements;
 import battleship.objects.Field.Fieldelements;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.*;
-import java.util.ArrayList;
-
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
- * Game Battleship
+ * game Panel
  *
- * @author Tom Ohme
+ * @author Hinrich Kaestner, Tom Ohme
  */
 public class Game extends JFrame implements ActionListener, IFieldObserver {
 
@@ -47,6 +44,12 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
     private JButton exit = new JButton("EXIT");
     private JPanel gamePanel = new JPanel();
 
+    /**
+     * set the 2 fields and the display of shots and hits
+     *
+     * @param app
+     * @param rebuild
+     */
     public Game(Application app, boolean rebuild) {
         this.app = app;
         Instance instance = Instance.getInstance();
@@ -129,10 +132,18 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         progressGameplay();
     }
 
+    /**
+     * add ActionListener on exit
+     */
     public void actionGame() {
         exit.addActionListener(this);
     }
 
+    /**
+     * exit Button leave the game
+     *
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == exit) {
@@ -185,6 +196,12 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         updateStatistics();
     }
 
+    /**
+     * change the detailsPanel to color red when computer is shooting
+     * change the display of shots and hits from computer after a shot
+     * and it looks if the user or the computer has won
+     *
+     */
     private void shootComputer() {
         detailsPanel.setBackground(Color.RED);
 /*
@@ -221,6 +238,14 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         progressGameplay();
     }
 
+    /**
+     * after a click on the field enemyOcean it looks if a ship is hit or sunk
+     * change the display of shots and hits from user after a shot
+     * and it looks if the user or the computer has won
+     *
+     * @param x
+     * @param y
+     */
     @Override
     public void fieldClicked(int x, int y) {
         if (gameplay.getCurrentPlayer() == Playerelements.USER) {
@@ -250,6 +275,9 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         }
     }
 
+    /**
+     * it looks if the computer or the user has won and returns a message
+     */
     private void progressGameplay() {
         // check for the end of the game
         Playerelements winner = gameplay.getGame().getWinner();
@@ -282,6 +310,9 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         }
     }
 
+    /**
+     * change the display of user hit and shot and the computer hit and shot
+     */
     private void updateStatistics() {
         userHitAnz.setText("" + userHits);
         userShotAnz.setText("" + userShots);
