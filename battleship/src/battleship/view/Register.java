@@ -29,16 +29,16 @@ public class Register extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
     private Application app;
 
-    JLabel bLabel = new JLabel("Username: ");
-    JLabel pLabel = new JLabel("Password: ");
-    JLabel pLabel2 = new JLabel("Password: ");
-    JTextField bField = new JTextField();
-    JPasswordField pField = new JPasswordField();
-    JPasswordField pField2 = new JPasswordField();
-    JButton weiter = new JButton("Weiter");
-    JButton zurueck = new JButton("Zur�ck");
-    JButton beenden = new JButton("Beenden");
-    JPanel registerPanel = new JPanel();
+    private JLabel bLabel = new JLabel("Username: ");
+    private JLabel pLabel = new JLabel("Password: ");
+    private JLabel pLabel2 = new JLabel("Password: ");
+    private JTextField bField = new JTextField();
+    private JPasswordField pField = new JPasswordField();
+    private JPasswordField pField2 = new JPasswordField();
+    private JButton register = new JButton("Register");
+    private JButton back = new JButton("Back");
+    private JButton quit = new JButton("Quit");
+    private JPanel registerPanel = new JPanel();
 
     public Register(Application app) {
         this.app = app;
@@ -62,9 +62,9 @@ public class Register extends JFrame implements ActionListener {
         pField.setBounds(150, 45, 180, 20);
         pLabel2.setBounds(50, 75, 100, 20);
         pField2.setBounds(150, 75, 180, 20);
-        weiter.setBounds(200, 110, 128, 20);
-        zurueck.setBounds(50, 110, 128, 20);
-        beenden.setBounds(200, 140, 128, 20);
+        register.setBounds(200, 110, 128, 20);
+        back.setBounds(50, 110, 128, 20);
+        quit.setBounds(200, 140, 128, 20);
 
         registerPanel.add(bLabel);
         registerPanel.add(bField);
@@ -72,9 +72,9 @@ public class Register extends JFrame implements ActionListener {
         registerPanel.add(pField);
         registerPanel.add(pLabel2);
         registerPanel.add(pField2);
-        registerPanel.add(weiter);
-        registerPanel.add(zurueck);
-        registerPanel.add(beenden);
+        registerPanel.add(register);
+        registerPanel.add(back);
+        registerPanel.add(quit);
 
         getContentPane().add(registerPanel);
 
@@ -82,15 +82,15 @@ public class Register extends JFrame implements ActionListener {
     }
 
     public void actionregister() {
-        getRootPane().setDefaultButton(weiter);
-        weiter.addActionListener(this);
-        zurueck.addActionListener(this);
-        beenden.addActionListener(this);
+        getRootPane().setDefaultButton(register);
+        register.addActionListener(this);
+        back.addActionListener(this);
+        quit.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == weiter) {
+        if (e.getSource() == register) {
             String username = bField.getText();
             char[] charpassword = pField.getPassword();
             char[] charpassword2 = pField2.getPassword();
@@ -111,10 +111,10 @@ public class Register extends JFrame implements ActionListener {
             } catch (IOException ioe) { // error in saving the data
                 JOptionPane.showMessageDialog(null, "There was an error while storing your data. Please try again.");
             }
-        } else if (e.getSource() == zurueck) {
+        } else if (e.getSource() == back) {
             emptyFields();
             app.login();
-        } else if (e.getSource() == beenden) {
+        } else if (e.getSource() == quit) {
             System.exit(0);
         }
     }

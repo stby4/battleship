@@ -27,14 +27,14 @@ public class Login extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
     private Application app;
 
-    JLabel bLabel = new JLabel("Username: ");
-    JLabel pLabel = new JLabel("Password: ");
-    JTextField bField = new JTextField();
-    JPasswordField pField = new JPasswordField();
-    JButton anmelden = new JButton("Anmelden");
-    JButton registrieren = new JButton("Registrieren");
-    JButton beenden = new JButton("Beenden");
-    JPanel loginPanel = new JPanel();
+    private JLabel bLabel = new JLabel("Username: ");
+    private JLabel pLabel = new JLabel("Password: ");
+    private JTextField bField = new JTextField();
+    private JPasswordField pField = new JPasswordField();
+    private JButton login = new JButton("Login");
+    private JButton register = new JButton("Register");
+    private JButton quit = new JButton("Quit");
+    private JPanel loginPanel = new JPanel();
 
     Login(Application app) {
         this.app = app;
@@ -56,33 +56,33 @@ public class Login extends JFrame implements ActionListener {
         bField.setBounds(150, 30, 180, 20);
         pLabel.setBounds(50, 60, 100, 20);
         pField.setBounds(150, 60, 180, 20);
-        anmelden.setBounds(200, 110, 128, 20);
-        registrieren.setBounds(50, 110, 128, 20);
-        beenden.setBounds(200, 140, 128, 20);
+        login.setBounds(200, 110, 128, 20);
+        register.setBounds(50, 110, 128, 20);
+        quit.setBounds(200, 140, 128, 20);
 
         loginPanel.add(bLabel);
         loginPanel.add(bField);
         loginPanel.add(pLabel);
         loginPanel.add(pField);
-        loginPanel.add(anmelden);
-        loginPanel.add(registrieren);
-        loginPanel.add(beenden);
+        loginPanel.add(login);
+        loginPanel.add(register);
+        loginPanel.add(quit);
 
         getContentPane().add(loginPanel);
 
-        actionlogin();
+        actionLogin();
     }
 
-    public void actionlogin() {
-        getRootPane().setDefaultButton(anmelden);
-        anmelden.addActionListener(this);
-        registrieren.addActionListener(this);
-        beenden.addActionListener(this);
+    private void actionLogin() {
+        getRootPane().setDefaultButton(login);
+        login.addActionListener(this);
+        register.addActionListener(this);
+        quit.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == anmelden) {
+        if (e.getSource() == login) {
             String username = bField.getText();
             char[] charpassword = pField.getPassword();
             String password = new String(charpassword);
@@ -97,10 +97,10 @@ public class Login extends JFrame implements ActionListener {
             } finally {
                 emptyFields();
             }
-        } else if (e.getSource() == registrieren) {
+        } else if (e.getSource() == register) {
             app.register();
             emptyFields();
-        } else if (e.getSource() == beenden) {
+        } else if (e.getSource() == quit) {
             System.exit(0);
         }
     }

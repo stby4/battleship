@@ -108,6 +108,7 @@ public class Application {
 
     public void gameExit() {
         try {
+            instance = Instance.getInstance();
             instance.storeGame();
         } catch(IOException ioe) {
             // TODO Tom make popup that informs user about error
