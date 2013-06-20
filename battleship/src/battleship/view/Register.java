@@ -40,6 +40,11 @@ public class Register extends JFrame implements ActionListener {
     private JButton quit = new JButton("Quit");
     private JPanel registerPanel = new JPanel();
 
+    /**
+     * Register
+     *
+     * @param app Application
+     */
     public Register(Application app) {
         this.app = app;
 
