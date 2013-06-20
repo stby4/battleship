@@ -90,7 +90,7 @@ public class Register extends JFrame implements ActionListener {
     /**
      * signUp Button if the user not exist, he is registered
      * back Button the user comes to the login Window
-     * quit Button leave the Register
+     * quit Button leave the register
      *
      * @param e
      */
