@@ -141,15 +141,15 @@ public class Highscore extends JFrame implements ActionListener {
 					difference.setForeground(Color.WHITE);
 					highscorePanel.add(difference);
 					y=y+30;
-				} else {
-					JLabel empty = new JLabel("keine Eintr�ge vorhanden");
-					empty.setFont(new Font("Arial", Font.BOLD, 16));
-					empty.setBounds(200, 175, 200, 25);
-					empty.setForeground(Color.WHITE);
-					highscorePanel.add(empty);
 				}
 				bestUser++;
-			}
+			} else {
+                JLabel empty = new JLabel("no entries existing");
+                empty.setFont(new Font("Arial", Font.BOLD, 16));
+                empty.setBounds(220, 175, 200, 25);
+                empty.setForeground(Color.WHITE);
+                highscorePanel.add(empty);
+            }
 		}
 		
 	}
