@@ -28,7 +28,7 @@ public class UserFile extends BinaryFile {
             for(battleship.objects.User userHelper : userList) {
                 if(user.getUid().equals(userHelper.getUid())) {
                     userList.remove(userHelper);
-                    //break; // let list run through all saved game to make it a bit more failure resistant
+                    break; // let list run through all saved game to make it a bit more failure resistant
                 }
             }
         } catch (Exception e) {

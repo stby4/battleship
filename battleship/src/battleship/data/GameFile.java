@@ -29,7 +29,7 @@ public class GameFile extends BinaryFile {
             for (Gameplay gameplayHelper : gameplayList) {
                 if (gameplay.getUser().getUid().equals(gameplayHelper.getUser().getUid())) {
                     gameplayList.remove(gameplay);
-                    //break; // let list run through all saved game to make it a bit more failure resistant
+                    break; // let list run through all saved game to make it a bit more failure resistant
                 }
             }
         } catch (Exception e) {

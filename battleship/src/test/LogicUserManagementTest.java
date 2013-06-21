@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
  *
  * @author Hinrich Kaestner, Tom Ohme
  */
-public class LogicUserTest {
+public class LogicUserManagementTest {
 
     private UserManagement lUserManagement = UserManagement.getInstance();
 
