@@ -66,7 +66,6 @@ public class Application {
      * close the login Window
      */
     public void loginDone() {
-        highscore = new Highscore(this);
         login.setVisible(false);
         menu();
     }
@@ -89,6 +88,7 @@ public class Application {
      * close the highscore, position, positionFinished and gameView Window and display the Menu Window
      */
     public void menu() {
+
         positionFinished = new PositionFinished(this);
         if (highscore != null) {
             highscore.setVisible(false);
@@ -103,6 +103,7 @@ public class Application {
             gameView.setVisible(false);
         }
         menu = new Menu(this);
+        highscore = new Highscore(this);
         register.setVisible(false);
         menu.setVisible(true);
     }
