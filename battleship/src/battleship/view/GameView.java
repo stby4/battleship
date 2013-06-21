@@ -15,13 +15,13 @@ import java.awt.event.ActionListener;
  *
  * @author Hinrich Kaestner, Tom Ohme
  */
-public class Game extends JFrame implements ActionListener, IFieldObserver {
+public class GameView extends JFrame implements ActionListener, IFieldObserver {
 
     private static final long serialVersionUID = 1L;
     private Application app;
     private Gameplay gameplay;
-    private Field myOcean;
-    private Field enemyOcean;
+    private FieldView myOcean;
+    private FieldView enemyOcean;
     private int userShots = 0;
     private int userHits = 0;
     private int opponentShots = 0;
@@ -50,12 +50,12 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
      * @param app
      * @param rebuild
      */
-    public Game(Application app, boolean rebuild) {
+    public GameView(Application app, boolean rebuild) {
         this.app = app;
         Instance instance = Instance.getInstance();
         gameplay = instance.getGameplay();
 
-        setTitle("Game Battleship");
+        setTitle("GameFile Battleship");
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int top = (screenSize.height - 450) / 2;
         int left = (screenSize.width - 650) / 2;
@@ -96,15 +96,15 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
         exit.setForeground(Color.WHITE);
         exit.setFocusable(false);
 
-        //create myOcean Field
-        myOcean = new Field(gameplay.getGame().getField(Playerelements.USER));
+        //create myOcean FieldView
+        myOcean = new FieldView(gameplay.getGame().getField(Playerelements.USER));
         myOcean.setShowAllShips(true);
         myOcean.setBounds(30, 78, 271, 271);
         myOcean.removeAll();
         gamePanel.add(myOcean);
 
-        //create enemyOcean Field
-        enemyOcean = new Field(gameplay.getGame().getField(Playerelements.COMPUTER));
+        //create enemyOcean FieldView
+        enemyOcean = new FieldView(gameplay.getGame().getField(Playerelements.COMPUTER));
         enemyOcean.setBounds(325, 78, 271, 271);
         enemyOcean.register(this);
         gamePanel.add(enemyOcean);
@@ -158,7 +158,7 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
     private void rebuildShots() {
         for (int i = 0; i < 2; i++) {
             battleship.objects.Field field;
-            Field ocean;
+            FieldView ocean;
             if (0 == i) {
                 field = gameplay.getGame().getField(Playerelements.USER);
                 ocean = myOcean;

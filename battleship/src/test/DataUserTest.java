@@ -1,5 +1,6 @@
 package test;
 
+import battleship.data.UserFile;
 import battleship.objects.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,13 +11,13 @@ import java.util.UUID;
 import static org.junit.Assert.*;
 
 /**
- * Unit test for data.User
+ * Unit test for data.UserManagement
  *
  * @author Hinrich Kaestner
  */
 public class DataUserTest {
 
-    private battleship.data.User file = null;
+    private UserFile file = null;
 
     @Before
     public void setUp() throws Exception {
@@ -24,7 +25,7 @@ public class DataUserTest {
         store.delete();
         String uid = UUID.randomUUID().toString();
         User user = new User(uid, "Hinrich", "password1");
-        file = new battleship.data.User();
+        file = new UserFile();
 
         file.store(user);
     }

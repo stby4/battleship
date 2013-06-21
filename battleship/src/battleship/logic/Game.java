@@ -31,9 +31,9 @@ public class Game implements java.io.Serializable {
 
 
     /* comments to hide this constructor from the code analyser
-    public Game(int sizeX, int sizeY, ArrayList<Ship> ships) {
-        this.fieldUser = new Field(sizeX, sizeY);
-        this.fieldComputer = new Field(sizeX, sizeY);
+    public GameFile(int sizeX, int sizeY, ArrayList<Ship> ships) {
+        this.fieldUser = new FieldView(sizeX, sizeY);
+        this.fieldComputer = new FieldView(sizeX, sizeY);
         this.shipTypes = ships;
 
         this.placeShipsComputer();

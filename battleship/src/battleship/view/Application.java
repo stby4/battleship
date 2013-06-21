@@ -1,6 +1,7 @@
 package battleship.view;
 
 import battleship.logic.Instance;
+import battleship.logic.UserManagement;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -16,12 +17,12 @@ public class Application {
     private Menu menu;
     private Position position;
     private PositionFinished positionFinished;
-    private Game game;
+    private GameView gameView;
     private Highscore highscore;
     private Instance instance;
 
     /**
-     * Start the game
+     * Start the gameView
      *
      * @param args
      */
@@ -85,7 +86,7 @@ public class Application {
 	*/
 
     /**
-     * close the highscore, position, positionFinished and game Window and display the Menu Window
+     * close the highscore, position, positionFinished and gameView Window and display the Menu Window
      */
     public void menu() {
         positionFinished = new PositionFinished(this);
@@ -98,8 +99,8 @@ public class Application {
         if (positionFinished != null) {
             positionFinished.setVisible(false);
         }
-        if (game != null) {
-            game.setVisible(false);
+        if (gameView != null) {
+            gameView.setVisible(false);
         }
         menu = new Menu(this);
         register.setVisible(false);
@@ -107,12 +108,12 @@ public class Application {
     }
 
     /**
-     * make a instance of a User, close the menu Window and display the position Window
+     * make a instance of a UserManagement, close the menu Window and display the position Window
      */
     public void position() {
-        battleship.logic.User lUser = battleship.logic.User.getInstance();
+        UserManagement lUserManagement = UserManagement.getInstance();
         instance = Instance.getInstance();
-        instance.newGame(lUser.getUser());
+        instance.newGame(lUserManagement.getUser());
         position = new Position(this);
         menu.setVisible(false);
         position.setVisible(true);
@@ -127,17 +128,17 @@ public class Application {
     }
 
     /**
-     * close the game and positionFinished Window and display the game Window
+     * close the gameView and positionFinished Window and display the gameView Window
      */
     public void game() {
-        game = new Game(this, false);
+        gameView = new GameView(this, false);
         positionFinished.setVisible(false);
-        game.setVisible(true);
+        gameView.setVisible(true);
     }
 
     /**
-     * after click the exit Button the game is saved or Error Message
-     * close the game Window and display the menu Window
+     * after click the exit Button the gameView is saved or Error Message
+     * close the gameView Window and display the menu Window
      */
     public void gameExit() {
         try {
@@ -146,19 +147,19 @@ public class Application {
         } catch(IOException ioe) {
             JPanel panel = new JPanel();
             Object[] options = {"OK"};
-            JOptionPane.showOptionDialog(panel, "The Game can't be saved", "Error Message", JOptionPane.PLAIN_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+            JOptionPane.showOptionDialog(panel, "The GameFile can't be saved", "Error Message", JOptionPane.PLAIN_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
         }
-        game.setVisible(false);
+        gameView.setVisible(false);
         menu.setVisible(true);
     }
 
     /**
-     * close the menu Window and display the stated game Window
+     * close the menu Window and display the stated gameView Window
      */
     public void loadGame() {
-        game = new Game(this, true);
+        gameView = new GameView(this, true);
         menu.setVisible(false);
-        game.setVisible(true);
+        gameView.setVisible(true);
     }
 
     /**

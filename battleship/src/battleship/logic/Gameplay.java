@@ -19,7 +19,7 @@ public class Gameplay implements java.io.Serializable {
     private String gid;
 
     /**
-     * Creates a new Gameplay and subsequently a new Game
+     * Creates a new Gameplay and subsequently a new GameFile
      *
      * @param user The user who wants to play.
      */
@@ -82,7 +82,7 @@ public class Gameplay implements java.io.Serializable {
     }
 
     /**
-     * Returns the Game class that is used in this gameplay.
+     * Returns the GameFile class that is used in this gameplay.
      *
      * @return game
      */

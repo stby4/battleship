@@ -1,6 +1,7 @@
 package battleship.logic;
 
-import battleship.data.*;
+import battleship.data.GameFile;
+import battleship.data.UserFile;
 
 import java.io.IOException;
 
@@ -43,7 +44,7 @@ public class Instance {
      * @return the loaded gameplay, or null if no matching gameplay was found
      */
     public boolean loadGame(String gid) {
-        gameplay = new battleship.data.Game().get(gid);
+        gameplay = new GameFile().get(gid);
         return null != gameplay;
     }
 
@@ -53,10 +54,10 @@ public class Instance {
      * @throws IOException
      */
     public void storeGame() throws IOException {
-        battleship.objects.User user = User.getInstance().getUser();
+        battleship.objects.User user = UserManagement.getInstance().getUser();
         user.setLastGame(gameplay.getGid());
-        new battleship.data.User().store(user);
-        new battleship.data.Game().store(gameplay);
+        new UserFile().store(user);
+        new GameFile().store(gameplay);
     }
 
     /**

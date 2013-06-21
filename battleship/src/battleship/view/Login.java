@@ -1,5 +1,6 @@
 package battleship.view;
 
+import battleship.logic.UserManagement;
 import battleship.objects.IncompleteDataException;
 import battleship.objects.WrongCredentialsException;
 
@@ -93,9 +94,9 @@ public class Login extends JFrame implements ActionListener {
             String username = bField.getText();
             char[] charpassword = pField.getPassword();
             String password = new String(charpassword);
-            battleship.logic.User lUser = battleship.logic.User.getInstance();
+            UserManagement lUserManagement = UserManagement.getInstance();
             try {
-                lUser.login(username, password);
+                lUserManagement.login(username, password);
                 app.loginDone();
             } catch (IncompleteDataException ide) {
                 JOptionPane.showMessageDialog(null, ide.getMessage());

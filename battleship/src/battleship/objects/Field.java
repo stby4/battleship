@@ -7,15 +7,15 @@ import java.util.List;
 
 
 /**
- * Field, handels placement of ships and shots
+ * FieldView, handels placement of ships and shots
  *
  * @author Hinrich Kaestner, Tom Ohme
  */
 public class Field implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	static public enum Fieldelements {
+    static public enum Fieldelements {
         WATER, // virgin field
         SHIP,  // ship in perfect condition
         HIT,   // ship with a hit
@@ -78,8 +78,8 @@ public class Field implements java.io.Serializable {
      * @return boolean true if all ships are sunk, false if not
      */
     public boolean getAllShipsSunk() {
-        for(Ship ship : this.ships) {
-            if(!ship.getSunk()) {
+        for (Ship ship : this.ships) {
+            if (!ship.getSunk()) {
                 return false;
             }
         }
@@ -103,8 +103,8 @@ public class Field implements java.io.Serializable {
     /**
      * Set a new status for a specific field.
      *
-     * @param posX field X value
-     * @param posY field Y value
+     * @param posX   field X value
+     * @param posY   field Y value
      * @param status the new, desired status
      * @return the new status (not necessarily the same as the desired status)
      */
@@ -113,7 +113,7 @@ public class Field implements java.io.Serializable {
             return Fieldelements.ERROR;
         }
         Fieldelements place = this.getFieldStatus(posX, posY);
-        if(place == status) {
+        if (place == status) {
             return Fieldelements.ERROR;
         }
 
@@ -236,18 +236,14 @@ public class Field implements java.io.Serializable {
         switch (status) {
             case HIT:
                 Fieldelements shipStatus;
-                for(Ship ship : this.ships) {
+                for (Ship ship : this.ships) {
                     shipStatus = ship.shoot(posX, posY);
-                    if(Fieldelements.SUNK == shipStatus) {
+                    if (Fieldelements.SUNK == shipStatus) {
                         int posXHelper = posX;
                         int posYHelper = posY;
-                        for(int i=0; i<ship.getLength(); i++) {
-                            try {
+                        for (int i = 0; i < ship.getLength(); i++) {
                             this.field.get(posXHelper).set(posYHelper, Fieldelements.SUNK);
-                            } catch(IndexOutOfBoundsException e) {
-                                break;
-                            }
-                            if(Directionelements.HORIZONTAL == ship.getDirection()) {
+                            if (Directionelements.HORIZONTAL == ship.getDirection()) {
                                 posXHelper++;
                             } else {
                                 posYHelper++;
@@ -255,7 +251,7 @@ public class Field implements java.io.Serializable {
                         }
                         break;
                     }
-                    if(Fieldelements.ERROR != shipStatus) {
+                    if (Fieldelements.ERROR != shipStatus) {
                         break;
                     }
                 }

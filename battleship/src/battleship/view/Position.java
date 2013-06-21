@@ -19,7 +19,7 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
 
     private static final long serialVersionUID = 1L;
     private Application app;
-    private Field myOcean;
+    private FieldView myOcean;
     private battleship.logic.Game game;
 
     private JLabel label = new JLabel("Set Ship:");
@@ -29,7 +29,7 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
     private JPanel positionPanel = new JPanel();
 
     /**
-     * show the Field for set the ships
+     * show the FieldView for set the ships
      *
      * @param app
      */
@@ -65,8 +65,8 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
         back.setForeground(Color.WHITE);
         back.setFocusable(false);
 
-        //create Field
-        myOcean = new Field(gameplay.getGame().getField(Game.Playerelements.USER));
+        //create FieldView
+        myOcean = new FieldView(gameplay.getGame().getField(Game.Playerelements.USER));
         myOcean.setShowAllShips(true);
         myOcean.register(this);
         myOcean.setBounds(30, 28, 271, 271);
@@ -154,7 +154,7 @@ public class Position extends JFrame implements ActionListener, IFieldObserver {
                 ship.unset();
             } else {
                 //create Ships
-                //battleship.view.Ship myShip = new battleship.view.Ship(ship, myOcean.getGraphics(), battleship.objects.Field.Fieldelements.SHIP);
+                //battleship.view.Ship myShip = new battleship.view.Ship(ship, myOcean.getGraphics(), battleship.objects.FieldView.Fieldelements.SHIP);
                 //myShip.setVisible(true);
                 //myOcean.add(myShip);
             }

@@ -1,5 +1,6 @@
 package battleship.view;
 
+import battleship.logic.UserManagement;
 import battleship.objects.DuplicateUsersException;
 import battleship.objects.IncompleteDataException;
 import battleship.objects.NotMatchingPasswordsException;
@@ -102,9 +103,9 @@ public class Register extends JFrame implements ActionListener {
             char[] charpassword2 = pField2.getPassword();
             String password = new String(charpassword);
             String password2 = new String(charpassword2);
-            battleship.logic.User lUser = battleship.logic.User.getInstance();
+            UserManagement lUserManagement = UserManagement.getInstance();
             try {
-                lUser.createNewUser(username, password, password2);
+                lUserManagement.createNewUser(username, password, password2);
                 JOptionPane.showMessageDialog(null, "Welcome to battleship!");
                 emptyFields();
                 app.menu();

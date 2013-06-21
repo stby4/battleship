@@ -1,6 +1,6 @@
 package test;
 
-import battleship.data.Game;
+import battleship.data.GameFile;
 import battleship.logic.Gameplay;
 import battleship.objects.User;
 import org.junit.Before;
@@ -12,13 +12,13 @@ import java.util.UUID;
 import static org.junit.Assert.*;
 
 /**
- * Unit test for data.Game
+ * Unit test for data.GameFile
  *
  * @author Hinrich Kaestner
  */
 public class DataGameTest {
 
-    private Game file = null;
+    private GameFile file = null;
     private String gid = null;
 
     @Before
@@ -27,7 +27,7 @@ public class DataGameTest {
         store.delete();
         Gameplay gameplay = new Gameplay(new User(UUID.randomUUID().toString(), "Tom", "password1"));
         gid = gameplay.getGid();
-        file = new Game();
+        file = new GameFile();
 
         file.store(gameplay);
     }

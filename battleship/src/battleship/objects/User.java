@@ -1,7 +1,9 @@
 package battleship.objects;
 
+import battleship.data.UserFile;
+
 /**
- * User class
+ * UserManagement class
  *
  * @author Hinrich Kaestner, Tom Ohme
  */
@@ -114,9 +116,9 @@ public class User implements java.io.Serializable {
      */
     public void addDefeat() {
         this.defeats++;
-        battleship.data.User dUser = new battleship.data.User();
+        UserFile dUserFile = new UserFile();
         try {
-        dUser.store(this);
+        dUserFile.store(this);
         } catch (Exception ignore) {
 
         }
@@ -136,9 +138,9 @@ public class User implements java.io.Serializable {
      */
     public void addVictory() {
         this.victories++;
-        battleship.data.User dUser = new battleship.data.User();
+        UserFile dUserFile = new UserFile();
         try {
-            dUser.store(this);
+            dUserFile.store(this);
         } catch (Exception ignore) {
 
         }

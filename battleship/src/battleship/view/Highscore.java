@@ -1,5 +1,6 @@
 package battleship.view;
 
+import battleship.data.UserFile;
 import battleship.objects.User;
 
 import javax.swing.*;
@@ -107,7 +108,7 @@ public class Highscore extends JFrame implements ActionListener {
      * and there number of games, victories, defeats and the difference between victories and defeats
      */
 	public void showUser() {
-		List<User> userList = new battleship.data.User().readAll();
+		List<User> userList = new UserFile().readAll();
 		for (int i=0; i<userList.size()-1; i++) {
 			compare(userList.get(i), userList.get(i+1));
 		}

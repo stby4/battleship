@@ -1,5 +1,6 @@
 package battleship.logic;
 
+import battleship.data.UserFile;
 import battleship.objects.DuplicateUsersException;
 import battleship.objects.IncompleteDataException;
 import battleship.objects.NotMatchingPasswordsException;
@@ -10,37 +11,37 @@ import java.util.UUID;
 
 
 /**
- * Create new useers, login existing users and request the currently logged in user.
+ * Create new useers, login existing users and request the currently logged in userManagement.
  *
  * @author Hinrich Kaestner, Tom Ohme
  */
-public class User {
-    private static User user = null;
+public class UserManagement {
+    private static UserManagement userManagement = null;
     private battleship.objects.User oUser;
 
-    private User() {
+    private UserManagement() {
 
     }
 
     /**
      * This class is a singleton.
      *
-     * @return an instance of User
+     * @return an instance of UserManagement
      */
-    public static User getInstance() {
-        if(null == user) {
-            user = new User();
+    public static UserManagement getInstance() {
+        if(null == userManagement) {
+            userManagement = new UserManagement();
         }
-        return user;
+        return userManagement;
     }
 
     /**
-     * Checks if the entered data is valid and creates a new user.
+     * Checks if the entered data is valid and creates a new userManagement.
      *
-     * @param username user name
+     * @param username userManagement name
      * @param password1 password, first entry
      * @param password2 password, second entry
-     * @return user ID
+     * @return userManagement ID
      * @throws DuplicateUsersException
      * @throws NotMatchingPasswordsException
      * @throws IncompleteDataException
@@ -50,8 +51,8 @@ public class User {
         if (username.equals("") || password1.equals("") || password2.equals("")) {
             throw new IncompleteDataException("Please fill out all fields.");
         }
-        battleship.data.User dUser = new battleship.data.User();
-        if (dUser.checkUsernameExists(username)) {
+        UserFile dUserFile = new UserFile();
+        if (dUserFile.checkUsernameExists(username)) {
             throw new DuplicateUsersException("This username has already been taken. Please choose another one.");
         }
         if (!password1.equals(password2)) {
@@ -60,14 +61,14 @@ public class User {
 
         String uid = UUID.randomUUID().toString();
         oUser = new battleship.objects.User(uid, username, password2);
-        dUser.store(oUser);
+        dUserFile.store(oUser);
         return uid;
     }
 
     /**
-     * Checks if the entered data is valid and logs the user in.
+     * Checks if the entered data is valid and logs the userManagement in.
      *
-     * @param username user name
+     * @param username userManagement name
      * @param password password
      * @throws WrongCredentialsException
      * @throws IncompleteDataException
@@ -76,17 +77,17 @@ public class User {
         if (username.equals("") || password.equals("")) {
             throw new IncompleteDataException("Please fill out all fields.");
         }
-        battleship.data.User dUser = new battleship.data.User();
-        oUser = dUser.get(username, password);
+        UserFile dUserFile = new UserFile();
+        oUser = dUserFile.get(username, password);
         if(null == oUser) {
-            throw new WrongCredentialsException("An user with the given credentials does not exist. Please register if you have not already done so.");
+            throw new WrongCredentialsException("An UserFile with the given credentials does not exist. Please register if you have not already done so.");
         }
     }
 
     /**
-     * Returns the current user.
+     * Returns the current userManagement.
      *
-     * @return current user
+     * @return current userManagement
      */
     public battleship.objects.User getUser() {
         return oUser;

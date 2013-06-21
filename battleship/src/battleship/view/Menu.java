@@ -1,7 +1,7 @@
 package battleship.view;
 
 import battleship.logic.Instance;
-import battleship.logic.User;
+import battleship.logic.UserManagement;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +22,7 @@ public class Menu extends JFrame implements ActionListener {
     JButton game = new JButton("NEW GAME");
     JButton loadGame = new JButton("LOAD GAME");
     JButton highscore = new JButton("HIGHSCORE");
-    JButton logout	= new JButton("LOGOUT");
+    JButton logout = new JButton("LOGOUT");
     JPanel menuPanel = new JPanel();
 
     /**
@@ -116,8 +116,11 @@ public class Menu extends JFrame implements ActionListener {
             app.position();
         } else if (e.getSource() == loadGame) {
             Instance instance = Instance.getInstance();
-            instance.loadGame(User.getInstance().getUser().getLastGame());
-            app.loadGame();
+            String lastGame = UserManagement.getInstance().getUser().getLastGame();
+            if (null != lastGame) {
+                instance.loadGame(lastGame);
+                app.loadGame();
+            }
         } else if (e.getSource() == highscore) {
             app.highscore();
         } else if (e.getSource() == logout) {
