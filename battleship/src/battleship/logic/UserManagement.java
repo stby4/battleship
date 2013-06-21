@@ -1,13 +1,10 @@
 package battleship.logic;
 
 import battleship.data.UserFile;
-import battleship.objects.User;
-import battleship.objects.DuplicateUsersException;
-import battleship.objects.IncompleteDataException;
-import battleship.objects.NotMatchingPasswordsException;
-import battleship.objects.WrongCredentialsException;
+import battleship.objects.*;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -92,5 +89,15 @@ public class UserManagement {
      */
     public battleship.objects.User getUser() {
         return oUser;
+    }
+
+    /**
+     * Returns all registered users.
+     *
+     * @return list with all users
+     */
+    public List<User> getAllUsers() {
+        UserFile dUserFile = new UserFile();
+        return dUserFile.readAll();
     }
 }
