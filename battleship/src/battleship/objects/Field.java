@@ -113,33 +113,38 @@ public class Field implements java.io.Serializable {
             return Fieldelements.ERROR;
         }
         Fieldelements place = this.getFieldStatus(posX, posY);
+        if(place == status) {
+            return Fieldelements.ERROR;
+        }
 
         // set to ship
         switch (status) {
             case SHIP:
                 if (Fieldelements.WATER == place) {
-                    field.get(posX).set(posY, status);
+                    field.get(posX).set(posY, Fieldelements.SHIP);
+                    return Fieldelements.SHIP;
                 } else {
                     return Fieldelements.ERROR;
                 }
-                break;
             case SHOT:
                 if (Fieldelements.WATER == place) {
                     field.get(posX).set(posY, Fieldelements.SHOT);
+                    return Fieldelements.SHOT;
                 } else if (Fieldelements.SHIP == place) {
                     field.get(posX).set(posY, Fieldelements.HIT);
+                    return Fieldelements.HIT;
                 } else {
                     return Fieldelements.ERROR;
                 }
-                break;
             case SUNK:
                 if (Fieldelements.HIT == place) {
                     field.get(posX).set(posY, status);
+                    return Fieldelements.SUNK;
                 } else {
                     return Fieldelements.ERROR;
                 }
-                break;
         }
+        // just in case
         return this.getFieldStatus(posX, posY);
     }
 
@@ -227,7 +232,8 @@ public class Field implements java.io.Serializable {
      * @return new status of the specific field
      */
     public Fieldelements shoot(int posX, int posY) {
-        switch (setFieldStatus(posX, posY, Fieldelements.SHOT)) {
+        Fieldelements status = setFieldStatus(posX, posY, Fieldelements.SHOT);
+        switch (status) {
             case HIT:
                 Fieldelements shipStatus;
                 for(Ship ship : this.ships) {
@@ -236,7 +242,7 @@ public class Field implements java.io.Serializable {
                         int posXHelper = posX;
                         int posYHelper = posY;
                         for(int i=0; i<ship.getLength(); i++) {
-                            setFieldStatus(posXHelper, posYHelper, Fieldelements.SUNK);
+                            this.field.get(posXHelper).set(posYHelper, Fieldelements.SUNK);
                             if(Directionelements.HORIZONTAL == ship.getDirection()) {
                                 posXHelper++;
                             } else {
@@ -250,7 +256,7 @@ public class Field implements java.io.Serializable {
                     }
                 }
             default:
-                return getFieldStatus(posX, posY);
+                return status;
         }
     }
 
