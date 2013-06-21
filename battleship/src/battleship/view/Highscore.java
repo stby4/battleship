@@ -115,36 +115,35 @@ public class Highscore extends JFrame implements ActionListener {
 		int bestUser = 0;
 		int y = 60;
 		for (User user : userList) {
-			if (user.getGamesNr() != 0) {
-				if (bestUser < 8) {
-					JLabel username = new JLabel(user.getName());
-					username.setBounds(50, y, 110, 25);
-					username.setForeground(Color.WHITE);
-					highscorePanel.add(username);
-					String strGames = String.valueOf(user.getGamesNr());
-					JLabel games = new JLabel(strGames);
-					games.setBounds(160, y, 110, 25);
-					games.setForeground(Color.WHITE);
-					highscorePanel.add(games);
-					String strVictories = String.valueOf(user.getVictories());
-					JLabel victories = new JLabel(strVictories);
-					victories.setBounds(255, y, 110, 25);
-					victories.setForeground(Color.WHITE);
-					highscorePanel.add(victories);
-					String strDefeats = String.valueOf(user.getDefeats());
-					JLabel defeats = new JLabel(strDefeats);
-					defeats.setBounds(365, y, 110, 25);
-					defeats.setForeground(Color.WHITE);
-					highscorePanel.add(defeats);
-					String strDifference = String.valueOf(user.getDifference());
-					JLabel difference = new JLabel(strDifference);
-					difference.setBounds(475, y, 110, 25);
-					difference.setForeground(Color.WHITE);
-					highscorePanel.add(difference);
-					y=y+30;
-				}
-				bestUser++;
-			} else {
+			if (bestUser < 8 && user.getGamesNr() != 0) {
+		    	JLabel username = new JLabel(user.getName());
+                username.setBounds(50, y, 110, 25);
+				username.setForeground(Color.WHITE);
+				highscorePanel.add(username);
+				String strGames = String.valueOf(user.getGamesNr());
+				JLabel games = new JLabel(strGames);
+				games.setBounds(160, y, 110, 25);
+				games.setForeground(Color.WHITE);
+				highscorePanel.add(games);
+				String strVictories = String.valueOf(user.getVictories());
+				JLabel victories = new JLabel(strVictories);
+				victories.setBounds(255, y, 110, 25);
+				victories.setForeground(Color.WHITE);
+				highscorePanel.add(victories);
+				String strDefeats = String.valueOf(user.getDefeats());
+				JLabel defeats = new JLabel(strDefeats);
+				defeats.setBounds(365, y, 110, 25);
+				defeats.setForeground(Color.WHITE);
+				highscorePanel.add(defeats);
+				String strDifference = String.valueOf(user.getDifference());
+				JLabel difference = new JLabel(strDifference);
+				difference.setBounds(475, y, 110, 25);
+				difference.setForeground(Color.WHITE);
+				highscorePanel.add(difference);
+				y=y+30;
+			}
+			bestUser++;
+            if (user == null) {
                 JLabel empty = new JLabel("no entries existing");
                 empty.setFont(new Font("Arial", Font.BOLD, 16));
                 empty.setBounds(220, 175, 200, 25);
@@ -152,7 +151,6 @@ public class Highscore extends JFrame implements ActionListener {
                 highscorePanel.add(empty);
             }
 		}
-		
 	}
 
     /**
