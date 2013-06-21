@@ -154,7 +154,7 @@ public class Highscore extends JFrame implements ActionListener {
 	}
 
     /**
-     * sort the users by the difference between victories and defeats
+     * sort the user by the difference between victories and defeats
      *
      * @param inUserLeft
      * @param inUserRight
