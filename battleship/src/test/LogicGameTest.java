@@ -6,7 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Unit test for data.UserManagement
+ * Unit test for logic.Game
  *
  * @author Hinrich Kaestner, Tom Ohme
  */
