@@ -177,6 +177,15 @@ public class GameView extends JFrame implements ActionListener, IFieldObserver {
                                 userShots++;
                             }
                             break;
+                        case SUNK: {
+                            if (0 == i) {
+                                opponentHits++;
+                                opponentShots++;
+                            } else {
+                                userHits++;
+                                userShots++;
+                            }
+                        }
                         case HIT:
                             if (0 == i) {
                                 opponentHits++;

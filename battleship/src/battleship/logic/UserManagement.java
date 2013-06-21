@@ -1,6 +1,7 @@
 package battleship.logic;
 
 import battleship.data.UserFile;
+import battleship.objects.User;
 import battleship.objects.DuplicateUsersException;
 import battleship.objects.IncompleteDataException;
 import battleship.objects.NotMatchingPasswordsException;
@@ -17,7 +18,7 @@ import java.util.UUID;
  */
 public class UserManagement {
     private static UserManagement userManagement = null;
-    private battleship.objects.User oUser;
+    private User oUser;
 
     private UserManagement() {
 
@@ -80,7 +81,7 @@ public class UserManagement {
         UserFile dUserFile = new UserFile();
         oUser = dUserFile.get(username, password);
         if(null == oUser) {
-            throw new WrongCredentialsException("An UserFile with the given credentials does not exist. Please register if you have not already done so.");
+            throw new WrongCredentialsException("An user with the given credentials does not exist. Please register if you have not already done so.");
         }
     }
 
