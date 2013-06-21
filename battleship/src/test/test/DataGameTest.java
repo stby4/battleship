@@ -1,3 +1,5 @@
+package test;
+
 import battleship.data.GameFile;
 import battleship.logic.Gameplay;
 import battleship.objects.User;

@@ -160,7 +160,7 @@ public class Highscore extends JFrame implements ActionListener {
      *
      * @param inUserLeft
      * @param inUserRight
-     * @return
+     * @return difference
      */
 	private int compare(User inUserLeft, User inUserRight) {
 		int difference = inUserLeft.getScore() - inUserRight.getScore();

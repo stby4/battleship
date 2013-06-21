@@ -1,3 +1,5 @@
+package test;
+
 import battleship.data.UserFile;
 import battleship.objects.User;
 import org.junit.Before;

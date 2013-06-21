@@ -1,3 +1,5 @@
+package test;
+
 import battleship.logic.Game;
 import battleship.objects.Field;
 import battleship.objects.Ship;

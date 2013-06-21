@@ -1,3 +1,5 @@
+package test;
+
 import battleship.logic.UserManagement;
 import battleship.objects.DuplicateUsersException;
 import battleship.objects.IncompleteDataException;

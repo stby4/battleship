@@ -1,3 +1,5 @@
+package test;
+
 import battleship.objects.Field;
 import battleship.objects.Ship;
 import org.junit.Before;
