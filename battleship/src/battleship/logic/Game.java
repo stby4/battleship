@@ -142,8 +142,8 @@ public class Game implements java.io.Serializable {
         boolean isSet;
         for (Ship ship : shipsComputerHelper) {
             do {
-                int posX = random.nextInt(sizeX + 1);
-                int posY = random.nextInt(sizeY + 1);
+                int posX = random.nextInt(sizeX);
+                int posY = random.nextInt(sizeY);
                 int pick = random.nextInt(Field.Directionelements.values().length);
                 ship.setPosition(posX, posY, Field.Directionelements.values()[pick]);
                 isSet = fieldComputer.addShip(ship);

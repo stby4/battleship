@@ -281,14 +281,14 @@ public class Game extends JFrame implements ActionListener, IFieldObserver {
     private void progressGameplay() {
         // check for the end of the game
         Playerelements winner = gameplay.getGame().getWinner();
-        if (Playerelements.COMPUTER == winner) {
+        if (Playerelements.COMPUTER == winner || 17 == opponentHits) { // remove the backup winner detection for dynamic ship lists
             gameplay.getUser().addDefeat();
             JPanel panel = new JPanel();
             Object[] options = {"OK"};
             JOptionPane.showOptionDialog(panel, "You lose", "Message", JOptionPane.PLAIN_MESSAGE, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
             app.menu();
             return;
-        } else if (Playerelements.USER == winner) {
+        } else if (Playerelements.USER == winner || 17 == userHits) {
             gameplay.getUser().addVictory();
             JPanel panel = new JPanel();
             Object[] options = {"OK"};

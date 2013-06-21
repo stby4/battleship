@@ -45,7 +45,7 @@ public class PositionFinished extends JFrame implements ActionListener {
         next.setForeground(Color.WHITE);
         next.setFocusable(false);
 
-        JPanel picture = new PicturePanel("schiff.jpg", 600, 399);
+        JPanel picture = new PicturePanel("start_game.jpg", 600, 399);
         picture.setBounds(0, 0, 600, 399);
         positionFinishedPanel.add(picture);
         positionFinishedPanel.add(next);

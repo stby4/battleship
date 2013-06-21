@@ -146,10 +146,8 @@ public class Ship implements java.io.Serializable, Cloneable {
         for (int i = 0; i < this.length; i++) {
             if (posXHelper == posX && posYHelper == posY) { // check that coordinates are actually part of the ship
                 Field.Fieldelements statusHelper = this.shots.get(i);
-                if (Field.Fieldelements.SUNK == statusHelper || Field.Fieldelements.HIT == statusHelper) { // "occupied"
-                    return Field.Fieldelements.ERROR;
-                }
-                if (Field.Fieldelements.SHIP == statusHelper) {
+
+                if (Field.Fieldelements.SHIP == statusHelper || Field.Fieldelements.SUNK == statusHelper) {
                     this.shots.set(i, Field.Fieldelements.HIT);
                     // check if all other fields are also HIT and it's time to sink to the ground of the deep, dark and freezing cold ocean
                     boolean sunkHelper = true;
