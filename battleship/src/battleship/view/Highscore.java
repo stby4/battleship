@@ -115,12 +115,12 @@ public class Highscore extends JFrame implements ActionListener {
 		int bestUser = 0;
 		int y = 60;
 		for (User user : userList) {
-			if (bestUser < 8 && user.getGamesNr() != 0) {
+			if (bestUser < 8 && user.getGamesCount() != 0) {
 		    	JLabel username = new JLabel(user.getName());
                 username.setBounds(50, y, 110, 25);
 				username.setForeground(Color.WHITE);
 				highscorePanel.add(username);
-				String strGames = String.valueOf(user.getGamesNr());
+				String strGames = String.valueOf(user.getGamesCount());
 				JLabel games = new JLabel(strGames);
 				games.setBounds(160, y, 110, 25);
 				games.setForeground(Color.WHITE);
@@ -135,7 +135,7 @@ public class Highscore extends JFrame implements ActionListener {
 				defeats.setBounds(365, y, 110, 25);
 				defeats.setForeground(Color.WHITE);
 				highscorePanel.add(defeats);
-				String strDifference = String.valueOf(user.getDifference());
+				String strDifference = String.valueOf(user.getScore());
 				JLabel difference = new JLabel(strDifference);
 				difference.setBounds(475, y, 110, 25);
 				difference.setForeground(Color.WHITE);
@@ -160,12 +160,12 @@ public class Highscore extends JFrame implements ActionListener {
      * @param inUserRight
      * @return
      */
-	public int compare(User inUserLeft, User inUserRight) {
-		int difference = inUserLeft.getDifference() - inUserRight.getDifference();
+	private int compare(User inUserLeft, User inUserRight) {
+		int difference = inUserLeft.getScore() - inUserRight.getScore();
 		if (difference == 0) {
-			if (inUserLeft.getDifference() > inUserRight.getDifference()) {
+			if (inUserLeft.getScore() > inUserRight.getScore()) {
 				return 1;
-			} else if (inUserLeft.getDifference() == inUserRight.getDifference()) {
+			} else if (inUserLeft.getScore() == inUserRight.getScore()) {
 				return 0;
 			} else {
 				return -1;

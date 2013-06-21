@@ -1,5 +1,3 @@
-package test;
-
 import battleship.logic.UserManagement;
 import battleship.objects.DuplicateUsersException;
 import battleship.objects.IncompleteDataException;
@@ -13,18 +11,28 @@ import static org.junit.Assert.*;
 /**
  * Unit test for logic.UserManagement
  *
- * @author Hinrich Kaestner
+ * @author Hinrich Kaestner, Tom Ohme
  */
 public class LogicUserTest {
 
     private UserManagement lUserManagement = UserManagement.getInstance();
 
+    /**
+     * Delete existing file.
+     *
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
         File store = new File("user.bin");
         store.delete();
     }
 
+    /**
+     * Create a new user.
+     *
+     * @throws Exception
+     */
     @Test
     public void testCreateNewUser() throws Exception {
         String uid = lUserManagement.createNewUser("Horst", "password2", "password2");
@@ -32,6 +40,9 @@ public class LogicUserTest {
 
     }
 
+    /**
+     * Create duplicates.
+     */
     @Test
     public void testDuplicateUsersException() {
         boolean thrown = false;
@@ -46,6 +57,9 @@ public class LogicUserTest {
         assertTrue(thrown);
     }
 
+    /**
+     * Create user with different passwords.
+     */
     @Test
     public void testNotMatchingPasswordsException() {
         boolean thrown = false;
@@ -59,6 +73,9 @@ public class LogicUserTest {
         assertTrue(thrown);
     }
 
+    /**
+     * Test user with missing second password.
+     */
     @Test
     public void testIncompleteDataException() {
         boolean thrown = false;
@@ -72,6 +89,11 @@ public class LogicUserTest {
         assertTrue(thrown);
     }
 
+    /**
+     * Test login with multiple users.
+     *
+     * @throws Exception
+     */
     @Test
     public void testLogin() throws Exception {
         lUserManagement.createNewUser("Angela", "password7", "password7");
@@ -82,6 +104,11 @@ public class LogicUserTest {
         assertEquals("password7", user.getPassword());
     }
 
+    /**
+     * Test receiving of data.
+     *
+     * @throws Exception
+     */
     @Test
     public void testGetUser() throws Exception {
         lUserManagement.createNewUser("Arnold", "password1", "password1");

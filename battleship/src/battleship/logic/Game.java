@@ -88,29 +88,6 @@ public class Game implements java.io.Serializable {
     }
 
     /**
-     * Returns a list of all sunken ships.
-     *
-     * @param player The player whose sunken ships will be searched.
-     * @return A list of all sunken ships.
-     */
-    public ArrayList<Ship> getSunkShips(Playerelements player) {
-        Field field;
-        if (Playerelements.COMPUTER == player) {
-            field = fieldUser;
-        } else {
-            field = fieldComputer;
-        }
-
-        ArrayList<Ship> sunkShips = new ArrayList<Ship>();
-        for (Ship ship : field.getShips()) {
-            if (ship.getSunk()) {
-                sunkShips.add(ship);
-            }
-        }
-        return sunkShips;
-    }
-
-    /**
      * adds a ship to the user field
      *
      * @param ship Ship

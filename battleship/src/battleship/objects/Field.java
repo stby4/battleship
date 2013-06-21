@@ -1,9 +1,6 @@
 package battleship.objects;
 
-import battleship.logic.Game;
-
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**

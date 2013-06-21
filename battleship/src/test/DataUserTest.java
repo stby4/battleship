@@ -1,5 +1,3 @@
-package test;
-
 import battleship.data.UserFile;
 import battleship.objects.User;
 import org.junit.Before;
@@ -13,12 +11,17 @@ import static org.junit.Assert.*;
 /**
  * Unit test for data.UserManagement
  *
- * @author Hinrich Kaestner
+ * @author Hinrich Kaestner, Tom Ohme
  */
 public class DataUserTest {
 
     private UserFile file = null;
 
+    /**
+     * Delete existing file and create a first user.
+     *
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
         File store = new File("game.bin");
@@ -30,6 +33,11 @@ public class DataUserTest {
         file.store(user);
     }
 
+    /**
+     * Check if first user was saved.
+     *
+     * @throws Exception
+     */
     @Test
     public void testGet1() throws Exception {
         User user = file.get("Hinrich", "password1");
@@ -37,12 +45,22 @@ public class DataUserTest {
         assertEquals("password1", user.getPassword());
     }
 
+    /**
+     * Check if not existing users are handled.
+     *
+     * @throws Exception
+     */
     @Test
     public void testGet2() throws Exception {
         User user = file.get("Tom", "password2");
         assertNull(user);
     }
 
+    /**
+     * Check multiple users.
+     *
+     * @throws Exception
+     */
     @Test
     public void testCheckUsernameExists() throws Exception {
         User user = new User(UUID.randomUUID().toString(), "Sabine", "password3");
@@ -56,6 +74,11 @@ public class DataUserTest {
         assertFalse(file.checkUsernameExists("Tom"));
     }
 
+    /**
+     * Update existing user.
+     *
+     * @throws Exception
+     */
     @Test
     public void testUpdateUserInfo() throws Exception {
         User user = new User(UUID.randomUUID().toString(), "Gerd", "password5");

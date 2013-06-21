@@ -151,7 +151,7 @@ public class User implements java.io.Serializable {
      *
      * @return game count
      */
-    public int getGamesNr() {
+    public int getGamesCount() {
     	return victories+defeats;
     }
 
@@ -160,7 +160,7 @@ public class User implements java.io.Serializable {
      *
      * @return difference between victories and defeats
      */
-    public int getDifference() {
+    public int getScore() {
     	return victories-defeats;
     }
 }

@@ -75,13 +75,13 @@ public class Register extends JFrame implements ActionListener {
 
         getContentPane().add(registerPanel);
 
-        actionregister();
+        actionRegister();
     }
 
     /**
      * add ActionListener on signUp, back and quit
      */
-    public void actionregister() {
+    public void actionRegister() {
         getRootPane().setDefaultButton(signUp);
         signUp.addActionListener(this);
         back.addActionListener(this);
