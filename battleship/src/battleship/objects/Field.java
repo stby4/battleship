@@ -242,7 +242,13 @@ public class Field implements java.io.Serializable {
                         int posXHelper = posX;
                         int posYHelper = posY;
                         for (int i = 0; i < ship.getLength(); i++) {
-                            this.field.get(posXHelper).set(posYHelper, Fieldelements.SUNK);
+                            try {
+                                Fieldelements oldstatus = getFieldStatus(posXHelper, posYHelper);
+                                if (Fieldelements.SHIP == oldstatus || Fieldelements.HIT == oldstatus) {
+                                    this.field.get(posXHelper).set(posYHelper, Fieldelements.SUNK);
+                                }
+                            } catch (IndexOutOfBoundsException ignore) {
+                            }
                             if (Directionelements.HORIZONTAL == ship.getDirection()) {
                                 posXHelper++;
                             } else {
