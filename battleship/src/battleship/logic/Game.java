@@ -24,8 +24,8 @@ public class Game implements java.io.Serializable {
     private Field fieldUser;
     private Field fieldComputer;
     private ArrayList<Ship> shipTypes;
-    private ArrayList<Ship> shipsUserHelper;
-    private ArrayList<Ship> shipsComputerHelper;
+    private ArrayList<Ship> shipsUser;
+    private ArrayList<Ship> shipsComputer;
     private int lastShotComputerX;
     private int lastShotComputerY;
 
@@ -59,8 +59,8 @@ public class Game implements java.io.Serializable {
         Ship frigate = new Ship(2, "Frigate", "frigate.png");
         shipTypes.add(frigate);
 
-        this.shipsComputerHelper = clone(shipTypes);
-        this.shipsUserHelper = clone(shipTypes);
+        this.shipsComputer = clone(shipTypes);
+        this.shipsUser = clone(shipTypes);
 
         this.placeShipsComputer();
     }
@@ -79,7 +79,7 @@ public class Game implements java.io.Serializable {
      * @return first unset Ship, or null if all ships are set
      */
     public Ship getNextUnsetShip() {
-        for (Ship ship : shipsUserHelper) {
+        for (Ship ship : shipsUser) {
             if (!ship.isSet()) {
                 return ship;
             }
@@ -140,7 +140,7 @@ public class Game implements java.io.Serializable {
         int sizeY = this.fieldComputer.getSizeY();
 
         boolean isSet;
-        for (Ship ship : shipsComputerHelper) {
+        for (Ship ship : shipsComputer) {
             do {
                 int posX = random.nextInt(sizeX);
                 int posY = random.nextInt(sizeY);
