@@ -13,6 +13,11 @@ import static org.junit.Assert.*;
 public class LogicGameTest {
     Game game = new Game();
 
+    /**
+     * Place a ship.
+     *
+     * @throws Exception
+     */
     @Test
     public void testPlaceShipUser() throws Exception {
         Ship ship = game.getNextUnsetShip();
@@ -22,11 +27,21 @@ public class LogicGameTest {
         assertEquals(Field.Fieldelements.SHIP, fieldUser.getFieldStatus(1,2));
     }
 
+    /**
+     * Place a shot.
+     *
+     * @throws Exception
+     */
     @Test
     public void testPlaceShotUser() throws Exception {
         assertNotNull(game.placeShotUser(3, 4));
     }
 
+    /**
+     * Let the computer shoot.
+     *
+     * @throws Exception
+     */
     @Test
     public void testGetLastShotComputer() throws Exception {
         game.placeShotComputer();
