@@ -30,7 +30,7 @@ public class PicturePanel extends JPanel {
         this.y = y;
         //this.setPreferredSize(new Dimension(600, 337));
         try {
-            image = ImageIO.read(new File("graphics/" +file));
+            image = ImageIO.read(new File("battleship/graphics/" +file));
         } catch (IOException e) {
             e.printStackTrace();
         }
