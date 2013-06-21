@@ -113,6 +113,7 @@ public class Highscore extends JFrame implements ActionListener {
 			compare(userList.get(i), userList.get(i+1));
 		}
 		int bestUser = 0;
+        int bestCount = 0;
 		int y = 60;
 		for (User user : userList) {
 			if (bestUser < 8 && user.getGamesCount() != 0) {
@@ -141,16 +142,17 @@ public class Highscore extends JFrame implements ActionListener {
 				difference.setForeground(Color.WHITE);
 				highscorePanel.add(difference);
 				y=y+30;
+                bestCount++;
 			}
-			bestUser++;
-            if (user == null) {
-                JLabel empty = new JLabel("no entries existing");
-                empty.setFont(new Font("Arial", Font.BOLD, 16));
-                empty.setBounds(220, 175, 200, 25);
-                empty.setForeground(Color.WHITE);
-                highscorePanel.add(empty);
-            }
+            bestUser++;
 		}
+        if (0 == bestCount) {
+            JLabel empty = new JLabel("no entries existing");
+            empty.setFont(new Font("Arial", Font.BOLD, 16));
+            empty.setBounds(220, 175, 200, 25);
+            empty.setForeground(Color.WHITE);
+            highscorePanel.add(empty);
+        }
 	}
 
     /**
